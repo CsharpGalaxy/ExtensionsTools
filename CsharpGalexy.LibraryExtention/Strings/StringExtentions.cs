@@ -132,18 +132,19 @@ namespace ExtentionLibrary.Strings;
         {
             if (value.IsEmpty()) return value;
 
-            var map = new Dictionary<string, string>
-            {
-                {"ض", "q"}, {"ص", "w"}, {"ث", "e"}, {"ق", "r"}, {"ف", "t"}, {"غ", "y"}, {"ع", "u"},
-                {"ه", "i"}, {"خ", "o"}, {"ح", "p"}, {"ج", "["}, {"چ", "]"}, {"ش", "a"}, {"س", "s"},
-                {"ی", "d"}, {"ب", "f"}, {"ل", "g"}, {"ا", "h"}, {"ت", "j"}, {"ن", "k"}, {"م", "l"},
-                {"ک", ";"}, {"گ", "'"}, {"ظ", "z"}, {"ط", "x"}, {"ز", "c"}, {"ر", "v"}, {"ذ", "b"},
-                {"د", "n"}, {"پ", "m"}, {"و", ","}, {"َ", "Q"}, {"ُ", "W"}, {"ِ", "E"}, {"ّ", "R"},
-                {"ْ", "T"}, {"‌", " "}, {"ئ", "O"}, {"آ", "o"}, {"ء", "P"}, {"ک", "k"}, {"ی", "y"},
-                {" ", " "}, {"-", "-"}, {".", "."}, {",", ","}, {"؟", "?"}, {"?", "z"}
-            };
+        var map = new Dictionary<string, string>
+{
+    {"ض", "q"}, {"ص", "w"}, {"ث", "e"}, {"ق", "r"}, {"ف", "t"}, {"غ", "y"}, {"ع", "u"},
+    {"ه", "i"}, {"خ", "o"}, {"ح", "p"}, {"ج", "["}, {"چ", "]"}, {"ش", "a"}, {"س", "s"},
+    {"ی", "y"}, {"ب", "f"}, {"ل", "g"}, {"ا", "h"}, {"ت", "j"}, {"ن", "k"}, {"م", "l"},
+    {"ک", "k"}, {"گ", "'"}, {"ظ", "z"}, {"ط", "x"}, {"ز", "c"}, {"ر", "v"}, {"ذ", "b"},
+    {"د", "n"}, {"پ", "m"}, {"و", ","}, {"َ", "Q"}, {"ُ", "W"}, {"ِ", "E"}, {"ّ", "R"},
+    {"ْ", "T"}, {"‌", " "}, {"ئ", "O"}, {"آ", "o"}, {"ء", "P"},
+    {" ", " "}, {"-", "-"}, {".", "."}, {",", ","}, {"؟", "?"}
+};
 
-            var result = new StringBuilder();
+
+        var result = new StringBuilder();
             foreach (char c in value)
             {
                 var key = c.ToString();
@@ -261,16 +262,25 @@ namespace ExtentionLibrary.Strings;
             if (value.IsEmpty() || count <= 0) return string.Empty;
             return string.Concat(Enumerable.Repeat(value, count));
         }
+    /// <summary>
+    /// GetCharacterCount O string
+    /// </summary>
+    public static int GetCharacterCount(string text)
+    {
+        if (string.IsNullOrEmpty(text))
+            return 0;
 
-        #endregion
+        return text.Length;
+    }
+    #endregion
 
-        #region Security & Sanitization
+    #region Security & Sanitization
 
-        /// <summary>
-        /// Sanitizes HTML input (basic protection)
-        /// Note: For production, use libraries like HtmlSanitizer
-        /// </summary>
-        public static string SanitizeHtml(this string value)
+    /// <summary>
+    /// Sanitizes HTML input (basic protection)
+    /// Note: For production, use libraries like HtmlSanitizer
+    /// </summary>
+    public static string SanitizeHtml(this string value)
         {
             if (value.IsEmpty()) return value;
             return Regex.Replace(value, @"<script[^>]*>[\s\S]*?</script>", "", RegexOptions.IgnoreCase)
