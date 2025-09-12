@@ -2,7 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Reflection;
 
 namespace ExtentionLibrary.Enums;
 
@@ -42,15 +44,19 @@ public static class EnumExtensions
         var field = value.GetType().GetField(value.ToString());
         if (field == null) return value.ToString();
 
-        // Try DisplayName first
-        var displayNameAttr = (DisplayNameAttribute)Attribute.GetCustomAttribute(field, typeof(DisplayNameAttribute));
-        if (displayNameAttr != null && !string.IsNullOrEmpty(displayNameAttr.DisplayName))
-            return displayNameAttr.DisplayName;
+        // Try DisplayAttribute first
+        var displayAttr = field.GetCustomAttribute<DisplayAttribute>();
+        if (displayAttr != null && !string.IsNullOrEmpty(displayAttr.Name))
+            return displayAttr.Name;
 
-        // Then try Description
-        var descriptionAttr = (DescriptionAttribute)Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute));
-        return descriptionAttr?.Description ?? value.ToString();
+        // Then try DescriptionAttribute
+        var descriptionAttr = field.GetCustomAttribute<DescriptionAttribute>();
+        if (descriptionAttr != null && !string.IsNullOrEmpty(descriptionAttr.Description))
+            return descriptionAttr.Description;
+
+        return value.ToString();
     }
+
 
     #endregion
 
