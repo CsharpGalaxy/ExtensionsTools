@@ -1,29 +1,29 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
-	  <LangVersion>latest</LangVersion>
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<LangVersion>latest</LangVersion>
+		<Version>1.0.1</Version>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<PackageProjectUrl>https://github.com/CsharpGalexy/ExtentionsTools</PackageProjectUrl>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<RepositoryUrl>https://github.com/CsharpGalexy/ExtentionsTools</RepositoryUrl>
+		<PackAsTool>True</PackAsTool>
+		<IncludeSymbols>True</IncludeSymbols>
+		<PackageLicenseFile>LICENSE</PackageLicenseFile>
+		<Authors>CsharpGalexy</Authors>
+	</PropertyGroup>
 
-	  <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <PackageProjectUrl>https://github.com/CsharpGalexy/ExtentionsTools</PackageProjectUrl>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
-    <RepositoryUrl>https://github.com/CsharpGalexy/ExtentionsTools</RepositoryUrl>
-    <PackAsTool>True</PackAsTool>
-    <IncludeSymbols>True</IncludeSymbols>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <Authors>CsharpGalexy</Authors>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <None Include="..\LICENSE">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-    <None Include="..\README.md">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-  </ItemGroup>
+	<ItemGroup>
+		<None Include="..\LICENSE">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+		<None Include="..\README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
 
 </Project>
