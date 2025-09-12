@@ -58,19 +58,11 @@ Console.WriteLine(status.GetDescription()); // "مدیر سیستم"
 // بررسی معتبر بودن
 Console.WriteLine(status.IsValid()); // True
 
-// کار با Flags
-[Flags]
-public enum Permissions
-{
-    None = 0,
-    Read = 1,
-    Write = 2,
-    Delete = 4
-}
 
-var perm = Permissions.Read | Permissions.Write;
-Console.WriteLine(perm.Has(Permissions.Read)); // True
-perm = perm.Clear(Permissions.Write).Set(Permissions.Delete);
+
+//var perm = Permissions.Read | Permissions.Write;
+//Console.WriteLine(perm.Has(Permissions.Read)); // True
+//perm = perm.Clear(Permissions.Write).Set(Permissions.Delete);
 #endregion
 
 
