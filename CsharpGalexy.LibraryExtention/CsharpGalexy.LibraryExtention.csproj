@@ -1,18 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net9.0</TargetFramework>
+		<TargetFramework>net8.0</TargetFramework>
 		<LangVersion>latest</LangVersion>
-		<Version>1.0.1</Version>
+		<OutputType>Library</OutputType>
+		<!--<PackAsTool>true</PackAsTool>-->
+		<Version>1.1.4</Version>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<PackageProjectUrl>https://github.com/CsharpGalexy/ExtentionsTools</PackageProjectUrl>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<RepositoryUrl>https://github.com/CsharpGalexy/ExtentionsTools</RepositoryUrl>
-		<PackAsTool>True</PackAsTool>
+		<!--<PackAsTool>True</PackAsTool>-->
 		<IncludeSymbols>True</IncludeSymbols>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
 		<Authors>CsharpGalexy</Authors>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 	</PropertyGroup>
 
 	<ItemGroup>
