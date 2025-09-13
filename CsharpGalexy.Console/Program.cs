@@ -4,7 +4,7 @@ using ExtentionLibrary.Enums;
 using ExtentionLibrary.Strings;
 using System.ComponentModel;
 using System.Text;
-
+using CsharpGalexy.LibraryExtention.TimeSpans;
 
 
 #region DateTime
@@ -126,9 +126,9 @@ stringBuilder.AppendLine(flags.Has(FlagEnum.A).ToString()); // True
 stringBuilder.AppendLine(flags.Has(FlagEnum.B).ToString()); // False
 flags = flags.Clear(FlagEnum.A);
 stringBuilder.AppendLine(flags.ToString());           // C
-
-#endregion
 File.WriteAllText("EnumExtensionsDemo.txt", stringBuilder.ToString());
+#endregion
+
 
 #region String
 stringBuilder.Clear();
@@ -181,5 +181,67 @@ File.WriteAllText("StringExtensionsDemo.txt", stringBuilder.ToString());
 #endregion
 
 
+
+#region TimeSpan
+
+stringBuilder.AppendLine("--- TimeSpan Extensions Demo ---\n");
+
+
+var ts = new TimeSpan(1, 2, 30, 45);
+
+
+stringBuilder.AppendLine($"Original TimeSpan: {ts}");
+stringBuilder.AppendLine($"Human Readable: {ts.ToHumanReadable()}");
+stringBuilder.AppendLine($"Human Readable: {ts.ToHumanReadablePersian()}");
+stringBuilder.AppendLine($"Short String: {ts.ToShortString()}");
+stringBuilder.AppendLine($"Total Weeks: {ts.TotalWeeks()}");
+stringBuilder.AppendLine($"Is Positive: {ts.IsPositive()}");
+stringBuilder.AppendLine($"Is Negative: {TimeSpan.FromMinutes(-5).IsNegative()}");
+
+
+stringBuilder.AppendLine($"Clamp (min 1h, max 2h): {TimeSpan.FromHours(3).Clamp(TimeSpan.FromHours(1), TimeSpan.FromHours(2))}");
+stringBuilder.AppendLine($"Abs of -30m: {TimeSpan.FromMinutes(-30).Abs()}");
+
+
+stringBuilder.AppendLine($"Rounded to nearest minute: {ts.RoundToNearestMinute()}");
+stringBuilder.AppendLine($"Rounded to nearest hour: {ts.RoundToNearestHour()}");
+stringBuilder.AppendLine($"Rounded to nearest day: {ts.RoundToNearestDay()}");
+
+
+var ts1 = TimeSpan.FromHours(1);
+var ts2 = TimeSpan.FromHours(2);
+stringBuilder.AppendLine($"Percentage of 1h over 2h: {ts1.PercentageOf(ts2)}%");
+stringBuilder.AppendLine($"Is 3h between 1h and 5h? {TimeSpan.FromHours(3).Between(TimeSpan.FromHours(1), TimeSpan.FromHours(5))}");
+
+
+stringBuilder.AppendLine($"Multiply 2h by 2: {TimeSpan.FromHours(2).Multiply(2)}");
+stringBuilder.AppendLine($"Divide 2h by 2: {TimeSpan.FromHours(2).Divide(2)}");
+
+
+stringBuilder.AppendLine($"Truncate to minutes: {ts.TruncateToMinutes()}");
+stringBuilder.AppendLine($"Truncate to hours: {ts.TruncateToHours()}");
+stringBuilder.AppendLine($"Truncate to days: {ts.TruncateToDays()}");
+
+
+stringBuilder.AppendLine($"Is Zero? {TimeSpan.Zero.IsZero()}");
+
+
+var dict = ts.ToDictionary();
+var dictPersian = ts.ToDictionaryPersian();
+stringBuilder.AppendLine("ToDictionary:");
+foreach (var kv in dict)
+{
+    stringBuilder.AppendLine($" {kv.Key}: {kv.Value}");
+}
+foreach (var kv in dictPersian)
+{
+    stringBuilder.AppendLine($" {kv.Key}: {kv.Value}");
+}
+
+stringBuilder.AppendLine("\n--- Demo Completed ---");
+File.WriteAllText("TimeSpanExtensionsDemo.txt", stringBuilder.ToString());
+#endregion
+
 Console.Write("------------------");
+
 Console.ReadKey();
