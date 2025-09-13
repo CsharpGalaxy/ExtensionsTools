@@ -18,6 +18,11 @@ Features
 
 🔍 Use with LINQ to filter dates (past/today/future)
 
+
+### install package
+
+```Install-Package CsharpGalexy.LibraryExtention -Version 1.1.4```
+
 Sample Code
 #region DateTime
 var now = DateTime.Now;
@@ -136,7 +141,7 @@ var todayOrLater = dates.Where(d => d.IsToday() || d.IsFuture()).ToList();
 2. Add the project or `.cs` files to your solution.
 3. Import the namespace:
    ```csharp
-   using DateTimeExtensions;
+   using ExtentionLibrary.DateTimes;
    ```
 
 ### Option 2: Manual Copy
