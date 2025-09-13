@@ -54,7 +54,7 @@ Clone the project or add it to your solution.
 
 Import the namespace:
 
-using YourNamespace.DateTimeExtensions;
+using CsharpGalexy.LibraryExtention;
 
 
 Start using the extension methods 🚀
@@ -68,7 +68,7 @@ Please run tests before submitting a PR.
 License
 
 This project is licensed under the MIT License.
-فایل readme بنویس
+
 
 ### ASSISTANT
 # DateTime Extensions (Persian DateTime Utilities)
