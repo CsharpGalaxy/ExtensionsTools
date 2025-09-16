@@ -1,4 +1,5 @@
 ﻿
+using CsharpGalexy.LibraryExtention.Models;
 using System;
 using System.Globalization;
 using System.Linq;
@@ -6,18 +7,33 @@ using System.Text;
 using System.Text.RegularExpressions;
 
 namespace ExtentionLibrary.Strings;
+/// <summary>
+/// Powerful extension methods for string
+/// </summary>
+public static class StringExtensions
+{
+    private static readonly Dictionary<string, string> PersianToEnglish = new()
+    {
+        {"ض", "q"}, {"ص", "w"}, {"ث", "e"}, {"ق", "r"}, {"ف", "t"}, {"غ", "y"}, {"ع", "u"},
+        {"ه", "i"}, {"خ", "o"}, {"ح", "p"}, {"ج", "["}, {"چ", "]"}, {"ش", "a"}, {"س", "s"},
+        {"ی", "y"}, {"ب", "f"}, {"ل", "g"}, {"ا", "h"}, {"ت", "j"}, {"ن", "k"}, {"م", "l"},
+        {"ک", ";"}, {"گ", "'"}, {"ظ", "z"}, {"ط", "x"}, {"ز", "c"}, {"ر", "v"}, {"ذ", "b"},
+        {"د", "n"}, {"پ", "m"}, {"و", ","}, {"َ", "Q"}, {"ُ", "W"}, {"ِ", "E"}, {"ّ", "R"},
+        {"ْ", "T"}, {"‌", " "}, {"ئ", "O"}, {"آ", "o"}, {"ء", "P"},
+        {" ", " "}, {"-", "-"}, {".", "."}, {",", ","}, {"؟", "?"}
+    };
+    private static readonly Dictionary<string, string> EnglishToPersian =
+        PersianToEnglish
+            .GroupBy(kv => kv.Value)
+            .ToDictionary(g => g.Key, g => g.First().Key);
+
+
+    #region Null/Empty/Whitespace Checks
 
     /// <summary>
-    /// Powerful extension methods for string
+    /// Checks if string is null, empty, or whitespace
     /// </summary>
-    public static class StringExtensions
-    {
-        #region Null/Empty/Whitespace Checks
-
-        /// <summary>
-        /// Checks if string is null, empty, or whitespace
-        /// </summary>
-        public static bool IsEmpty(this string value)
+    public static bool IsEmpty(this string value)
         {
             return string.IsNullOrWhiteSpace(value);
         }
@@ -124,44 +140,33 @@ namespace ExtentionLibrary.Strings;
                         .Replace("9", "۹");
         }
 
-        /// <summary>
-        /// Converts Persian keyboard layout to English (e.g. "ضه" -> "hello")
-        /// Very useful for search and input handling
-        /// </summary>
-        public static string ToFinglish(this string value)
-        {
-            if (value.IsEmpty()) return value;
+    public static string ConvertLayout(this string value, KeyboardLayoutDirection direction)
+    {
+        if (string.IsNullOrEmpty(value)) return value;
 
-        var map = new Dictionary<string, string>
-{
-    {"ض", "q"}, {"ص", "w"}, {"ث", "e"}, {"ق", "r"}, {"ف", "t"}, {"غ", "y"}, {"ع", "u"},
-    {"ه", "i"}, {"خ", "o"}, {"ح", "p"}, {"ج", "["}, {"چ", "]"}, {"ش", "a"}, {"س", "s"},
-    {"ی", "y"}, {"ب", "f"}, {"ل", "g"}, {"ا", "h"}, {"ت", "j"}, {"ن", "k"}, {"م", "l"},
-    {"ک", "k"}, {"گ", "'"}, {"ظ", "z"}, {"ط", "x"}, {"ز", "c"}, {"ر", "v"}, {"ذ", "b"},
-    {"د", "n"}, {"پ", "m"}, {"و", ","}, {"َ", "Q"}, {"ُ", "W"}, {"ِ", "E"}, {"ّ", "R"},
-    {"ْ", "T"}, {"‌", " "}, {"ئ", "O"}, {"آ", "o"}, {"ء", "P"},
-    {" ", " "}, {"-", "-"}, {".", "."}, {",", ","}, {"؟", "?"}
-};
-
+        var map = direction == KeyboardLayoutDirection.PersianToEnglish
+            ? PersianToEnglish
+            : EnglishToPersian;
 
         var result = new StringBuilder();
-            foreach (char c in value)
-            {
-                var key = c.ToString();
-                result.Append(map.ContainsKey(key) ? map[key] : c.ToString());
-            }
-
-            return result.ToString().ToLower();
+        foreach (char c in value)
+        {
+            var key = c.ToString();
+            result.Append(map.ContainsKey(key) ? map[key] : c.ToString());
         }
 
-        #endregion
+        return direction == KeyboardLayoutDirection.PersianToEnglish
+            ? result.ToString().ToLower()
+            : result.ToString();
+    }
+    #endregion
 
-        #region Validation
+    #region Validation
 
-        /// <summary>
-        /// Checks if string is a valid email address
-        /// </summary>
-        public static bool IsEmail(this string value)
+    /// <summary>
+    /// Checks if string is a valid email address
+    /// </summary>
+    public static bool IsEmail(this string value)
         {
             if (value.IsEmpty()) return false;
 
@@ -208,6 +213,7 @@ namespace ExtentionLibrary.Strings;
         /// </summary>
         public static bool IsNumeric(this string value)
         {
+        
             return decimal.TryParse(value, out _);
         }
 

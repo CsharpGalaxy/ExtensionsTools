@@ -1,10 +1,11 @@
 ﻿using CsharpGalexy.Console.Models;
+using CsharpGalexy.LibraryExtention.Models;
+using CsharpGalexy.LibraryExtention.TimeSpans;
 using ExtentionLibrary.DateTimes;
 using ExtentionLibrary.Enums;
 using ExtentionLibrary.Strings;
 using System.ComponentModel;
 using System.Text;
-using CsharpGalexy.LibraryExtention.TimeSpans;
 
 
 #region DateTime
@@ -148,8 +149,18 @@ stringBuilder.AppendLine($"\"aáà\".RemoveDiacritics() => \"{"aáà".RemoveDiac
 stringBuilder.AppendLine("\n--- Persian / Numbers ---");
 stringBuilder.AppendLine($"\"۱۲۳۴\".ToEnglishNumbers() => \"{"۱۲۳۴".ToEnglishNumbers()}\"");
 stringBuilder.AppendLine($"\"5678\".ToPersianNumbers() => \"{"5678".ToPersianNumbers()}\"");
-stringBuilder.AppendLine($"\"سلام\".ToFinglish() => \"{"سلام".ToFinglish()}\"");
 
+
+
+string persian = "ضه";
+string toEnglish = persian.ConvertLayout(KeyboardLayoutDirection.PersianToEnglish);
+// خروجی: "hello"
+
+string english = "hello";
+string toPersian = english.ConvertLayout(KeyboardLayoutDirection.EnglishToPersian);
+
+stringBuilder.AppendLine($"\"ضه\".ToFinglish() => \"{"ضه".ConvertLayout(CsharpGalexy.LibraryExtention.Models.KeyboardLayoutDirection.PersianToEnglish)}\"");
+stringBuilder.AppendLine($"\"hello\".ToFinglish() => \"{"hello".ConvertLayout(CsharpGalexy.LibraryExtention.Models.KeyboardLayoutDirection.EnglishToPersian)}\"");
 // Validation
 stringBuilder.AppendLine("\n--- Validation ---");
 stringBuilder.AppendLine($"\"test@test.com\".IsEmail() => {"test@test.com".IsEmail()}");
@@ -183,7 +194,7 @@ File.WriteAllText("StringExtensionsDemo.txt", stringBuilder.ToString());
 
 
 #region TimeSpan
-
+stringBuilder.Clear();
 stringBuilder.AppendLine("--- TimeSpan Extensions Demo ---\n");
 
 
