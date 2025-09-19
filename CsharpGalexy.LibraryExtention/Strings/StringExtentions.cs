@@ -180,11 +180,23 @@ public static class StringExtensions
                 return false;
             }
         }
+    /// <summary>
+    /// Checks if the string is a valid URL.
+    /// </summary>
+    /// <param name="url">The string to validate.</param>
+    /// <returns>True if valid URL, otherwise false.</returns>
+    public static bool IsValidUrl(this string url)
+    {
+        if (string.IsNullOrWhiteSpace(url))
+            return false;
 
-        /// <summary>
-        /// Checks if string is a valid Iranian mobile number (09123456789)
-        /// </summary>
-        public static bool IsIranianMobile(this string value)
+        return Uri.TryCreate(url, UriKind.Absolute, out Uri uriResult)
+               && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
+    }
+    /// <summary>
+    /// Checks if string is a valid Iranian mobile number (09123456789)
+    /// </summary>
+    public static bool IsIranianMobile(this string value)
         {
             if (value.IsEmpty()) return false;
 
