@@ -188,6 +188,44 @@ stringBuilder.AppendLine($"\"hello world\".ToTitleCase() => \"{"hello world".ToT
 
 stringBuilder.AppendLine("\n===== END TESTS =====");
 stringBuilder.AppendLine("------------------");
+
+
+// گرفتن پیش شماره هر استان
+stringBuilder.AppendLine("تهران".GetProvincePhoneCode());           // 021
+stringBuilder.AppendLine("خراسان رضوی".GetProvincePhoneCode());     // 051
+stringBuilder.AppendLine("فارس".GetProvincePhoneCode());            // 071
+stringBuilder.AppendLine("گیلان".GetProvincePhoneCode());           // 013
+stringBuilder.AppendLine("کرمان".GetProvincePhoneCode());           // null → چون "کرمان" در لیست نیست (استان "کرمان" → مرکز: "کرمان" → کد: "034")
+
+// برای دریافت کدپستی مرکز استان‌های ایران بر اساس نام استان 
+stringBuilder.AppendLine("تهران".GetProvincePostalCode());     // 15957
+stringBuilder.AppendLine("فارس".GetProvincePostalCode());      // 71967
+stringBuilder.AppendLine("کرمان".GetProvincePostalCode());     // 76137
+stringBuilder.AppendLine("یزد".GetProvincePostalCode());       // 89169
+
+
+//گرفتن نام شهر مرکز استان
+stringBuilder.AppendLine("خراسان رضوی".GetProvinceCapital());   // مشهد
+stringBuilder.AppendLine("فارس".GetProvinceCapital());          // شیراز
+stringBuilder.AppendLine("البرز".GetProvinceCapital());         // کرج
+stringBuilder.AppendLine("لرستان".GetProvinceCapital());        // خرم‌آباد
+
+
+//گرفتن کل استان ها
+var provinces = ProvinceHelper.GetAllProvinces();
+foreach (var province in provinces)
+{
+    Console.WriteLine(province);
+}
+// یا مرتب شده:
+var sorted = ProvinceHelper.GetAllProvincesSorted();
+foreach (var p in sorted)
+{
+    Console.WriteLine(p);
+}
+
+
+// تست اعتبارسنجی
 File.WriteAllText("StringExtensionsDemo.txt", stringBuilder.ToString());
 #endregion
 
