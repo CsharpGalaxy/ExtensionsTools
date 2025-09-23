@@ -8,7 +8,8 @@ using ExtentionLibrary.Strings;
 using System.ComponentModel;
 using System.Text;
 using CsharpGalexy.LibraryExtention.Extentions.Struct;
-
+string str = "dasdad assad sd sds sdsd";
+var a = str.TruncateMore(3);
 #region DateTime
 var now = DateTime.Now;
 var yesterday = now.AddDays(-1);
