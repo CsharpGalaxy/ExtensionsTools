@@ -72,7 +72,40 @@ public static class StringExtensions
     #endregion
 
     #region Cleaning & Formatting
+    /// <summary>
+    /// Truncates the string to the specified maximum number of characters and appends "..." if truncated.
+    /// </summary>
+    /// <param name="text">The input string.</param>
+    /// <param name="maxLength">Maximum number of characters.</param>
+    /// <returns>The truncated string with "..." if it exceeds <paramref name="maxLength"/>.</returns>
+    public static string TruncateMore(this string text, int maxLength)
+    {
+        if (string.IsNullOrEmpty(text) || maxLength <= 0)
+            return string.Empty;
 
+        if (text.Length <= maxLength)
+            return text;
+
+        return text.Substring(0, maxLength) + "...";
+    }
+
+    /// <summary>
+    /// Truncates the string to the specified maximum number of words and appends "..." if truncated.
+    /// </summary>
+    /// <param name="text">The input string.</param>
+    /// <param name="maxWords">Maximum number of words.</param>
+    /// <returns>The truncated string with "..." if it exceeds <paramref name="maxWords"/> words.</returns>
+    public static string TruncateWords(this string text, int maxWords)
+    {
+        if (string.IsNullOrEmpty(text) || maxWords <= 0)
+            return string.Empty;
+
+        var words = text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+        if (words.Length <= maxWords)
+            return text;
+
+        return string.Join(" ", words.Take(maxWords)) + "...";
+    }
     /// <summary>
     /// Removes all whitespace (including newlines, tabs)
     /// </summary>
