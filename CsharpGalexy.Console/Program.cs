@@ -1,12 +1,13 @@
 ﻿using CsharpGalexy.Console.Models;
 using CsharpGalexy.LibraryExtention.Models;
+using CsharpGalexy.LibraryExtention.Null;
 using CsharpGalexy.LibraryExtention.TimeSpans;
 using ExtentionLibrary.DateTimes;
 using ExtentionLibrary.Enums;
 using ExtentionLibrary.Strings;
 using System.ComponentModel;
 using System.Text;
-
+using CsharpGalexy.LibraryExtention.Extentions.Struct;
 
 #region DateTime
 var now = DateTime.Now;
@@ -229,7 +230,67 @@ foreach (var p in sorted)
 File.WriteAllText("StringExtensionsDemo.txt", stringBuilder.ToString());
 #endregion
 
+#region Guid
+stringBuilder.Clear();
+var guid = Guid.NewGuid();
 
+// تبدیل به رشته کوتاه
+string shortStr = guid.ToShortString();
+stringBuilder.AppendLine($"Short: {shortStr}");
+
+// بازگردانی به Guid
+Guid restored = shortStr.ToGuid();
+stringBuilder.AppendLine($"Restored: {restored}");
+
+// چک کردن خالی بودن
+stringBuilder.AppendLine($"Is Empty: {guid.IsEmpty()}");
+
+// رشته تمیز (بدون خط تیره)
+stringBuilder.AppendLine($"Clean: {guid.ToCleanString()}");
+
+// ایجاد Guid فرزند قطعی
+Guid child = guid.DeriveGuid("ChildKey");
+stringBuilder.AppendLine($"Child: {child}");
+
+// تلاش برای تبدیل رشته به Guid
+string input = "invalid-guid";
+if (input.TryParseGuid(out Guid parsed))
+{
+    stringBuilder.AppendLine($"Parsed: {parsed}");
+}
+else
+{
+    stringBuilder.AppendLine("Parse failed.");
+}
+// تست روی Guid معمولی
+Guid empty = Guid.Empty;
+Guid valid = Guid.NewGuid();
+
+stringBuilder.AppendLine(empty.OrDefault().ToString());        // → Guid.Empty
+stringBuilder.AppendLine(valid.OrDefault().ToString());        // → خود valid GUID
+
+Guid fallback = new("11111111-1111-1111-1111-111111111111");
+stringBuilder.AppendLine(empty.OrDefault(fallback).ToString()); // → fallback
+
+// تست روی Nullable Guid
+Guid? nullGuid = null;
+Guid? emptyGuid = Guid.Empty;
+Guid? realGuid = valid;
+
+stringBuilder.AppendLine(nullGuid.OrDefault().ToString());          // → Guid.Empty
+stringBuilder.AppendLine(emptyGuid.OrDefault().ToString());         // → Guid.Empty
+stringBuilder.AppendLine(realGuid.OrDefault().ToString());          // → valid GUID
+stringBuilder.AppendLine(nullGuid.OrDefault(fallback).ToString());  // → fallback
+
+// تست اعتبارسنجی
+File.WriteAllText("StringExtensionsDemo.txt", stringBuilder.ToString());
+#endregion
+
+#region Object
+
+Person person = new Person().NothingIfNull();
+Console.WriteLine(person.Name); // ✅ امن! اگر null بود، یک Person جدید (با مقادیر پیش‌فرض) برمی‌گرده.
+#endregion
 
 #region TimeSpan
 stringBuilder.Clear();

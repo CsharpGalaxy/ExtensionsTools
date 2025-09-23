@@ -76,6 +76,40 @@ public static class DateTimeExtensions
 
     #region Date Comparisons
 
+
+    /// <summary>
+    /// Determines whether the difference between two dates is within a specified minute tolerance.
+    /// </summary>
+    /// <param name="date1">First date</param>
+    /// <param name="date2">Second date</param>
+    /// <param name="tolerance">Tolerance in minutes</param>
+    /// <returns>True if difference is within tolerance</returns>
+    public static bool DifTime(this DateTime date1, DateTime date2, int tolerance)
+    {
+        TimeSpan diffResult = date1.Subtract(date2);
+        return Math.Abs(diffResult.TotalMinutes) <= tolerance;
+    }
+
+    /// <summary>
+    /// Checks if a DateTime falls between two other DateTimes (inclusive).
+    /// </summary>
+    /// <param name="dt">The date to check</param>
+    /// <param name="start">Start boundary</param>
+    /// <param name="end">End boundary</param>
+    /// <returns>True if dt is between start and end (inclusive)</returns>
+    public static bool IsBetween(this DateTime dt, DateTime start, DateTime end)
+        => dt >= start && dt <= end;
+
+    /// <summary>
+    /// Checks if a DateTimeOffset falls between two other DateTimesOffsets (inclusive).
+    /// </summary>
+    /// <param name="dt">The date to check</param>
+    /// <param name="start">Start boundary</param>
+    /// <param name="end">End boundary</param>
+    /// <returns>True if dt is between start and end (inclusive)</returns>
+    public static bool IsBetween(this DateTimeOffset dt, DateTimeOffset start, DateTimeOffset end)
+        => dt >= start && dt <= end;
+
     /// <summary>
     /// Checks if the date is today
     /// </summary>
@@ -395,6 +429,18 @@ public static class DateTimeExtensions
     {
         return dateTime.Truncate(TimeSpan.FromHours(1));
     }
+
+    #endregion
+
+    #region Formatting
+
+    /// <summary>
+    /// Converts a DateTime to string using the current culture's short date pattern.
+    /// </summary>
+    /// <param name="date">The date to format</param>
+    /// <returns>Formatted date string</returns>
+    public static string ToSystemDatePattern(this DateTime date)
+        => date.ToString(System.Globalization.DateTimeFormatInfo.CurrentInfo?.ShortDatePattern);
 
     #endregion
 }

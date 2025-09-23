@@ -8,6 +8,7 @@ using System.Reflection;
 
 namespace ExtentionLibrary.Enums;
 
+
 /// <summary>
 /// Extension methods for enums
 /// </summary>
@@ -57,13 +58,12 @@ public static class EnumExtensions
         return value.ToString();
     }
 
-
     #endregion
 
     #region Convert Enum to List of Key-Value Pairs (for dropdowns)
 
     /// <summary>
-    /// Converts an enum type to a list of SelectListItem (or KeyValue) for use in dropdowns
+    /// Converts an enum type to a list of KeyValuePair for use in dropdowns
     /// </summary>
     /// <typeparam name="T">Enum type</typeparam>
     /// <returns>List of { Value, Text }</returns>
@@ -76,7 +76,7 @@ public static class EnumExtensions
     }
 
     /// <summary>
-    /// Converts enum to list with Description or name
+    /// Converts enum to list with Description or name (ValueTuple version)
     /// </summary>
     public static IEnumerable<(int Value, string Text)> ToSelectList<T>() where T : Enum
     {
@@ -111,17 +111,6 @@ public static class EnumExtensions
     {
         return Enum.TryParse(value, ignoreCase, out T result) ? result : defaultValue;
     }
-    //public static T ToEnum<T>(this string value, T defaultValue, bool ignoreCase = true)
-    //where T : struct, IConvertible
-    //{
-    //    if (!typeof(T).IsEnum)
-    //        throw new ArgumentException($"Type '{typeof(T).Name}' is not an enum.");
-
-    //    if (string.IsNullOrWhiteSpace(value))
-    //        return defaultValue;
-
-    //    return Enum.TryParse(value, ignoreCase, out T result) ? result : defaultValue;
-    //}
 
     #endregion
 
@@ -223,6 +212,103 @@ public static class EnumExtensions
 
         var result = Convert.ToUInt64(enumValue) & ~Convert.ToUInt64(flag);
         return (T)Enum.ToObject(typeof(T), result);
+    }
+
+    #endregion
+
+    #region Additional Helpers (Legacy/Alternate Implementations)
+
+    /// <summary>
+    /// Gets the name of the enum value.
+    /// </summary>
+    public static string AsName(this Enum @this)
+    {
+        Type type = @this.GetType();
+        return Enum.GetName(type, @this);
+    }
+
+    /// <summary>
+    /// Gets the Description attribute or falls back to name.
+    /// </summary>
+    public static string AsDescription(this Enum @this)
+    {
+        Type type = @this.GetType();
+        string name = Enum.GetName(type, @this);
+
+        MemberInfo member = type
+            .GetMembers()
+            .FirstOrDefault(w => w.Name == name);
+
+        DescriptionAttribute attribute = member != null
+            ? member
+                .GetCustomAttributes(true)
+                .FirstOrDefault(w => w.GetType() == typeof(DescriptionAttribute)) as DescriptionAttribute
+            : null;
+
+        return attribute != null ? attribute.Description : name;
+    }
+
+    /// <summary>
+    /// Converts enum to its underlying integer value.
+    /// </summary>
+    public static int AsValue(this Enum @this)
+    {
+        Type type = @this.GetType();
+        return (int)Enum.Parse(type, @this.ToString());
+    }
+
+    /// <summary>
+    /// Converts an integer to its enum string representation.
+    /// </summary>
+    public static string ToEnumString<TEnum>(this int enumValue)
+    {
+        var enumString = enumValue.ToString();
+        if (!Enum.IsDefined(typeof(TEnum), enumValue)) return enumString;
+
+        enumString = ((TEnum)Enum.ToObject(typeof(TEnum), enumValue)).ToString();
+        return enumString;
+    }
+
+    /// <summary>
+    /// Parses string to enum (unsafe version - throws exception if invalid).
+    /// </summary>
+    public static T ToEnum<T>(this string enumString) => (T)Enum.Parse(typeof(T), enumString);
+
+    /// <summary>
+    /// Joins all enum values into a comma-separated string.
+    /// </summary>
+    public static string EnumJoin<T>()
+    {
+        var values = (T[])Enum.GetValues(typeof(T));
+        return string.Join(",", values.Select(x => x));
+    }
+
+    /// <summary>
+    /// Checks if enum has a value by integer.
+    /// </summary>
+    public static bool Has(this Enum @this, int value)
+    {
+        Type type = @this.GetType();
+        return Enum.IsDefined(type, value);
+    }
+
+    /// <summary>
+    /// Checks if enum has a value by string name.
+    /// </summary>
+    public static bool Has(this Enum @this, string value)
+    {
+        Type type = @this.GetType();
+        return Enum.IsDefined(type, value);
+    }
+
+    /// <summary>
+    /// Converts enum to dictionary of int-value to string-name.
+    /// </summary>
+    public static Dictionary<int, string> ToDict(this Enum theEnum)
+    {
+        return Enum.GetValues(theEnum.GetType())
+                   .Cast<int>()
+                   .ToDictionary(enumValue => enumValue, enumValue => enumValue.ToString());
     }
 
     #endregion
