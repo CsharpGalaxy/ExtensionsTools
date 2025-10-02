@@ -826,5 +826,50 @@ public static class StringExtensions
     public static int TryParse(this string input, int defaultValue) => int.TryParse(input, out var value) ? value : defaultValue;
 
     #endregion
+
+    /// <summary>
+    /// تبدیل تاریخ شمسی به میلادی
+    /// جداکننده می‌تواند / یا - باشد
+    /// </summary>
+    /// <param name="shamsiDate">تاریخ شمسی به صورت رشته (مثال: "1404/7/3" یا "1404-07-03")</param>
+    /// <returns>DateTime میلادی</returns>
+    public static DateTime ToGregorianDate(this string shamsiDate)
+    {
+        if (string.IsNullOrWhiteSpace(shamsiDate))
+            throw new ArgumentNullException(nameof(shamsiDate));
+
+        // قبول هر دو جداکننده / و -
+        var parts = shamsiDate.Split(new[] { '/', '-' }, StringSplitOptions.RemoveEmptyEntries);
+        if (parts.Length != 3)
+            throw new FormatException("فرمت تاریخ شمسی باید yyyy/MM/dd یا yyyy-MM-dd باشد.");
+
+        // parse سال، ماه، روز
+        int year = int.Parse(parts[0]);
+        int month = int.Parse(parts[1]);
+        int day = int.Parse(parts[2]);
+
+        var persianCalendar = new PersianCalendar();
+        return persianCalendar.ToDateTime(year, month, day, 0, 0, 0, 0);
+    }
+
+    /// <summary>
+    /// تبدیل تاریخ شمسی به میلادی با ساعت و دقیقه
+    /// </summary>
+    public static DateTime ToGregorianDate(this string shamsiDate, int hour, int minute, int second = 0)
+    {
+        if (string.IsNullOrWhiteSpace(shamsiDate))
+            throw new ArgumentNullException(nameof(shamsiDate));
+
+        var parts = shamsiDate.Split(new[] { '/', '-' }, StringSplitOptions.RemoveEmptyEntries);
+        if (parts.Length != 3)
+            throw new FormatException("فرمت تاریخ شمسی باید yyyy/MM/dd یا yyyy-MM-dd باشد.");
+
+        int year = int.Parse(parts[0]);
+        int month = int.Parse(parts[1]);
+        int day = int.Parse(parts[2]);
+
+        var persianCalendar = new PersianCalendar();
+        return persianCalendar.ToDateTime(year, month, day, hour, minute, second, 0);
+    }
 }
 
