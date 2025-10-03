@@ -871,5 +871,27 @@ public static class StringExtensions
         var persianCalendar = new PersianCalendar();
         return persianCalendar.ToDateTime(year, month, day, hour, minute, second, 0);
     }
+    // 18. Reverse
+    public static string Reverse(this string source) =>
+        string.IsNullOrEmpty(source) ? source : new string(source.Reverse().ToArray());
+
+
+
+    // 20. IsGuid
+    public static bool IsGuid(this string source) =>
+        !string.IsNullOrWhiteSpace(source) && Guid.TryParse(source, out _);
+
+    // 7. Trim (همه انواع)
+    public static string TrimAll(this string source) => source?.Trim();
+    public static string TrimStartAll(this string source) => source?.TrimStart();
+    public static string TrimEndAll(this string source) => source?.TrimEnd();
+    // 3. Equals (با مقایسه حساس به بزرگی/کوچکی یا نادیده گرفتن آن)
+    public static bool EqualsIgnoreCase(this string source, string other) =>
+        string.Equals(source, other, StringComparison.OrdinalIgnoreCase);
+
+    public static bool EqualsInvariant(this string source, string other) =>
+        string.Equals(source, other, StringComparison.InvariantCultureIgnoreCase);
+
+
 }
 
