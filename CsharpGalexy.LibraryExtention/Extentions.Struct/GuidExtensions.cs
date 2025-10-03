@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CsharpGalexy.LibraryExtention.Extentions.Struct;
 
 using System;
 using System.Text;

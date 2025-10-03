@@ -13,7 +13,6 @@ using JsonSerializer = System.Text.Json.JsonSerializer;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json.Linq;
 
-namespace ExtentionLibrary.Strings;
 /// <summary>
 /// Powerful extension methods for string
 /// </summary>

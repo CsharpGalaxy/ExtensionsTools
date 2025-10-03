@@ -1,4 +1,4 @@
-﻿namespace CsharpGalexy.LibraryExtention.Null;
+﻿
 
 public static class NullPatternExtentions
 {    // ایجاد یک نمونه جدید از نوع T (فقط برای انواعی که کانسترکتور پیش‌فرض دارند)
