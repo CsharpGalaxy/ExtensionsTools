@@ -871,27 +871,77 @@ public static class StringExtensions
         var persianCalendar = new PersianCalendar();
         return persianCalendar.ToDateTime(year, month, day, hour, minute, second, 0);
     }
-    // 18. Reverse
+  
+    /// <summary>/// <summary>
+    /// Reverses the characters in the input string.
+    /// </summary>
+    /// <param name="source">The input string.</param>
+    /// <returns>The reversed string. If null or empty, returns the original value.</returns>
     public static string Reverse(this string source) =>
         string.IsNullOrEmpty(source) ? source : new string(source.Reverse().ToArray());
 
-
-
-    // 20. IsGuid
+    /// Checks whether the input string is a valid GUID.
+    /// </summary>
+    /// <param name="source">The input string.</param>
+    /// <returns>True if the string is a valid GUID; otherwise, false.</returns>
     public static bool IsGuid(this string source) =>
         !string.IsNullOrWhiteSpace(source) && Guid.TryParse(source, out _);
 
-    // 7. Trim (همه انواع)
+
+
+    /// <summary>
+    /// Trims whitespace from both the beginning and end of the string.
+    /// </summary>
+    /// <param name="source">The input string.</param>
+    /// <returns>The trimmed string, or null if the input is null.</returns>
     public static string TrimAll(this string source) => source?.Trim();
+
+    /// <summary>
+    /// Trims whitespace from the beginning of the string.
+    /// </summary>
+    /// <param name="source">The input string.</param>
+    /// <returns>The trimmed string, or null if the input is null.</returns>
     public static string TrimStartAll(this string source) => source?.TrimStart();
+
+    /// <summary>
+    /// Trims whitespace from the end of the string.
+    /// </summary>
+    /// <param name="source">The input string.</param>
+    /// <returns>The trimmed string, or null if the input is null.</returns>
     public static string TrimEndAll(this string source) => source?.TrimEnd();
-    // 3. Equals (با مقایسه حساس به بزرگی/کوچکی یا نادیده گرفتن آن)
+
+    /// <summary>
+    /// Compares two strings for equality, ignoring case sensitivity.
+    /// </summary>
+    /// <param name="source">The first string.</param>
+    /// <param name="other">The second string to compare.</param>
+    /// <returns>True if the strings are equal ignoring case; otherwise, false.</returns>
     public static bool EqualsIgnoreCase(this string source, string other) =>
         string.Equals(source, other, StringComparison.OrdinalIgnoreCase);
 
+    /// <summary>
+    /// Compares two strings for equality using invariant culture, ignoring case sensitivity.
+    /// </summary>
+    /// <param name="source">The first string.</param>
+    /// <param name="other">The second string to compare.</param>
+    /// <returns>True if the strings are equal using invariant culture and ignoring case; otherwise, false.</returns>
     public static bool EqualsInvariant(this string source, string other) =>
         string.Equals(source, other, StringComparison.InvariantCultureIgnoreCase);
 
+
+    /// <summary>
+    /// Determines whether the string is null or empty.
+    /// </summary>
+    /// <param name="value">The input string.</param>
+    /// <returns>True if the string is null or empty; otherwise, false.</returns>
+    public static bool IsNullOrEmptyEx(this string value) => string.IsNullOrEmpty(value);
+
+    /// <summary>
+    /// Determines whether the string is null, empty, or consists only of white-space characters.
+    /// </summary>
+    /// <param name="value">The input string.</param>
+    /// <returns>True if the string is null, empty, or whitespace; otherwise, false.</returns>
+    public static bool IsNullOrWhiteSpaceEx(this string value) => string.IsNullOrWhiteSpace(value);
 
 }
 
