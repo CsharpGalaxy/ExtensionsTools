@@ -1,6 +1,4 @@
-﻿using ExtentionLibrary.Strings;
-using System;
-using System.IO;
+﻿
 using System.Text.RegularExpressions;
 
 namespace CsharpGalexy.LibraryExtention.IO

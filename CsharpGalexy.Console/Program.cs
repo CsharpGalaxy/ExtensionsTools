@@ -1,13 +1,9 @@
 ﻿using CsharpGalexy.Console.Models;
 using CsharpGalexy.LibraryExtention.Models;
-using CsharpGalexy.LibraryExtention.Null;
-using CsharpGalexy.LibraryExtention.TimeSpans;
 using ExtentionLibrary.DateTimes;
 using ExtentionLibrary.Enums;
-using ExtentionLibrary.Strings;
 using System.ComponentModel;
 using System.Text;
-using CsharpGalexy.LibraryExtention.Extentions.Struct;
 string str = "dasdad assad sd sds sdsd";
 var a = str.TruncateMore(3);
 #region DateTime
