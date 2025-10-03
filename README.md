@@ -1,6 +1,6 @@
 String Document
 
-- [string extention method en?](.CsharpGalexy.LibraryExtention/Extentions.Strings/README-en.md)
+- [string extention method en?](./CsharpGalexy.LibraryExtention/Extentions.Strings/README-en.md)
 - [string extention method fa?](./CsharpGalexy.LibraryExtention/Extentions.Strings/README-fa.md)  
 ### DateTime Extensions (Persian DateTime Utilities)
 
