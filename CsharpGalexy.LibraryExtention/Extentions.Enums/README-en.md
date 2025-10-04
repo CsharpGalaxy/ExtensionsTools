@@ -65,3 +65,41 @@ var descAttr = myEnumValue.GetAttribute<DescriptionAttribute>();
 ```
 
 ---
+
+## 🚩 **Working with [Flags] (bit flags)**
+
+| Method                                                 | Purpose                                                                                         |
+| ------------------------------------------------------ | ----------------------------------------------------------------------------------------------- |
+| `Has(this Enum enumValue, Enum flag)`                  | Checks whether the specified `flag` is set on `enumValue` (for enums annotated with `[Flags]`). |
+| `Set<T>(this Enum enumValue, T flag) where T : Enum`   | Adds a flag to `enumValue` and returns the resulting enum (for `[Flags]`).                      |
+| `Clear<T>(this Enum enumValue, T flag) where T : Enum` | Removes a flag from `enumValue` and returns the resulting enum (for `[Flags]`).                 |
+
+**Important notes:**
+
+* If `enumValue` or `flag` is `null`, `Has(...)` returns `false`.
+* If the enum type is **not** decorated with `[Flags]`, `Has/Set/Clear` throw an `ArgumentException`.
+* Flag operations are performed by converting to `UInt64` and doing bitwise operations so they work across different underlying enum integral types.
+
+---
+
+## 🔧 **Helpers and Additional Implementations (Legacy / Alternate Implementations)**
+
+| Method                                    | Purpose                                                                                                  |
+| ----------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `AsName(this Enum @this)`                 | Returns the enum member name (equivalent to `Enum.GetName`).                                             |
+| `AsDescription(this Enum @this)`          | Returns `DescriptionAttribute` if present; otherwise returns the member name.                            |
+| `AsValue(this Enum @this)`                | Converts the enum to its underlying integer value (`int`).                                               |
+| `ToEnumString<TEnum>(this int enumValue)` | Gets the enum member name for the numeric value; if value is not defined, returns the numeric string.    |
+| `ToEnum<T>(this string enumString)`       | **Unsafe version**: parses string to enum using `Enum.Parse` — will throw an exception if parsing fails. |
+| `EnumJoin<T>()`                           | Joins all enum members into a comma-separated string.                                                    |
+| `Has(this Enum @this, int value)`         | Checks whether an integer value is defined in the enum (`Enum.IsDefined`).                               |
+| `Has(this Enum @this, string value)`      | Checks whether a string name is defined in the enum (`Enum.IsDefined`).                                  |
+| `ToDict(this Enum theEnum)`               | Converts enum members to `Dictionary<int, string>`: key = numeric value, value = member name.            |
+
+**Warnings / Technical Notes:**
+
+* `ToEnum<T>(enumString)` is **unsafe** and will throw an exception if the input is invalid — prefer the safe `ToEnum` (TryParse-based) versions unless you are certain of the input.
+* `AsValue()` and `ToDict()` assume conversion to `int` is appropriate; if your enum has a different underlying type (e.g. `byte`, `long`) the behavior might not match expectations and you may need to adjust the implementation.
+* `ToDict()` uses `Cast<int>()`; for enums whose underlying type is not `int`, consider changing the cast or implementation.
+
+---
