@@ -1,5 +1,4 @@
 ﻿using CsharpGalexy.LibraryExtention.Models.Files;
-using Microsoft.AspNetCore.Http;
 
 namespace CsharpGalexy.LibraryExtention.File;
 
@@ -452,53 +451,57 @@ public static partial class ValidateFiles
     /// <param name="fileName"></param>
     /// <param name="generateNewFileName"></param>
     /// <returns>UploadFileResult(bool IsSuccess, string NewFileName, List<string> Errors)</returns>
-    public static async Task<UploadFileResult> UploadFileAsync(this IFormFile file, FileType type, string path, string fileName = "", bool generateNewFileName = false)
+
+    public static async Task<UploadFileResult> UploadFileAsync(Stream stream, string fileName, FileType type, string path, bool generateNewFileName = false)
     {
+        var errors = new List<string>();
+
+        if (stream == null || stream.Length == 0)
+        {
+            errors.Add("فایل خالی یا نامعتبر است.");
+            return new UploadFileResult(false, errors);
+        }
+
         try
         {
-            string FileExtension = Path.GetExtension(file.FileName);
-            string newFileName = string.Empty;
+            var extension = Path.GetExtension(fileName)?.ToLowerInvariant();
+            var newFileName = generateNewFileName
+                ? $"{Guid.NewGuid()}{extension}"
+                : fileName;
 
-            if (generateNewFileName)
-                newFileName = $"{Guid.NewGuid()}{FileExtension}";
-            else
-                newFileName = string.IsNullOrWhiteSpace(fileName) == true ? file.FileName : fileName;
-
-            if (Directory.Exists(path) == false)
+            if (!Directory.Exists(path))
                 Directory.CreateDirectory(path);
 
-            string fullPath = string.IsNullOrWhiteSpace(newFileName) == false ?
-             $"{path}/{newFileName}" : $"{path}/{file.FileName}";
+            var fullPath = Path.Combine(path, newFileName);
 
-            bool result = default;
-            using (var memory = new MemoryStream())
+            using var memory = new MemoryStream();
+            await stream.CopyToAsync(memory);
+            var fileBytes = memory.ToArray();
+
+            if (!IsValidFile(fileBytes, type, extension))
             {
-                await file.CopyToAsync(memory);
-                result = IsValidFile(memory.ToArray(), type, FileExtension.Replace('.', ' '));
-
-                if (!result)
-                {
-                    memory.Close();
-                    return new UploadFileResult(false, "invalid file type !");
-                }
+                errors.Add("نوع فایل مجاز نیست.");
+                return new UploadFileResult(false, errors);
             }
 
-            using (var stream = new FileStream(fullPath, FileMode.Create))
-            {
-                await file.CopyToAsync(stream);
-            }
+            await System.IO.File.WriteAllBytesAsync(fullPath, fileBytes);
 
-            return new UploadFileResult(newFileName);
+            return new UploadFileResult(true, newFileName);
         }
-        catch (Exception exp)
+        catch (Exception ex)
         {
 #if DEBUG
-            return new UploadFileResult(false, new List<string>() { exp.Message, exp.StackTrace });
+            errors.Add(ex.Message);
+            errors.Add(ex.StackTrace ?? "");
 #else
- return new UploadFileResult(false, "There was an error uploading the file");
+            errors.Add("خطا در آپلود فایل.");
 #endif
+            return new UploadFileResult(false, errors);
         }
     }
+
+
+
 
     /// <summary>
     /// removes any kind of files with file path
