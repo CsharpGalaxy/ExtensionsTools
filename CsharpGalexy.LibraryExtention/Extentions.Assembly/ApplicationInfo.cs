@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 
-namespace CsharpGalexy.LibraryExtention.Extentions.Assembly;
+
 
 /// <summary>
 /// Provides information about the calling assembly,
