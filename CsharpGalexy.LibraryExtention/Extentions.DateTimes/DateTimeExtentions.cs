@@ -1,4 +1,4 @@
-﻿namespace ExtentionLibrary.DateTimes;
+﻿
 
 using System;
 using System.Globalization;
