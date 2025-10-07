@@ -1,7 +1,9 @@
 ﻿using CsharpGalexy.Console.Models;
+using CsharpGalexy.LibraryExtention.Extentions.Province;
 using CsharpGalexy.LibraryExtention.Models;
 using System.ComponentModel;
 using System.Text;
+using YourNamespace.Helpers;
 string str = "dasdad assad sd sds sdsd";
 var a = str.TruncateMore(3);
 #region DateTime
@@ -10,7 +12,7 @@ var yesterday = now.AddDays(-1);
 var tomorrow = now.AddDays(1);
 var birthDate = new DateTime(1990, 5, 20);
 
-StringBuilder stringBuilder = new StringBuilder();
+ StringBuilder stringBuilder = new StringBuilder();
 stringBuilder.AppendLine("=== Persian Date ===");
 stringBuilder.AppendLine($"Today (Shamsi): {now.ToShamsiDate()}");
 stringBuilder.AppendLine($"Today (Shamsi custom format): {now.ToShamsiDate("dd MMMM yyyy")}");
@@ -70,61 +72,61 @@ stringBuilder.AppendLine($"Truncate to hour: {now.TruncateToHour():HH:mm:ss.fff}
 #endregion
 
 
-#region Enum
-stringBuilder.Clear();
-stringBuilder.AppendLine("=== GetDescription ===");
-stringBuilder.AppendLine(SampleEnum.First.GetDescription());   // این مقدار اول است
-stringBuilder.AppendLine(SampleEnum.Second.GetDescription());  // این مقدار دوم است
-stringBuilder.AppendLine(SampleEnum.Third.GetDescription());   // Third
+//#region Enum
+//stringBuilder.Clear();
+//stringBuilder.AppendLine("=== GetDescription ===");
+//stringBuilder.AppendLine(SampleEnum.First.GetDescription());   // این مقدار اول است
+//stringBuilder.AppendLine(SampleEnum.Second.GetDescription());  // این مقدار دوم است
+//stringBuilder.AppendLine(SampleEnum.Third.GetDescription());   // Third
 
-stringBuilder.AppendLine("\n=== GetDisplayName ===");
-stringBuilder.AppendLine(SampleEnum.First.GetDisplayName());   // این مقدار اول است
-stringBuilder.AppendLine(SampleEnum.Second.GetDisplayName());  // مقدار دوم (DisplayName بر Description ارجحیت دارد)
-stringBuilder.AppendLine(SampleEnum.Third.GetDisplayName());   // Third
+//stringBuilder.AppendLine("\n=== GetDisplayName ===");
+//stringBuilder.AppendLine(SampleEnum.First.GetDisplayName());   // این مقدار اول است
+//stringBuilder.AppendLine(SampleEnum.Second.GetDisplayName());  // مقدار دوم (DisplayName بر Description ارجحیت دارد)
+//stringBuilder.AppendLine(SampleEnum.Third.GetDisplayName());   // Third
 
-stringBuilder.AppendLine("\n=== ToList / ToSelectList ===");
-var list = EnumExtensions.ToList<SampleEnum>();
-foreach (var kv in list)
-stringBuilder.AppendLine($"{kv.Key} - {kv.Value}");
+//stringBuilder.AppendLine("\n=== ToList / ToSelectList ===");
+//var list = EnumExtensions.ToList<SampleEnum>();
+//foreach (var kv in list)
+//stringBuilder.AppendLine($"{kv.Key} - {kv.Value}");
 
-var selectList = EnumExtensions.ToSelectList<SampleEnum>();
-foreach (var item in selectList)
-stringBuilder.AppendLine($"{item.Value} - {item.Text}");
+//var selectList = EnumExtensions.ToSelectList<SampleEnum>();
+//foreach (var item in selectList)
+//stringBuilder.AppendLine($"{item.Value} - {item.Text}");
 
-stringBuilder.AppendLine("\n=== ToEnum ===");
-string val1 = "Second";
-string val2 = "second";
-string val3 = "Unknown";
+//stringBuilder.AppendLine("\n=== ToEnum ===");
+//string val1 = "Second";
+//string val2 = "second";
+//string val3 = "Unknown";
 
-stringBuilder.AppendLine(val1.ToEnum<SampleEnum>().ToString());           // Second
-stringBuilder.AppendLine(val2.ToEnum<SampleEnum>().ToString());           // Second (ignoreCase = true)
-stringBuilder.AppendLine(val3.ToEnum<SampleEnum>(SampleEnum.None).ToString()); // None (fallback)
+//stringBuilder.AppendLine(val1.ToEnum<SampleEnum>().ToString());           // Second
+//stringBuilder.AppendLine(val2.ToEnum<SampleEnum>().ToString());           // Second (ignoreCase = true)
+//stringBuilder.AppendLine(val3.ToEnum<SampleEnum>(SampleEnum.None).ToString()); // None (fallback)
 
-stringBuilder.AppendLine("\n=== IsValid ===");
-stringBuilder.AppendLine(SampleEnum.First.IsValid().ToString());   // True
-stringBuilder.AppendLine(((SampleEnum)100).IsValid().ToString());    // False
+//stringBuilder.AppendLine("\n=== IsValid ===");
+//stringBuilder.AppendLine(SampleEnum.First.IsValid().ToString());   // True
+//stringBuilder.AppendLine(((SampleEnum)100).IsValid().ToString());    // False
 
-stringBuilder.AppendLine("\n=== GetValues / GetNames ===");
-var values = EnumExtensions.GetValues<SampleEnum>();
-var names = EnumExtensions.GetNames<SampleEnum>();
-stringBuilder.AppendLine(string.Join(", ", values));
-stringBuilder.AppendLine(string.Join(", ", names));
+//stringBuilder.AppendLine("\n=== GetValues / GetNames ===");
+//var values = EnumExtensions.GetValues<SampleEnum>();
+//var names = EnumExtensions.GetNames<SampleEnum>();
+//stringBuilder.AppendLine(string.Join(", ", values));
+//stringBuilder.AppendLine(string.Join(", ", names));
 
-stringBuilder.AppendLine("\n=== GetAttribute ===");
-var attr = SampleEnum.Second.GetAttribute<DescriptionAttribute>();
-stringBuilder.AppendLine(attr?.Description);  // این مقدار دوم است
+//stringBuilder.AppendLine("\n=== GetAttribute ===");
+//var attr = SampleEnum.Second.GetAttribute<DescriptionAttribute>();
+//stringBuilder.AppendLine(attr?.Description);  // این مقدار دوم است
 
-stringBuilder.AppendLine("\n=== Flags Tests ===");
+//stringBuilder.AppendLine("\n=== Flags Tests ===");
 
 
-var flags = FlagEnum.A.Set(FlagEnum.C);
-stringBuilder.AppendLine(flags.ToString());           // A, C
-stringBuilder.AppendLine(flags.Has(FlagEnum.A).ToString()); // True
-stringBuilder.AppendLine(flags.Has(FlagEnum.B).ToString()); // False
-flags = flags.Clear(FlagEnum.A);
-stringBuilder.AppendLine(flags.ToString());           // C
-File.WriteAllText("EnumExtensionsDemo.txt", stringBuilder.ToString());
-#endregion
+//var flags = FlagEnum.A.Set(FlagEnum.C);
+//stringBuilder.AppendLine(flags.ToString());           // A, C
+//stringBuilder.AppendLine(flags.Has(FlagEnum.A).ToString()); // True
+//stringBuilder.AppendLine(flags.Has(FlagEnum.B).ToString()); // False
+//flags = flags.Clear(FlagEnum.A);
+//stringBuilder.AppendLine(flags.ToString());           // C
+//File.WriteAllText("EnumExtensionsDemo.txt", stringBuilder.ToString());
+//#endregion
 
 
 #region String
@@ -186,39 +188,25 @@ stringBuilder.AppendLine("\n===== END TESTS =====");
 stringBuilder.AppendLine("------------------");
 
 
-// گرفتن پیش شماره هر استان
-stringBuilder.AppendLine("تهران".GetProvincePhoneCode());           // 021
-stringBuilder.AppendLine("خراسان رضوی".GetProvincePhoneCode());     // 051
-stringBuilder.AppendLine("فارس".GetProvincePhoneCode());            // 071
-stringBuilder.AppendLine("گیلان".GetProvincePhoneCode());           // 013
-stringBuilder.AppendLine("کرمان".GetProvincePhoneCode());           // null → چون "کرمان" در لیست نیست (استان "کرمان" → مرکز: "کرمان" → کد: "034")
-
-// برای دریافت کدپستی مرکز استان‌های ایران بر اساس نام استان 
-stringBuilder.AppendLine("تهران".GetProvincePostalCode());     // 15957
-stringBuilder.AppendLine("فارس".GetProvincePostalCode());      // 71967
-stringBuilder.AppendLine("کرمان".GetProvincePostalCode());     // 76137
-stringBuilder.AppendLine("یزد".GetProvincePostalCode());       // 89169
+        // null → چون "کرمان" در لیست نیست (استان "کرمان" → مرکز: "کرمان" → کد: "034")
 
 
-//گرفتن نام شهر مرکز استان
-stringBuilder.AppendLine("خراسان رضوی".GetProvinceCapital());   // مشهد
-stringBuilder.AppendLine("فارس".GetProvinceCapital());          // شیراز
-stringBuilder.AppendLine("البرز".GetProvinceCapital());         // کرج
-stringBuilder.AppendLine("لرستان".GetProvinceCapital());        // خرم‌آباد
 
+
+var aaa= ProvincePostalCodeHelper.GetAllPostalCodes();
 
 //گرفتن کل استان ها
-var provinces = ProvinceHelper.GetAllProvinces();
-foreach (var province in provinces)
-{
-    Console.WriteLine(province);
-}
+//var provinces = ProvinceHelper.GetAllProvinces();
+//foreach (var province in provinces)
+//{
+//    stringBuilder.AppendLine(province);
+//}
 // یا مرتب شده:
-var sorted = ProvinceHelper.GetAllProvincesSorted();
-foreach (var p in sorted)
-{
-    Console.WriteLine(p);
-}
+//var sorted = ProvinceHelper.GetAllProvincesSorted();
+//foreach (var p in sorted)
+//{
+//    stringBuilder.AppendLine(p);
+//}
 
 
 // تست اعتبارسنجی
@@ -284,7 +272,7 @@ File.WriteAllText("StringExtensionsDemo.txt", stringBuilder.ToString());
 #region Object
 
 Person person = new Person().NothingIfNull();
-Console.WriteLine(person.Name); // ✅ امن! اگر null بود، یک Person جدید (با مقادیر پیش‌فرض) برمی‌گرده.
+stringBuilder.AppendLine(person.Name); // ✅ امن! اگر null بود، یک Person جدید (با مقادیر پیش‌فرض) برمی‌گرده.
 #endregion
 
 #region TimeSpan
@@ -349,4 +337,122 @@ File.WriteAllText("TimeSpanExtensionsDemo.txt", stringBuilder.ToString());
 
 Console.Write("------------------");
 
+
+#region CountryDialCodeHelper
+stringBuilder.Clear();
+
+stringBuilder.AppendLine("🧪 شروع تست‌های CountryDialCodeHelper...\n");
+
+try
+{
+    Test_GetPersianCountryByDialCode(stringBuilder);
+    Test_GetEnglishCountryByDialCode(stringBuilder);
+    Test_GetDialCodeByPersianCountry(stringBuilder);
+    Test_GetDialCodeByEnglishCountry(stringBuilder);
+    Test_GetAllCountriesSortedByDialCode(stringBuilder);
+    Test_CaseInsensitiveSearch(stringBuilder);
+    Test_InvalidInputs(stringBuilder);
+
+    stringBuilder.AppendLine("✅ تمام تست‌ها با موفقیت انجام شدند!");
+}
+catch (Exception ex)
+{
+    stringBuilder.AppendLine($"❌ خطا در تست: {ex.Message}");
+    stringBuilder.AppendLine(ex.StackTrace);
+}
+
+stringBuilder.AppendLine("\nبرای خروج کلیدی را فشار دهید...");
+File.WriteAllText("CountryDialCodeHelper.txt", stringBuilder.ToString());
+
+
+static void Test_GetPersianCountryByDialCode(in StringBuilder stringBuilder)
+{
+    stringBuilder.AppendLine("• تست GetPersianCountryByDialCode...");
+    var result = CountryDialCodeHelper.GetPersianCountryByDialCode("+1");
+    if (result != "آمریکا")
+        throw new Exception("نتیجه مورد انتظار 'آمریکا' نیست.");
+    stringBuilder.AppendLine("  ✔️ OK");
+}
+
+static void Test_GetEnglishCountryByDialCode(in StringBuilder stringBuilder)
+{
+    stringBuilder.AppendLine("• تست GetEnglishCountryByDialCode...");
+    var result = CountryDialCodeHelper.GetEnglishCountryByDialCode("+1");
+    if (result != "United States")
+        throw new Exception("نتیجه مورد انتظار 'United States' نیست.");
+    stringBuilder.AppendLine("  ✔️ OK");
+}
+
+static void Test_GetDialCodeByPersianCountry(in StringBuilder stringBuilder)
+{
+    stringBuilder.AppendLine("• تست GetDialCodeByPersianCountry...");
+    var result = CountryDialCodeHelper.GetDialCodeByPersianCountry("آمریکا");
+    if (result != "+1")
+        throw new Exception("کد تلفن آمریکا باید '+1' باشد.");
+    stringBuilder.AppendLine("  ✔️ OK");
+}
+
+static void Test_GetDialCodeByEnglishCountry(in StringBuilder stringBuilder)
+{
+    stringBuilder.AppendLine("• تست GetDialCodeByEnglishCountry...");
+    var result = CountryDialCodeHelper.GetDialCodeByEnglishCountry("Canada");
+    if (result != "+1")
+        throw new Exception("کد تلفن کانادا باید '+1' باشد.");
+    stringBuilder.AppendLine("  ✔️ OK");
+}
+
+static void Test_GetAllCountriesSortedByDialCode(in StringBuilder stringBuilder)
+{
+    stringBuilder.AppendLine("• تست GetAllCountriesSortedByDialCode...");
+    var sorted = CountryDialCodeHelper.GetAllCountriesSortedByDialCode();
+    if (sorted.Count == 0)
+        throw new Exception("لیست کشورها خالی است.");
+
+    // بررسی اینکه اولین کشور کد +1 دارد
+    if (sorted[0].DialCode != "+1")
+        throw new Exception("اولین کشور باید کد +1 داشته باشد.");
+
+    stringBuilder.AppendLine($"  ✔️ OK (تعداد کشورها: {sorted.Count})");
+}
+
+static void Test_CaseInsensitiveSearch(in StringBuilder stringBuilder)
+{
+    stringBuilder.AppendLine("• تست جستجوی بدون حساسیت به بزرگ/کوچکی...");
+    var code1 = CountryDialCodeHelper.GetDialCodeByEnglishCountry("canada");
+    var code2 = CountryDialCodeHelper.GetDialCodeByEnglishCountry("CANADA");
+    var code3 = CountryDialCodeHelper.GetDialCodeByPersianCountry("آمریکا"); // فارسی همیشه case-sensitive نیست ولی تست می‌کنیم
+
+    if (code1 != "+1" || code2 != "+1")
+        throw new Exception("جستجوی بدون حساسیت به حروف کار نمی‌کند.");
+
+    stringBuilder.AppendLine("  ✔️ OK");
+}
+
+static void Test_InvalidInputs(in StringBuilder stringBuilder)
+{
+    stringBuilder.AppendLine("• تست ورودی‌های نامعتبر...");
+
+    // جستجوی کد تلفن ناموجود
+    var unknown = CountryDialCodeHelper.GetPersianCountryByDialCode("+999");
+    if (unknown != null)
+        throw new Exception("کد تلفن ناموجود نباید نتیجه‌ای برگرداند.");
+
+    // جستجوی نام کشور ناموجود
+    var unknownCode = CountryDialCodeHelper.GetDialCodeByEnglishCountry("Atlantis");
+    if (unknownCode != null)
+        throw new Exception("نام کشور ناموجود نباید نتیجه‌ای برگرداند.");
+
+    // ورودی خالی
+    var empty = CountryDialCodeHelper.GetDialCodeByEnglishCountry("");
+    if (empty != null)
+        throw new Exception("ورودی خالی نباید نتیجه‌ای برگرداند.");
+
+    stringBuilder.AppendLine("  ✔️ OK");
+}
+#endregion
 Console.ReadKey();
+
+
+
+Console.ReadKey();
+
