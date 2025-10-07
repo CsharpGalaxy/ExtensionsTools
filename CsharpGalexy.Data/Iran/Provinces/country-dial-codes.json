@@ -1,0 +1,1342 @@
+[
+  {
+    "DialCode": "+1",
+    "PersianCountryName": "آمریکا",
+    "EnglishCountryName": "United States"
+  },
+  {
+    "DialCode": "+1",
+    "PersianCountryName": "کانادا",
+    "EnglishCountryName": "Canada"
+  },
+  {
+    "DialCode": "+20",
+    "PersianCountryName": "مصر",
+    "EnglishCountryName": "Egypt"
+  },
+  {
+    "DialCode": "+25",
+    "PersianCountryName": "اوگاندا",
+    "EnglishCountryName": "Uganda"
+  },
+  {
+    "DialCode": "+27",
+    "PersianCountryName": "آفریقای جنوبی",
+    "EnglishCountryName": "South Africa"
+  },
+  {
+    "DialCode": "+30",
+    "PersianCountryName": "یونان",
+    "EnglishCountryName": "Greece"
+  },
+  {
+    "DialCode": "+31",
+    "PersianCountryName": "هلند",
+    "EnglishCountryName": "Netherlands"
+  },
+  {
+    "DialCode": "+32",
+    "PersianCountryName": "بلژیک",
+    "EnglishCountryName": "Belgium"
+  },
+  {
+    "DialCode": "+33",
+    "PersianCountryName": "فرانسه",
+    "EnglishCountryName": "France"
+  },
+  {
+    "DialCode": "+34",
+    "PersianCountryName": "اسپانیا",
+    "EnglishCountryName": "Spain"
+  },
+  {
+    "DialCode": "+36",
+    "PersianCountryName": "مجارستان",
+    "EnglishCountryName": "Hungary"
+  },
+  {
+    "DialCode": "+39",
+    "PersianCountryName": "ایتالیا",
+    "EnglishCountryName": "Italy"
+  },
+  {
+    "DialCode": "+39",
+    "PersianCountryName": "واتیکان",
+    "EnglishCountryName": "Vatican"
+  },
+  {
+    "DialCode": "+41",
+    "PersianCountryName": "سوئیس",
+    "EnglishCountryName": "Switzerland"
+  },
+  {
+    "DialCode": "+42",
+    "PersianCountryName": "چک",
+    "EnglishCountryName": "Czech Republic"
+  },
+  {
+    "DialCode": "+43",
+    "PersianCountryName": "اتریش",
+    "EnglishCountryName": "Austria"
+  },
+  {
+    "DialCode": "+44",
+    "PersianCountryName": "انگلستان",
+    "EnglishCountryName": "United Kingdom"
+  },
+  {
+    "DialCode": "+45",
+    "PersianCountryName": "دانمارک",
+    "EnglishCountryName": "Denmark"
+  },
+  {
+    "DialCode": "+46",
+    "PersianCountryName": "سوئد",
+    "EnglishCountryName": "Sweden"
+  },
+  {
+    "DialCode": "+47",
+    "PersianCountryName": "نروژ",
+    "EnglishCountryName": "Norway"
+  },
+  {
+    "DialCode": "+48",
+    "PersianCountryName": "لهستان",
+    "EnglishCountryName": "Poland"
+  },
+  {
+    "DialCode": "+49",
+    "PersianCountryName": "آلمان",
+    "EnglishCountryName": "Germany"
+  },
+  {
+    "DialCode": "+51",
+    "PersianCountryName": "پرو",
+    "EnglishCountryName": "Peru"
+  },
+  {
+    "DialCode": "+52",
+    "PersianCountryName": "مکزیک",
+    "EnglishCountryName": "Mexico"
+  },
+  {
+    "DialCode": "+53",
+    "PersianCountryName": "کوبا",
+    "EnglishCountryName": "Cuba"
+  },
+  {
+    "DialCode": "+54",
+    "PersianCountryName": "آرژانتین",
+    "EnglishCountryName": "Argentina"
+  },
+  {
+    "DialCode": "+55",
+    "PersianCountryName": "برزیل",
+    "EnglishCountryName": "Brazil"
+  },
+  {
+    "DialCode": "+56",
+    "PersianCountryName": "شیلی",
+    "EnglishCountryName": "Chile"
+  },
+  {
+    "DialCode": "+57",
+    "PersianCountryName": "کلمبیا",
+    "EnglishCountryName": "Colombia"
+  },
+  {
+    "DialCode": "+58",
+    "PersianCountryName": "ونزوئلا",
+    "EnglishCountryName": "Venezuela"
+  },
+  {
+    "DialCode": "+60",
+    "PersianCountryName": "مالزی",
+    "EnglishCountryName": "Malaysia"
+  },
+  {
+    "DialCode": "+61",
+    "PersianCountryName": "استرالیا",
+    "EnglishCountryName": "Australia"
+  },
+  {
+    "DialCode": "+62",
+    "PersianCountryName": "اندونزی",
+    "EnglishCountryName": "Indonesia"
+  },
+  {
+    "DialCode": "+63",
+    "PersianCountryName": "فیلیپین",
+    "EnglishCountryName": "Philippines"
+  },
+  {
+    "DialCode": "+64",
+    "PersianCountryName": "نیوزلند",
+    "EnglishCountryName": "New Zealand"
+  },
+  {
+    "DialCode": "+65",
+    "PersianCountryName": "سنگاپور",
+    "EnglishCountryName": "Singapore"
+  },
+  {
+    "DialCode": "+66",
+    "PersianCountryName": "تایلند",
+    "EnglishCountryName": "Thailand"
+  },
+  {
+    "DialCode": "+67",
+    "PersianCountryName": "فلیپین",
+    "EnglishCountryName": "Philippines"
+  },
+  {
+    "DialCode": "+68",
+    "PersianCountryName": "مالدیو",
+    "EnglishCountryName": "Maldives"
+  },
+  {
+    "DialCode": "+69",
+    "PersianCountryName": "سریلانکا",
+    "EnglishCountryName": "Sri Lanka"
+  },
+  {
+    "DialCode": "+7",
+    "PersianCountryName": "روسیه",
+    "EnglishCountryName": "Russia"
+  },
+  {
+    "DialCode": "+81",
+    "PersianCountryName": "ژاپن",
+    "EnglishCountryName": "Japan"
+  },
+  {
+    "DialCode": "+82",
+    "PersianCountryName": "کره جنوبی",
+    "EnglishCountryName": "South Korea"
+  },
+  {
+    "DialCode": "+84",
+    "PersianCountryName": "ویتنام",
+    "EnglishCountryName": "Vietnam"
+  },
+  {
+    "DialCode": "+86",
+    "PersianCountryName": "چین",
+    "EnglishCountryName": "China"
+  },
+  {
+    "DialCode": "+90",
+    "PersianCountryName": "ترکیه",
+    "EnglishCountryName": "Turkey"
+  },
+  {
+    "DialCode": "+91",
+    "PersianCountryName": "هند",
+    "EnglishCountryName": "India"
+  },
+  {
+    "DialCode": "+92",
+    "PersianCountryName": "پاکستان",
+    "EnglishCountryName": "Pakistan"
+  },
+  {
+    "DialCode": "+93",
+    "PersianCountryName": "افغانستان",
+    "EnglishCountryName": "Afghanistan"
+  },
+  {
+    "DialCode": "+94",
+    "PersianCountryName": "سریلانکا",
+    "EnglishCountryName": "Sri Lanka"
+  },
+  {
+    "DialCode": "+95",
+    "PersianCountryName": "میانمار",
+    "EnglishCountryName": "Myanmar"
+  },
+  {
+    "DialCode": "+212",
+    "PersianCountryName": "مراکش",
+    "EnglishCountryName": "Morocco"
+  },
+  {
+    "DialCode": "+213",
+    "PersianCountryName": "الجزایر",
+    "EnglishCountryName": "Algeria"
+  },
+  {
+    "DialCode": "+216",
+    "PersianCountryName": "تونس",
+    "EnglishCountryName": "Tunisia"
+  },
+  {
+    "DialCode": "+218",
+    "PersianCountryName": "لیبی",
+    "EnglishCountryName": "Libya"
+  },
+  {
+    "DialCode": "+220",
+    "PersianCountryName": "گامبیا",
+    "EnglishCountryName": "Gambia"
+  },
+  {
+    "DialCode": "+221",
+    "PersianCountryName": "سنگال",
+    "EnglishCountryName": "Senegal"
+  },
+  {
+    "DialCode": "+222",
+    "PersianCountryName": "موریتانی",
+    "EnglishCountryName": "Mauritania"
+  },
+  {
+    "DialCode": "+223",
+    "PersianCountryName": "مالی",
+    "EnglishCountryName": "Mali"
+  },
+  {
+    "DialCode": "+224",
+    "PersianCountryName": "گینه",
+    "EnglishCountryName": "Guinea"
+  },
+  {
+    "DialCode": "+225",
+    "PersianCountryName": "ساحل عاج",
+    "EnglishCountryName": "Ivory Coast"
+  },
+  {
+    "DialCode": "+226",
+    "PersianCountryName": "بورکینافاسو",
+    "EnglishCountryName": "Burkina Faso"
+  },
+  {
+    "DialCode": "+227",
+    "PersianCountryName": "نیجر",
+    "EnglishCountryName": "Niger"
+  },
+  {
+    "DialCode": "+228",
+    "PersianCountryName": "توغو",
+    "EnglishCountryName": "Togo"
+  },
+  {
+    "DialCode": "+229",
+    "PersianCountryName": "بنین",
+    "EnglishCountryName": "Benin"
+  },
+  {
+    "DialCode": "+230",
+    "PersianCountryName": "موریس",
+    "EnglishCountryName": "Mauritius"
+  },
+  {
+    "DialCode": "+231",
+    "PersianCountryName": "لیبریا",
+    "EnglishCountryName": "Liberia"
+  },
+  {
+    "DialCode": "+232",
+    "PersianCountryName": "سیرالئون",
+    "EnglishCountryName": "Sierra Leone"
+  },
+  {
+    "DialCode": "+233",
+    "PersianCountryName": "غنا",
+    "EnglishCountryName": "Ghana"
+  },
+  {
+    "DialCode": "+234",
+    "PersianCountryName": "نیجریه",
+    "EnglishCountryName": "Nigeria"
+  },
+  {
+    "DialCode": "+235",
+    "PersianCountryName": "چاد",
+    "EnglishCountryName": "Chad"
+  },
+  {
+    "DialCode": "+236",
+    "PersianCountryName": "افریقای مرکزی",
+    "EnglishCountryName": "Central African Republic"
+  },
+  {
+    "DialCode": "+237",
+    "PersianCountryName": "کامرون",
+    "EnglishCountryName": "Cameroon"
+  },
+  {
+    "DialCode": "+238",
+    "PersianCountryName": "کیپ ورد",
+    "EnglishCountryName": "Cape Verde"
+  },
+  {
+    "DialCode": "+239",
+    "PersianCountryName": "سائوتومه و پرنسیپ",
+    "EnglishCountryName": "Sao Tome and Principe"
+  },
+  {
+    "DialCode": "+240",
+    "PersianCountryName": "گینه استوایی",
+    "EnglishCountryName": "Equatorial Guinea"
+  },
+  {
+    "DialCode": "+241",
+    "PersianCountryName": "گابون",
+    "EnglishCountryName": "Gabon"
+  },
+  {
+    "DialCode": "+242",
+    "PersianCountryName": "کنگو",
+    "EnglishCountryName": "Congo"
+  },
+  {
+    "DialCode": "+243",
+    "PersianCountryName": "زئیر",
+    "EnglishCountryName": "Zaire"
+  },
+  {
+    "DialCode": "+244",
+    "PersianCountryName": "آنگولا",
+    "EnglishCountryName": "Angola"
+  },
+  {
+    "DialCode": "+245",
+    "PersianCountryName": "گینه بیسائو",
+    "EnglishCountryName": "Guinea-Bissau"
+  },
+  {
+    "DialCode": "+246",
+    "PersianCountryName": "سرزمین های دور افتاده بریتانیا",
+    "EnglishCountryName": "British Indian Ocean Territory"
+  },
+  {
+    "DialCode": "+247",
+    "PersianCountryName": "آسام",
+    "EnglishCountryName": "Ascension Island"
+  },
+  {
+    "DialCode": "+248",
+    "PersianCountryName": "سیشل",
+    "EnglishCountryName": "Seychelles"
+  },
+  {
+    "DialCode": "+249",
+    "PersianCountryName": "سودان",
+    "EnglishCountryName": "Sudan"
+  },
+  {
+    "DialCode": "+250",
+    "PersianCountryName": "رواندا",
+    "EnglishCountryName": "Rwanda"
+  },
+  {
+    "DialCode": "+251",
+    "PersianCountryName": "اتیوپی",
+    "EnglishCountryName": "Ethiopia"
+  },
+  {
+    "DialCode": "+252",
+    "PersianCountryName": "سومالی",
+    "EnglishCountryName": "Somalia"
+  },
+  {
+    "DialCode": "+253",
+    "PersianCountryName": "جیبوتی",
+    "EnglishCountryName": "Djibouti"
+  },
+  {
+    "DialCode": "+254",
+    "PersianCountryName": "کنیا",
+    "EnglishCountryName": "Kenya"
+  },
+  {
+    "DialCode": "+255",
+    "PersianCountryName": "تانزانیا",
+    "EnglishCountryName": "Tanzania"
+  },
+  {
+    "DialCode": "+256",
+    "PersianCountryName": "اوگاندا",
+    "EnglishCountryName": "Uganda"
+  },
+  {
+    "DialCode": "+257",
+    "PersianCountryName": "بوروندی",
+    "EnglishCountryName": "Burundi"
+  },
+  {
+    "DialCode": "+258",
+    "PersianCountryName": "موزامبیک",
+    "EnglishCountryName": "Mozambique"
+  },
+  {
+    "DialCode": "+259",
+    "PersianCountryName": "زامبیا",
+    "EnglishCountryName": "Zambia"
+  },
+  {
+    "DialCode": "+260",
+    "PersianCountryName": "مالاوی",
+    "EnglishCountryName": "Malawi"
+  },
+  {
+    "DialCode": "+261",
+    "PersianCountryName": "ماداکاسکار",
+    "EnglishCountryName": "Madagascar"
+  },
+  {
+    "DialCode": "+262",
+    "PersianCountryName": "جزایر کومور",
+    "EnglishCountryName": "Comoros"
+  },
+  {
+    "DialCode": "+263",
+    "PersianCountryName": "زیمبابوه",
+    "EnglishCountryName": "Zimbabwe"
+  },
+  {
+    "DialCode": "+264",
+    "PersianCountryName": "نامیبیا",
+    "EnglishCountryName": "Namibia"
+  },
+  {
+    "DialCode": "+265",
+    "PersianCountryName": "لسوتو",
+    "EnglishCountryName": "Lesotho"
+  },
+  {
+    "DialCode": "+266",
+    "PersianCountryName": "اسواتینی",
+    "EnglishCountryName": "Eswatini"
+  },
+  {
+    "DialCode": "+267",
+    "PersianCountryName": "بتسوانا",
+    "EnglishCountryName": "Botswana"
+  },
+  {
+    "DialCode": "+268",
+    "PersianCountryName": "موریس",
+    "EnglishCountryName": "Mauritius"
+  },
+  {
+    "DialCode": "+269",
+    "PersianCountryName": "جزایر کومور",
+    "EnglishCountryName": "Comoros"
+  },
+  {
+    "DialCode": "+370",
+    "PersianCountryName": "لیتوانی",
+    "EnglishCountryName": "Lithuania"
+  },
+  {
+    "DialCode": "+371",
+    "PersianCountryName": "لتونی",
+    "EnglishCountryName": "Latvia"
+  },
+  {
+    "DialCode": "+372",
+    "PersianCountryName": "استونی",
+    "EnglishCountryName": "Estonia"
+  },
+  {
+    "DialCode": "+373",
+    "PersianCountryName": "مولداوی",
+    "EnglishCountryName": "Moldova"
+  },
+  {
+    "DialCode": "+374",
+    "PersianCountryName": "ارمنستان",
+    "EnglishCountryName": "Armenia"
+  },
+  {
+    "DialCode": "+375",
+    "PersianCountryName": "بلاروس",
+    "EnglishCountryName": "Belarus"
+  },
+  {
+    "DialCode": "+376",
+    "PersianCountryName": "آندورا",
+    "EnglishCountryName": "Andorra"
+  },
+  {
+    "DialCode": "+377",
+    "PersianCountryName": "موناکو",
+    "EnglishCountryName": "Monaco"
+  },
+  {
+    "DialCode": "+378",
+    "PersianCountryName": "سن مارینو",
+    "EnglishCountryName": "San Marino"
+  },
+  {
+    "DialCode": "+379",
+    "PersianCountryName": "یونان",
+    "EnglishCountryName": "Greece"
+  },
+  {
+    "DialCode": "+420",
+    "PersianCountryName": "چک",
+    "EnglishCountryName": "Czech Republic"
+  },
+  {
+    "DialCode": "+421",
+    "PersianCountryName": "اسلواکی",
+    "EnglishCountryName": "Slovakia"
+  },
+  {
+    "DialCode": "+423",
+    "PersianCountryName": "لیختن اشتاین",
+    "EnglishCountryName": "Liechtenstein"
+  },
+  {
+    "DialCode": "+501",
+    "PersianCountryName": "بلیز",
+    "EnglishCountryName": "Belize"
+  },
+  {
+    "DialCode": "+502",
+    "PersianCountryName": "گواتمالا",
+    "EnglishCountryName": "Guatemala"
+  },
+  {
+    "DialCode": "+503",
+    "PersianCountryName": "السالوادور",
+    "EnglishCountryName": "El Salvador"
+  },
+  {
+    "DialCode": "+504",
+    "PersianCountryName": "هندوراس",
+    "EnglishCountryName": "Honduras"
+  },
+  {
+    "DialCode": "+505",
+    "PersianCountryName": "نیکاراگوئه",
+    "EnglishCountryName": "Nicaragua"
+  },
+  {
+    "DialCode": "+506",
+    "PersianCountryName": "کاستاریکا",
+    "EnglishCountryName": "Costa Rica"
+  },
+  {
+    "DialCode": "+507",
+    "PersianCountryName": "پاناما",
+    "EnglishCountryName": "Panama"
+  },
+  {
+    "DialCode": "+508",
+    "PersianCountryName": "گوادلوپ",
+    "EnglishCountryName": "Guadeloupe"
+  },
+  {
+    "DialCode": "+509",
+    "PersianCountryName": "هائی تی",
+    "EnglishCountryName": "Haiti"
+  },
+  {
+    "DialCode": "+590",
+    "PersianCountryName": "فرانس گاوان",
+    "EnglishCountryName": "French Guiana"
+  },
+  {
+    "DialCode": "+591",
+    "PersianCountryName": "بولیوی",
+    "EnglishCountryName": "Bolivia"
+  },
+  {
+    "DialCode": "+592",
+    "PersianCountryName": "گیانای فرانسه",
+    "EnglishCountryName": "French Guiana"
+  },
+  {
+    "DialCode": "+593",
+    "PersianCountryName": "اکوادور",
+    "EnglishCountryName": "Ecuador"
+  },
+  {
+    "DialCode": "+594",
+    "PersianCountryName": "گیانا",
+    "EnglishCountryName": "Guyana"
+  },
+  {
+    "DialCode": "+595",
+    "PersianCountryName": "پاراگوئه",
+    "EnglishCountryName": "Paraguay"
+  },
+  {
+    "DialCode": "+596",
+    "PersianCountryName": "مارتینیک",
+    "EnglishCountryName": "Martinique"
+  },
+  {
+    "DialCode": "+597",
+    "PersianCountryName": "سورینام",
+    "EnglishCountryName": "Suriname"
+  },
+  {
+    "DialCode": "+598",
+    "PersianCountryName": "اروگوئه",
+    "EnglishCountryName": "Uruguay"
+  },
+  {
+    "DialCode": "+599",
+    "PersianCountryName": "جزایر ویرجین بریتانیا",
+    "EnglishCountryName": "British Virgin Islands"
+  },
+  {
+    "DialCode": "+670",
+    "PersianCountryName": "تیمور شرقی",
+    "EnglishCountryName": "East Timor"
+  },
+  {
+    "DialCode": "+672",
+    "PersianCountryName": "سرزمین های دور افتاده استرالیای غربی",
+    "EnglishCountryName": "Cocos (Keeling) Islands"
+  },
+  {
+    "DialCode": "+673",
+    "PersianCountryName": "برونئی",
+    "EnglishCountryName": "Brunei"
+  },
+  {
+    "DialCode": "+674",
+    "PersianCountryName": "نائورا",
+    "EnglishCountryName": "Nauru"
+  },
+  {
+    "DialCode": "+675",
+    "PersianCountryName": "پاپوآ گینه نو",
+    "EnglishCountryName": "Papua New Guinea"
+  },
+  {
+    "DialCode": "+676",
+    "PersianCountryName": "تونگا",
+    "EnglishCountryName": "Tonga"
+  },
+  {
+    "DialCode": "+677",
+    "PersianCountryName": "جزایر سلیمان",
+    "EnglishCountryName": "Solomon Islands"
+  },
+  {
+    "DialCode": "+678",
+    "PersianCountryName": "وانواتو",
+    "EnglishCountryName": "Vanuatu"
+  },
+  {
+    "DialCode": "+679",
+    "PersianCountryName": "فیجی",
+    "EnglishCountryName": "Fiji"
+  },
+  {
+    "DialCode": "+680",
+    "PersianCountryName": "پالائو",
+    "EnglishCountryName": "Palau"
+  },
+  {
+    "DialCode": "+681",
+    "PersianCountryName": "سماوای شرقی",
+    "EnglishCountryName": "American Samoa"
+  },
+  {
+    "DialCode": "+682",
+    "PersianCountryName": "جزایر کوک",
+    "EnglishCountryName": "Cook Islands"
+  },
+  {
+    "DialCode": "+683",
+    "PersianCountryName": "جزایر ویرجین ایالات متحده",
+    "EnglishCountryName": "U.S. Virgin Islands"
+  },
+  {
+    "DialCode": "+685",
+    "PersianCountryName": "ساموا",
+    "EnglishCountryName": "Samoa"
+  },
+  {
+    "DialCode": "+686",
+    "PersianCountryName": "کیش",
+    "EnglishCountryName": "Kyrgyzstan"
+  },
+  {
+    "DialCode": "+687",
+    "PersianCountryName": "نیو کاله",
+    "EnglishCountryName": "New Caledonia"
+  },
+  {
+    "DialCode": "+688",
+    "PersianCountryName": "تایوان",
+    "EnglishCountryName": "Taiwan"
+  },
+  {
+    "DialCode": "+689",
+    "PersianCountryName": "پلینزیای فرانسه",
+    "EnglishCountryName": "French Polynesia"
+  },
+  {
+    "DialCode": "+690",
+    "PersianCountryName": "جزایر مارشال",
+    "EnglishCountryName": "Marshall Islands"
+  },
+  {
+    "DialCode": "+691",
+    "PersianCountryName": "جزایر میکرونزی",
+    "EnglishCountryName": "Micronesia"
+  },
+  {
+    "DialCode": "+692",
+    "PersianCountryName": "تیلمود",
+    "EnglishCountryName": "Tajikistan"
+  },
+  {
+    "DialCode": "+693",
+    "PersianCountryName": "ازبکستان",
+    "EnglishCountryName": "Uzbekistan"
+  },
+  {
+    "DialCode": "+694",
+    "PersianCountryName": "قرقیزستان",
+    "EnglishCountryName": "Kyrgyzstan"
+  },
+  {
+    "DialCode": "+695",
+    "PersianCountryName": "تاجیکستان",
+    "EnglishCountryName": "Tajikistan"
+  },
+  {
+    "DialCode": "+796",
+    "PersianCountryName": "روسیه",
+    "EnglishCountryName": "Russia"
+  },
+  {
+    "DialCode": "+797",
+    "PersianCountryName": "قرقیزستان",
+    "EnglishCountryName": "Kyrgyzstan"
+  },
+  {
+    "DialCode": "+798",
+    "PersianCountryName": "ترکمنستان",
+    "EnglishCountryName": "Turkmenistan"
+  },
+  {
+    "DialCode": "+799",
+    "PersianCountryName": "قزاقستان",
+    "EnglishCountryName": "Kazakhstan"
+  },
+  {
+    "DialCode": "+800",
+    "PersianCountryName": "خط تماس رایگان جهانی",
+    "EnglishCountryName": "Universal Freephone Service"
+  },
+  {
+    "DialCode": "+808",
+    "PersianCountryName": "خط تماس رایگان ایالات متحده",
+    "EnglishCountryName": "U.S. Toll-Free Service"
+  },
+  {
+    "DialCode": "+850",
+    "PersianCountryName": "کره شمالی",
+    "EnglishCountryName": "North Korea"
+  },
+  {
+    "DialCode": "+852",
+    "PersianCountryName": "هنگ کنگ",
+    "EnglishCountryName": "Hong Kong"
+  },
+  {
+    "DialCode": "+853",
+    "PersianCountryName": "ماکائو",
+    "EnglishCountryName": "Macau"
+  },
+  {
+    "DialCode": "+855",
+    "PersianCountryName": "کامبوج",
+    "EnglishCountryName": "Cambodia"
+  },
+  {
+    "DialCode": "+856",
+    "PersianCountryName": "لائوس",
+    "EnglishCountryName": "Laos"
+  },
+  {
+    "DialCode": "+960",
+    "PersianCountryName": "مالدیو",
+    "EnglishCountryName": "Maldives"
+  },
+  {
+    "DialCode": "+961",
+    "PersianCountryName": "لبنان",
+    "EnglishCountryName": "Lebanon"
+  },
+  {
+    "DialCode": "+962",
+    "PersianCountryName": "اردن",
+    "EnglishCountryName": "Jordan"
+  },
+  {
+    "DialCode": "+963",
+    "PersianCountryName": "سوریه",
+    "EnglishCountryName": "Syria"
+  },
+  {
+    "DialCode": "+964",
+    "PersianCountryName": "عراق",
+    "EnglishCountryName": "Iraq"
+  },
+  {
+    "DialCode": "+965",
+    "PersianCountryName": "کویت",
+    "EnglishCountryName": "Kuwait"
+  },
+  {
+    "DialCode": "+966",
+    "PersianCountryName": "عربستان",
+    "EnglishCountryName": "Saudi Arabia"
+  },
+  {
+    "DialCode": "+967",
+    "PersianCountryName": "یمن",
+    "EnglishCountryName": "Yemen"
+  },
+  {
+    "DialCode": "+968",
+    "PersianCountryName": "عمان",
+    "EnglishCountryName": "Oman"
+  },
+  {
+    "DialCode": "+970",
+    "PersianCountryName": "فلسطین",
+    "EnglishCountryName": "Palestine"
+  },
+  {
+    "DialCode": "+971",
+    "PersianCountryName": "امارات",
+    "EnglishCountryName": "United Arab Emirates"
+  },
+  {
+    "DialCode": "+972",
+    "PersianCountryName": "اسرائیل",
+    "EnglishCountryName": "Israel"
+  },
+  {
+    "DialCode": "+973",
+    "PersianCountryName": "بحرین",
+    "EnglishCountryName": "Bahrain"
+  },
+  {
+    "DialCode": "+974",
+    "PersianCountryName": "قطر",
+    "EnglishCountryName": "Qatar"
+  },
+  {
+    "DialCode": "+975",
+    "PersianCountryName": "برونئی",
+    "EnglishCountryName": "Brunei"
+  },
+  {
+    "DialCode": "+976",
+    "PersianCountryName": "مغولستان",
+    "EnglishCountryName": "Mongolia"
+  },
+  {
+    "DialCode": "+977",
+    "PersianCountryName": "نپال",
+    "EnglishCountryName": "Nepal"
+  },
+  {
+    "DialCode": "+979",
+    "PersianCountryName": "تبت",
+    "EnglishCountryName": "Tibet"
+  },
+  {
+    "DialCode": "+992",
+    "PersianCountryName": "تاجیکستان",
+    "EnglishCountryName": "Tajikistan"
+  },
+  {
+    "DialCode": "+993",
+    "PersianCountryName": "ترکمنستان",
+    "EnglishCountryName": "Turkmenistan"
+  },
+  {
+    "DialCode": "+994",
+    "PersianCountryName": "آذربایجان",
+    "EnglishCountryName": "Azerbaijan"
+  },
+  {
+    "DialCode": "+995",
+    "PersianCountryName": "گرجستان",
+    "EnglishCountryName": "Georgia"
+  },
+  {
+    "DialCode": "+996",
+    "PersianCountryName": "قرقیزستان",
+    "EnglishCountryName": "Kyrgyzstan"
+  },
+  {
+    "DialCode": "+998",
+    "PersianCountryName": "ازبکستان",
+    "EnglishCountryName": "Uzbekistan"
+  },
+  {
+    "DialCode": "+1242",
+    "PersianCountryName": "باهماس",
+    "EnglishCountryName": "Bahamas"
+  },
+  {
+    "DialCode": "+1246",
+    "PersianCountryName": "باربادوس",
+    "EnglishCountryName": "Barbados"
+  },
+  {
+    "DialCode": "+1264",
+    "PersianCountryName": "انگوشیند",
+    "EnglishCountryName": "Anguilla"
+  },
+  {
+    "DialCode": "+1268",
+    "PersianCountryName": "آنتیگوا و باربودا",
+    "EnglishCountryName": "Antigua and Barbuda"
+  },
+  {
+    "DialCode": "+1284",
+    "PersianCountryName": "جزایر ویرجین ایالات متحده",
+    "EnglishCountryName": "U.S. Virgin Islands"
+  },
+  {
+    "DialCode": "+1340",
+    "PersianCountryName": "جزایر ویرجین بریتانیا",
+    "EnglishCountryName": "British Virgin Islands"
+  },
+  {
+    "DialCode": "+1441",
+    "PersianCountryName": "جزایر برمودا",
+    "EnglishCountryName": "Bermuda"
+  },
+  {
+    "DialCode": "+1473",
+    "PersianCountryName": "گرنادا",
+    "EnglishCountryName": "Grenada"
+  },
+  {
+    "DialCode": "+1649",
+    "PersianCountryName": "ترنداد و توباگو",
+    "EnglishCountryName": "Trinidad and Tobago"
+  },
+  {
+    "DialCode": "+1664",
+    "PersianCountryName": "سنت هلیا",
+    "EnglishCountryName": "Saint Helena"
+  },
+  {
+    "DialCode": "+1670",
+    "PersianCountryName": "ساوانا",
+    "EnglishCountryName": "Saba"
+  },
+  {
+    "DialCode": "+1671",
+    "PersianCountryName": "جزایر ماریانا",
+    "EnglishCountryName": "Northern Mariana Islands"
+  },
+  {
+    "DialCode": "+1678",
+    "PersianCountryName": "سنت کitts و نیویس",
+    "EnglishCountryName": "Saint Kitts and Nevis"
+  },
+  {
+    "DialCode": "+1684",
+    "PersianCountryName": "ساموآ آمریکا",
+    "EnglishCountryName": "American Samoa"
+  },
+  {
+    "DialCode": "+1758",
+    "PersianCountryName": "سنت لوسیا",
+    "EnglishCountryName": "Saint Lucia"
+  },
+  {
+    "DialCode": "+1784",
+    "PersianCountryName": "سنت وینسنت و گرانادین ها",
+    "EnglishCountryName": "Saint Vincent and the Grenadines"
+  },
+  {
+    "DialCode": "+1868",
+    "PersianCountryName": "ترینیداد و توباگو",
+    "EnglishCountryName": "Trinidad and Tobago"
+  },
+  {
+    "DialCode": "+2121",
+    "PersianCountryName": "اتریش",
+    "EnglishCountryName": "Austria"
+  },
+  {
+    "DialCode": "+2181",
+    "PersianCountryName": "لیبی",
+    "EnglishCountryName": "Libya"
+  },
+  {
+    "DialCode": "+2081",
+    "PersianCountryName": "اسرائیل",
+    "EnglishCountryName": "Israel"
+  },
+  {
+    "DialCode": "+2201",
+    "PersianCountryName": "سنگال",
+    "EnglishCountryName": "Senegal"
+  },
+  {
+    "DialCode": "+2211",
+    "PersianCountryName": "سودان",
+    "EnglishCountryName": "Sudan"
+  },
+  {
+    "DialCode": "+2261",
+    "PersianCountryName": "بنگلادش",
+    "EnglishCountryName": "Bangladesh"
+  },
+  {
+    "DialCode": "+2351",
+    "PersianCountryName": "شارجه",
+    "EnglishCountryName": "Sharjah"
+  },
+  {
+    "DialCode": "+2401",
+    "PersianCountryName": "یمن",
+    "EnglishCountryName": "Yemen"
+  },
+  {
+    "DialCode": "+2541",
+    "PersianCountryName": "کنیا",
+    "EnglishCountryName": "Kenya"
+  },
+  {
+    "DialCode": "+2631",
+    "PersianCountryName": "زیمبابوه",
+    "EnglishCountryName": "Zimbabwe"
+  },
+  {
+    "DialCode": "+5011",
+    "PersianCountryName": "بلیز",
+    "EnglishCountryName": "Belize"
+  },
+  {
+    "DialCode": "+5031",
+    "PersianCountryName": "السالوادور",
+    "EnglishCountryName": "El Salvador"
+  },
+  {
+    "DialCode": "+5051",
+    "PersianCountryName": "نیکاراگوئه",
+    "EnglishCountryName": "Nicaragua"
+  },
+  {
+    "DialCode": "+6061",
+    "PersianCountryName": "فیلیپین",
+    "EnglishCountryName": "Philippines"
+  },
+  {
+    "DialCode": "+6291",
+    "PersianCountryName": "کوبا",
+    "EnglishCountryName": "Cuba"
+  },
+  {
+    "DialCode": "+6511",
+    "PersianCountryName": "بحرین",
+    "EnglishCountryName": "Bahrain"
+  },
+  {
+    "DialCode": "+6621",
+    "PersianCountryName": "ویتنام",
+    "EnglishCountryName": "Vietnam"
+  },
+  {
+    "DialCode": "+6731",
+    "PersianCountryName": "برونئی",
+    "EnglishCountryName": "Brunei"
+  },
+  {
+    "DialCode": "+6771",
+    "PersianCountryName": "جزایر سلیمان",
+    "EnglishCountryName": "Solomon Islands"
+  },
+  {
+    "DialCode": "+6781",
+    "PersianCountryName": "نیو کاله",
+    "EnglishCountryName": "New Caledonia"
+  },
+  {
+    "DialCode": "+6791",
+    "PersianCountryName": "فیجی",
+    "EnglishCountryName": "Fiji"
+  },
+  {
+    "DialCode": "+6861",
+    "PersianCountryName": "کره شمالی",
+    "EnglishCountryName": "North Korea"
+  },
+  {
+    "DialCode": "+6881",
+    "PersianCountryName": "تایوان",
+    "EnglishCountryName": "Taiwan"
+  },
+  {
+    "DialCode": "+6891",
+    "PersianCountryName": "جزایر کوک",
+    "EnglishCountryName": "Cook Islands"
+  },
+  {
+    "DialCode": "+6901",
+    "PersianCountryName": "جزایر مارشال",
+    "EnglishCountryName": "Marshall Islands"
+  },
+  {
+    "DialCode": "+6911",
+    "PersianCountryName": "جزایر میکرونزی",
+    "EnglishCountryName": "Micronesia"
+  },
+  {
+    "DialCode": "+7361",
+    "PersianCountryName": "ترکمنستان",
+    "EnglishCountryName": "Turkmenistan"
+  },
+  {
+    "DialCode": "+7721",
+    "PersianCountryName": "تاجیکستان",
+    "EnglishCountryName": "Tajikistan"
+  },
+  {
+    "DialCode": "+7971",
+    "PersianCountryName": "قزاقستان",
+    "EnglishCountryName": "Kazakhstan"
+  },
+  {
+    "DialCode": "+8701",
+    "PersianCountryName": "روسیه",
+    "EnglishCountryName": "Russia"
+  },
+  {
+    "DialCode": "+8801",
+    "PersianCountryName": "هند",
+    "EnglishCountryName": "India"
+  },
+  {
+    "DialCode": "+8861",
+    "PersianCountryName": "هنگ کنگ",
+    "EnglishCountryName": "Hong Kong"
+  },
+  {
+    "DialCode": "+9611",
+    "PersianCountryName": "لبنان",
+    "EnglishCountryName": "Lebanon"
+  },
+  {
+    "DialCode": "+9621",
+    "PersianCountryName": "اردن",
+    "EnglishCountryName": "Jordan"
+  },
+  {
+    "DialCode": "+9631",
+    "PersianCountryName": "سوریه",
+    "EnglishCountryName": "Syria"
+  },
+  {
+    "DialCode": "+9641",
+    "PersianCountryName": "عراق",
+    "EnglishCountryName": "Iraq"
+  },
+  {
+    "DialCode": "+9651",
+    "PersianCountryName": "کویت",
+    "EnglishCountryName": "Kuwait"
+  },
+  {
+    "DialCode": "+9661",
+    "PersianCountryName": "عربستان",
+    "EnglishCountryName": "Saudi Arabia"
+  },
+  {
+    "DialCode": "+9671",
+    "PersianCountryName": "یمن",
+    "EnglishCountryName": "Yemen"
+  },
+  {
+    "DialCode": "+9681",
+    "PersianCountryName": "عمان",
+    "EnglishCountryName": "Oman"
+  },
+  {
+    "DialCode": "+9701",
+    "PersianCountryName": "فلسطین",
+    "EnglishCountryName": "Palestine"
+  },
+  {
+    "DialCode": "+9711",
+    "PersianCountryName": "امارات",
+    "EnglishCountryName": "United Arab Emirates"
+  },
+  {
+    "DialCode": "+9721",
+    "PersianCountryName": "اسرائیل",
+    "EnglishCountryName": "Israel"
+  },
+  {
+    "DialCode": "+9731",
+    "PersianCountryName": "بحرین",
+    "EnglishCountryName": "Bahrain"
+  },
+  {
+    "DialCode": "+9741",
+    "PersianCountryName": "قطر",
+    "EnglishCountryName": "Qatar"
+  },
+  {
+    "DialCode": "+9751",
+    "PersianCountryName": "برونئی",
+    "EnglishCountryName": "Brunei"
+  },
+  {
+    "DialCode": "+9761",
+    "PersianCountryName": "مغولستان",
+    "EnglishCountryName": "Mongolia"
+  },
+  {
+    "DialCode": "+9771",
+    "PersianCountryName": "نپال",
+    "EnglishCountryName": "Nepal"
+  },
+  {
+    "DialCode": "+9791",
+    "PersianCountryName": "تبت",
+    "EnglishCountryName": "Tibet"
+  },
+  {
+    "DialCode": "+9921",
+    "PersianCountryName": "تاجیکستان",
+    "EnglishCountryName": "Tajikistan"
+  },
+  {
+    "DialCode": "+9931",
+    "PersianCountryName": "ترکمنستان",
+    "EnglishCountryName": "Turkmenistan"
+  },
+  {
+    "DialCode": "+9941",
+    "PersianCountryName": "آذربایجان",
+    "EnglishCountryName": "Azerbaijan"
+  },
+  {
+    "DialCode": "+9951",
+    "PersianCountryName": "گرجستان",
+    "EnglishCountryName": "Georgia"
+  },
+  {
+    "DialCode": "+9961",
+    "PersianCountryName": "قرقیزستان",
+    "EnglishCountryName": "Kyrgyzstan"
+  },
+  {
+    "DialCode": "+9981",
+    "PersianCountryName": "ازبکستان",
+    "EnglishCountryName": "Uzbekistan"
+  }
+]
