@@ -1,78 +1,88 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text.Json;
 
-/// <summary>
-/// Extension Method برای دریافت پیش‌شماره تلفن استان‌های ایران
-/// فقط بر اساس نام استان — بدون شهرهای فرعی
-/// مثال: "تهران".GetProvincePhoneCode() → "021"
-/// </summary>
-public static class ProvincePhoneCodeExtensions
+
+
+
+namespace CsharpGalexy.LibraryExtention.Extentions.Province;
+public class ProvincePhoneCode
 {
-    // 🗺️ دیکشنری پیش‌شماره استان‌های ایران — فقط مراکز استان
-    private static readonly Dictionary<string, string> ProvincePhoneCodes =
-        new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-        {
-            { "تهران", "021" },
-            { "اصفهان", "031" },
-            { "خراسان رضوی", "051" },
-            { "فارس", "071" },
-            { "آذربایجان شرقی", "041" },
-            { "خوزستان", "061" },
-            { "البرز", "026" },
-            { "قم", "025" },
-            { "یزد", "035" },
-            { "گیلان", "013" },
-            { "آذربایجان غربی", "044" },
-            { "سیستان و بلوچستان", "054" },
-            { "کردستان", "087" },
-            { "خراسان شمالی", "058" },
-            { "مازندران", "011" },
-            { "هرمزگان", "076" },
-            { "لرستان", "066" },
-            { "قزوین", "028" },
-            { "همدان", "081" },
-            { "کهگیلویه و بویراحمد", "083" },
-            { "اردبیل", "045" },
-            { "خراسان جنوبی", "056" },
-            { "زنجان", "024" },
-            { "سمنان", "023" },
-            { "ایلام", "084" },
-            { "گلستان", "017" },
-            { "بوشهر", "077" },
-            { "مرکزی", "086" },
-            { "چهارمحال و بختیاری", "038" }
-        };
+    public string ProvinceName { get; set; } = string.Empty;
+    public string PhoneCode { get; set; } = string.Empty;
+}
+/// <summary>
+/// Helper برای دریافت پیش‌شماره تلفن مراکز استان‌های ایران از فایل JSON
+/// </summary>
+public static class ProvincePhoneCodeHelper
+{
+    private static readonly Lazy<Dictionary<string, string>> _lazyPhoneCodes =
+        new Lazy<Dictionary<string, string>>(LoadFromJson);
+
+    private static string JsonFilePath =>
+        Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Iran/Provinces/province-phone-codes.json");
+
+    private static Dictionary<string, string> LoadFromJson()
+    {
+        if (!System.IO.File.Exists(JsonFilePath))
+            throw new FileNotFoundException($"فایل province-phone-codes.json یافت نشد: {JsonFilePath}");
+
+        var json = System.IO.File.ReadAllText(JsonFilePath);
+        var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+        var items = JsonSerializer.Deserialize<List<ProvincePhoneCode>>(json, options);
+
+        if (items == null)
+            throw new InvalidOperationException("خطا در دی‌سریالایز کردن فایل province-phone-codes.json");
+
+        // تبدیل لیست به دیکشنری با مقایسه‌ی بدون حساسیت به بزرگ/کوچکی
+        return items
+            .ToDictionary(
+                item => item.ProvinceName.Trim(),
+                item => item.PhoneCode,
+                StringComparer.OrdinalIgnoreCase
+            );
+    }
 
     /// <summary>
     /// دریافت پیش‌شماره تلفن استان بر اساس نام استان
     /// </summary>
-    /// <param name="provinceName">نام استان — مثال: "تهران"</param>
-    /// <param name="culture">فرهنگ (اختیاری — پیش‌فرض: فارسی)</param>
-    /// <returns>پیش‌شماره استان (مثلاً "021") یا null اگر استان یافت نشد</returns>
+    /// <param name="provinceName">نام استان (مثلاً "تهران")</param>
+    /// <returns>پیش‌شماره (مثلاً "021") یا null اگر یافت نشد</returns>
     /// <exception cref="ArgumentException">اگر ورودی خالی باشد</exception>
-    public static string? GetProvincePhoneCode(this string provinceName, CultureInfo? culture = null)
+    public static string? GetPhoneCode(string provinceName)
     {
         if (string.IsNullOrWhiteSpace(provinceName))
             throw new ArgumentException("نام استان نمی‌تواند خالی باشد.", nameof(provinceName));
 
         var key = provinceName.Trim();
-
-        return ProvincePhoneCodes.TryGetValue(key, out var code) ? code : null;
+        return _lazyPhoneCodes.Value.TryGetValue(key, out var code) ? code : null;
     }
 
     /// <summary>
-    /// [اختیاری] بررسی اینکه آیا استان در لیست پشتیبانی شده است؟
+    /// بررسی اینکه آیا استان در لیست پشتیبانی شده است؟
     /// </summary>
-    public static bool IsSupportedProvince(this string provinceName)
+    public static bool IsSupportedProvince(string provinceName)
     {
         if (string.IsNullOrWhiteSpace(provinceName)) return false;
-        return ProvincePhoneCodes.ContainsKey(provinceName.Trim());
+        return _lazyPhoneCodes.Value.ContainsKey(provinceName.Trim());
     }
 
     /// <summary>
-    /// [اختیاری] دریافت لیست تمام استان‌های پشتیبانی شده
+    /// دریافت لیست تمام استان‌های پشتیبانی شده
     /// </summary>
-    public static string[] GetAllProvinces()
+    public static string[] GetAllProvinceNames() =>
+        _lazyPhoneCodes.Value.Keys.ToArray();
+
+    /// <summary>
+    /// دریافت تمام داده‌ها به صورت لیست
+    /// </summary>
+    public static IReadOnlyList<(string ProvinceName, string PhoneCode)> GetAllPhoneCodes()
     {
-        return ProvincePhoneCodes.Keys.ToArray();
+        return _lazyPhoneCodes.Value
+            .Select(kvp => (kvp.Key, kvp.Value))
+            .ToList()
+            .AsReadOnly();
     }
 }
