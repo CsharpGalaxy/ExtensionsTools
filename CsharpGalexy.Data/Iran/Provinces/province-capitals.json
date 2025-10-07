@@ -1,0 +1,157 @@
+[
+  {
+    "ProvinceId": "00",
+    "ProvinceName": "مرکزی",
+    "Capital": "اراک"
+  },
+  {
+    "ProvinceId": "01",
+    "ProvinceName": "گيلان",
+    "Capital": "رشت"
+  },
+  {
+    "ProvinceId": "02",
+    "ProvinceName": "مازندران",
+    "Capital": "ساری"
+  },
+  {
+    "ProvinceId": "03",
+    "ProvinceName": "آذربايجان شرقی",
+    "Capital": "تبریز"
+  },
+  {
+    "ProvinceId": "04",
+    "ProvinceName": "آذربايجان غربی",
+    "Capital": "ارومیه"
+  },
+  {
+    "ProvinceId": "05",
+    "ProvinceName": "کرمانشاه",
+    "Capital": "کرمانشاه"
+  },
+  {
+    "ProvinceId": "06",
+    "ProvinceName": "خوزستان",
+    "Capital": "اهواز"
+  },
+  {
+    "ProvinceId": "07",
+    "ProvinceName": "فارس",
+    "Capital": "شیراز"
+  },
+  {
+    "ProvinceId": "08",
+    "ProvinceName": "كرمان",
+    "Capital": "کرمان"
+  },
+  {
+    "ProvinceId": "09",
+    "ProvinceName": "خراسان رضوی",
+    "Capital": "مشهد"
+  },
+  {
+    "ProvinceId": "10",
+    "ProvinceName": "اصفهان",
+    "Capital": "اصفهان"
+  },
+  {
+    "ProvinceId": "11",
+    "ProvinceName": "سيستان وبلوچستان",
+    "Capital": "زاهدان"
+  },
+  {
+    "ProvinceId": "12",
+    "ProvinceName": "كردستان",
+    "Capital": "سنندج"
+  },
+  {
+    "ProvinceId": "13",
+    "ProvinceName": "همدان",
+    "Capital": "همدان"
+  },
+  {
+    "ProvinceId": "14",
+    "ProvinceName": "چهارمحال وبختياری",
+    "Capital": "شهرکرد"
+  },
+  {
+    "ProvinceId": "15",
+    "ProvinceName": "لرستان",
+    "Capital": "خرم‌آباد"
+  },
+  {
+    "ProvinceId": "16",
+    "ProvinceName": "ايلام",
+    "Capital": "ایلام"
+  },
+  {
+    "ProvinceId": "17",
+    "ProvinceName": "كهگيلويه وبويراحمد",
+    "Capital": "یاسوج"
+  },
+  {
+    "ProvinceId": "18",
+    "ProvinceName": "بوشهر",
+    "Capital": "بوشهر"
+  },
+  {
+    "ProvinceId": "19",
+    "ProvinceName": "زنجان",
+    "Capital": "زنجان"
+  },
+  {
+    "ProvinceId": "20",
+    "ProvinceName": "سمنان",
+    "Capital": "سمنان"
+  },
+  {
+    "ProvinceId": "21",
+    "ProvinceName": "يزد",
+    "Capital": "یزد"
+  },
+  {
+    "ProvinceId": "22",
+    "ProvinceName": "هرمزگان",
+    "Capital": "بندرعباس"
+  },
+  {
+    "ProvinceId": "23",
+    "ProvinceName": "تهران",
+    "Capital": "تهران"
+  },
+  {
+    "ProvinceId": "24",
+    "ProvinceName": "اردبيل",
+    "Capital": "اردبیل"
+  },
+  {
+    "ProvinceId": "25",
+    "ProvinceName": "قم",
+    "Capital": "قم"
+  },
+  {
+    "ProvinceId": "26",
+    "ProvinceName": "قزوين",
+    "Capital": "قزوین"
+  },
+  {
+    "ProvinceId": "27",
+    "ProvinceName": "گلستان",
+    "Capital": "گرگان"
+  },
+  {
+    "ProvinceId": "28",
+    "ProvinceName": "خراسان شمالی",
+    "Capital": "بجنورد"
+  },
+  {
+    "ProvinceId": "29",
+    "ProvinceName": "خراسان جنوبی",
+    "Capital": "بیرجند"
+  },
+  {
+    "ProvinceId": "30",
+    "ProvinceName": "البرز",
+    "Capital": "کرج"
+  }
+]
