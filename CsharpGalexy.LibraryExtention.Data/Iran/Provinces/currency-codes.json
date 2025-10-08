@@ -1,0 +1,464 @@
+[
+  {
+    "CountryName": "آمریکا",
+    "CurrencyCode": "USD",
+    "CurrencyName": "دلار آمریکا",
+    "Symbol": "$"
+  },
+  {
+    "CountryName": "کانادا",
+    "CurrencyCode": "CAD",
+    "CurrencyName": "دلار کانادا",
+    "Symbol": "CA$"
+  },
+  {
+    "CountryName": "انگلستان",
+    "CurrencyCode": "GBP",
+    "CurrencyName": "پوند استرلینگ",
+    "Symbol": "£"
+  },
+  {
+    "CountryName": "اروپا",
+    "CurrencyCode": "EUR",
+    "CurrencyName": "یورو",
+    "Symbol": "€"
+  },
+  {
+    "CountryName": "سوئیس",
+    "CurrencyCode": "CHF",
+    "CurrencyName": "فرانک سوئیس",
+    "Symbol": "CHF"
+  },
+  {
+    "CountryName": "ژاپن",
+    "CurrencyCode": "JPY",
+    "CurrencyName": "ین ژاپن",
+    "Symbol": "¥"
+  },
+  {
+    "CountryName": "چین",
+    "CurrencyCode": "CNY",
+    "CurrencyName": "یوان چین",
+    "Symbol": "¥"
+  },
+  {
+    "CountryName": "هند",
+    "CurrencyCode": "INR",
+    "CurrencyName": "روپیه هند",
+    "Symbol": "₹"
+  },
+  {
+    "CountryName": "روسیه",
+    "CurrencyCode": "RUB",
+    "CurrencyName": "روبل روسیه",
+    "Symbol": "₽"
+  },
+  {
+    "CountryName": "ترکیه",
+    "CurrencyCode": "TRY",
+    "CurrencyName": "لیر ترکیه",
+    "Symbol": "₺"
+  },
+  {
+    "CountryName": "عربستان",
+    "CurrencyCode": "SAR",
+    "CurrencyName": "ریال عربستان",
+    "Symbol": "﷼"
+  },
+  {
+    "CountryName": "امارات",
+    "CurrencyCode": "AED",
+    "CurrencyName": "درهم امارات",
+    "Symbol": "د.إ"
+  },
+  {
+    "CountryName": "قطر",
+    "CurrencyCode": "QAR",
+    "CurrencyName": "ریال قطر",
+    "Symbol": "ر.ق"
+  },
+  {
+    "CountryName": "کویت",
+    "CurrencyCode": "KWD",
+    "CurrencyName": "دینار کویت",
+    "Symbol": "د.ك"
+  },
+  {
+    "CountryName": "بحرین",
+    "CurrencyCode": "BHD",
+    "CurrencyName": "دینار بحرین",
+    "Symbol": "د.ب"
+  },
+  {
+    "CountryName": "عراق",
+    "CurrencyCode": "IQD",
+    "CurrencyName": "دینار عراق",
+    "Symbol": "ع.د"
+  },
+  {
+    "CountryName": "ایران",
+    "CurrencyCode": "IRR",
+    "CurrencyName": "ریال ایران",
+    "Symbol": "﷼"
+  },
+  {
+    "CountryName": "افغانستان",
+    "CurrencyCode": "AFN",
+    "CurrencyName": "افغانی",
+    "Symbol": "؋"
+  },
+  {
+    "CountryName": "پاکستان",
+    "CurrencyCode": "PKR",
+    "CurrencyName": "روپیه پاکستان",
+    "Symbol": "₨"
+  },
+  {
+    "CountryName": "استرالیا",
+    "CurrencyCode": "AUD",
+    "CurrencyName": "دلار استرالیا",
+    "Symbol": "A$"
+  },
+  {
+    "CountryName": "نیوزلند",
+    "CurrencyCode": "NZD",
+    "CurrencyName": "دلار نیوزیلند",
+    "Symbol": "NZ$"
+  },
+  {
+    "CountryName": "مصر",
+    "CurrencyCode": "EGP",
+    "CurrencyName": "پوند مصر",
+    "Symbol": "ج.م"
+  },
+  {
+    "CountryName": "مراکش",
+    "CurrencyCode": "MAD",
+    "CurrencyName": "درهم مراکش",
+    "Symbol": "د.م"
+  },
+  {
+    "CountryName": "الجزایر",
+    "CurrencyCode": "DZD",
+    "CurrencyName": "دینار الجزایر",
+    "Symbol": "د.ج"
+  },
+  {
+    "CountryName": "تونس",
+    "CurrencyCode": "TND",
+    "CurrencyName": "دینار تونس",
+    "Symbol": "د.ت"
+  },
+  {
+    "CountryName": "لیبی",
+    "CurrencyCode": "LYD",
+    "CurrencyName": "دینار لیبی",
+    "Symbol": "ل.د"
+  },
+  {
+    "CountryName": "سودان",
+    "CurrencyCode": "SDG",
+    "CurrencyName": "پوند سودان",
+    "Symbol": "ج.س"
+  },
+  {
+    "CountryName": "نیجریه",
+    "CurrencyCode": "NGN",
+    "CurrencyName": "نايرا",
+    "Symbol": "₦"
+  },
+  {
+    "CountryName": "آفریقای جنوبی",
+    "CurrencyCode": "ZAR",
+    "CurrencyName": "رند آفریقای جنوبی",
+    "Symbol": "R"
+  },
+  {
+    "CountryName": "برزیل",
+    "CurrencyCode": "BRL",
+    "CurrencyName": "رئال برزیل",
+    "Symbol": "R$"
+  },
+  {
+    "CountryName": "آرژانتین",
+    "CurrencyCode": "ARS",
+    "CurrencyName": "پزو آرژانتین",
+    "Symbol": "$"
+  },
+  {
+    "CountryName": "مکزیک",
+    "CurrencyCode": "MXN",
+    "CurrencyName": "پزو مکزیک",
+    "Symbol": "$"
+  },
+  {
+    "CountryName": "کره جنوبی",
+    "CurrencyCode": "KRW",
+    "CurrencyName": "وون کره جنوبی",
+    "Symbol": "₩"
+  },
+  {
+    "CountryName": "تایلند",
+    "CurrencyCode": "THB",
+    "CurrencyName": "بات تایلند",
+    "Symbol": "฿"
+  },
+  {
+    "CountryName": "مالزی",
+    "CurrencyCode": "MYR",
+    "CurrencyName": "رینگیت مالزی",
+    "Symbol": "RM"
+  },
+  {
+    "CountryName": "اندونزی",
+    "CurrencyCode": "IDR",
+    "CurrencyName": "روپیه اندونزی",
+    "Symbol": "Rp"
+  },
+  {
+    "CountryName": "فیلیپین",
+    "CurrencyCode": "PHP",
+    "CurrencyName": "پزو فیلیپین",
+    "Symbol": "₱"
+  },
+  {
+    "CountryName": "ویتنام",
+    "CurrencyCode": "VND",
+    "CurrencyName": "دونگ ویتنام",
+    "Symbol": "₫"
+  },
+  {
+    "CountryName": "سنگاپور",
+    "CurrencyCode": "SGD",
+    "CurrencyName": "دلار سنگاپور",
+    "Symbol": "S$"
+  },
+  {
+    "CountryName": "هونگ کنگ",
+    "CurrencyCode": "HKD",
+    "CurrencyName": "دلار هنگ کنگ",
+    "Symbol": "HK$"
+  },
+  {
+    "CountryName": "ماکائو",
+    "CurrencyCode": "MOP",
+    "CurrencyName": "پاتاکا ماکائو",
+    "Symbol": "MOP$"
+  },
+  {
+    "CountryName": "اسرائیل",
+    "CurrencyCode": "ILS",
+    "CurrencyName": "شکل جدید اسرائیل",
+    "Symbol": "₪"
+  },
+  {
+    "CountryName": "اردن",
+    "CurrencyCode": "JOD",
+    "CurrencyName": "دینار اردن",
+    "Symbol": "د.ا"
+  },
+  {
+    "CountryName": "لبنان",
+    "CurrencyCode": "LBP",
+    "CurrencyName": "پوند لبنان",
+    "Symbol": "ل.ل"
+  },
+  {
+    "CountryName": "سوریه",
+    "CurrencyCode": "SYP",
+    "CurrencyName": "پوند سوریه",
+    "Symbol": "ل.س"
+  },
+  {
+    "CountryName": "یمن",
+    "CurrencyCode": "YER",
+    "CurrencyName": "ریال یمن",
+    "Symbol": "﷼"
+  },
+  {
+    "CountryName": "عمان",
+    "CurrencyCode": "OMR",
+    "CurrencyName": "ریال عمان",
+    "Symbol": "ر.ع"
+  },
+  {
+    "CountryName": "فلسطین",
+    "CurrencyCode": "ILS",
+    "CurrencyName": "شکل جدید اسرائیل",
+    "Symbol": "₪"
+  },
+  {
+    "CountryName": "سوئد",
+    "CurrencyCode": "SEK",
+    "CurrencyName": "کرون سوئد",
+    "Symbol": "kr"
+  },
+  {
+    "CountryName": "نروژ",
+    "CurrencyCode": "NOK",
+    "CurrencyName": "کرون نروژ",
+    "Symbol": "kr"
+  },
+  {
+    "CountryName": "دانمارک",
+    "CurrencyCode": "DKK",
+    "CurrencyName": "کرون دانمارک",
+    "Symbol": "kr"
+  },
+  {
+    "CountryName": "ایسلند",
+    "CurrencyCode": "ISK",
+    "CurrencyName": "کرون ایسلند",
+    "Symbol": "kr"
+  },
+  {
+    "CountryName": "لهستان",
+    "CurrencyCode": "PLN",
+    "CurrencyName": "زلوتی لهستان",
+    "Symbol": "zł"
+  },
+  {
+    "CountryName": "مجارستان",
+    "CurrencyCode": "HUF",
+    "CurrencyName": "فورینت مجارستان",
+    "Symbol": "Ft"
+  },
+  {
+    "CountryName": "چک",
+    "CurrencyCode": "CZK",
+    "CurrencyName": "کرون چک",
+    "Symbol": "Kč"
+  },
+  {
+    "CountryName": "رومانی",
+    "CurrencyCode": "RON",
+    "CurrencyName": "لو رومانی",
+    "Symbol": "lei"
+  },
+  {
+    "CountryName": "بلغارستان",
+    "CurrencyCode": "BGN",
+    "CurrencyName": "لو بلغارستان",
+    "Symbol": "лв"
+  },
+  {
+    "CountryName": "صربستان",
+    "CurrencyCode": "RSD",
+    "CurrencyName": "دینار صربستان",
+    "Symbol": "дин"
+  },
+  {
+    "CountryName": "کرواسی",
+    "CurrencyCode": "HRK",
+    "CurrencyName": "کونا کرواسی",
+    "Symbol": "kn"
+  },
+  {
+    "CountryName": "اسلواکی",
+    "CurrencyCode": "EUR",
+    "CurrencyName": "یورو",
+    "Symbol": "€"
+  },
+  {
+    "CountryName": "اسلوونی",
+    "CurrencyCode": "EUR",
+    "CurrencyName": "یورو",
+    "Symbol": "€"
+  },
+  {
+    "CountryName": "مالت",
+    "CurrencyCode": "EUR",
+    "CurrencyName": "یورو",
+    "Symbol": "€"
+  },
+  {
+    "CountryName": "قبرس",
+    "CurrencyCode": "EUR",
+    "CurrencyName": "یورو",
+    "Symbol": "€"
+  },
+  {
+    "CountryName": "یونان",
+    "CurrencyCode": "EUR",
+    "CurrencyName": "یورو",
+    "Symbol": "€"
+  },
+  {
+    "CountryName": "پرتغال",
+    "CurrencyCode": "EUR",
+    "CurrencyName": "یورو",
+    "Symbol": "€"
+  },
+  {
+    "CountryName": "اسپانیا",
+    "CurrencyCode": "EUR",
+    "CurrencyName": "یورو",
+    "Symbol": "€"
+  },
+  {
+    "CountryName": "فرانسه",
+    "CurrencyCode": "EUR",
+    "CurrencyName": "یورو",
+    "Symbol": "€"
+  },
+  {
+    "CountryName": "آلمان",
+    "CurrencyCode": "EUR",
+    "CurrencyName": "یورو",
+    "Symbol": "€"
+  },
+  {
+    "CountryName": "ایتالیا",
+    "CurrencyCode": "EUR",
+    "CurrencyName": "یورو",
+    "Symbol": "€"
+  },
+  {
+    "CountryName": "بلژیک",
+    "CurrencyCode": "EUR",
+    "CurrencyName": "یورو",
+    "Symbol": "€"
+  },
+  {
+    "CountryName": "هلند",
+    "CurrencyCode": "EUR",
+    "CurrencyName": "یورو",
+    "Symbol": "€"
+  },
+  {
+    "CountryName": "لوکزامبورگ",
+    "CurrencyCode": "EUR",
+    "CurrencyName": "یورو",
+    "Symbol": "€"
+  },
+  {
+    "CountryName": "اتریش",
+    "CurrencyCode": "EUR",
+    "CurrencyName": "یورو",
+    "Symbol": "€"
+  },
+  {
+    "CountryName": "فنلاند",
+    "CurrencyCode": "EUR",
+    "CurrencyName": "یورو",
+    "Symbol": "€"
+  },
+  {
+    "CountryName": "استونی",
+    "CurrencyCode": "EUR",
+    "CurrencyName": "یورو",
+    "Symbol": "€"
+  },
+  {
+    "CountryName": "لتونی",
+    "CurrencyCode": "EUR",
+    "CurrencyName": "یورو",
+    "Symbol": "€"
+  },
+  {
+    "CountryName": "لیتوانی",
+    "CurrencyCode": "EUR",
+    "CurrencyName": "یورو",
+    "Symbol": "€"
+  }
+]
