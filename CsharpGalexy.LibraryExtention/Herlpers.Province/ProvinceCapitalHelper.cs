@@ -17,7 +17,7 @@ public static class ProvinceCapitalHelper
     private static Task<List<ProvinceCapital>>? _provincesTask;
 
     private static string JsonFileUrl =>
-        "https://raw.githubusercontent.com/CsharpGalexy/ExtentionsTools/main/CsharpGalexy.Data/Iran/Provinces/province-capitals.json";
+        "https://raw.githubusercontent.com/CsharpGalexy/ExtentionsTools/main/CsharpGalexy.LibraryExtention.Data/Iran/Provinces/province-capitals.json";
 
     /// <summary>
     /// بارگذاری اولیه و کش کردن داده‌ها

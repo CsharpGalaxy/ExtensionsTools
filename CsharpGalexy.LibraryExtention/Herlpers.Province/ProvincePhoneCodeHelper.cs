@@ -21,7 +21,7 @@ namespace CsharpGalexy.LibraryExtention.Extentions.Province
         private static Task<Dictionary<string, string>>? _phoneCodesTask;
 
         private static string JsonFileUrl =>
-            "https://raw.githubusercontent.com/CsharpGalexy/ExtentionsTools/main/CsharpGalexy.Data/Iran/Provinces/province-phone-codes.json";
+            "https://raw.githubusercontent.com/CsharpGalexy/ExtentionsTools/main/CsharpGalexy.LibraryExtention.Data/Iran/Provinces/province-phone-codes.json";
 
         /// <summary>
         /// بارگذاری اولیه و کش کردن داده‌ها

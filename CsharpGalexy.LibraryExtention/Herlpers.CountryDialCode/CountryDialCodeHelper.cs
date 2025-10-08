@@ -25,7 +25,7 @@ namespace YourNamespace.Helpers
         private static Task<List<CountryDialCode>>? _countriesTask;
 
         private static string JsonFileUrl =>
-            "https://raw.githubusercontent.com/CsharpGalexy/ExtentionsTools/main/CsharpGalexy.Data/Iran/Provinces/country-dial-codes.json";
+            "https://raw.githubusercontent.com/CsharpGalexy/ExtentionsTools/main/CsharpGalexy.LibraryExtention.Data/Iran/Provinces/country-dial-codes.json";
 
         /// <summary>
         /// بارگذاری اولیه و کش کردن داده‌ها

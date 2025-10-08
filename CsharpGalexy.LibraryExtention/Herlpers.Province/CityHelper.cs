@@ -12,7 +12,7 @@ namespace CsharpGalexy.LibraryExtention.Extentions.Province
         private static Task<List<CityModel>>? _citiesTask;
 
         private static string JsonFileUrl =>
-           "https://raw.githubusercontent.com/CsharpGalexy/ExtentionsTools/main/CsharpGalexy.Data/Iran/Provinces/provinces_cities.json";
+           "https://raw.githubusercontent.com/CsharpGalexy/ExtentionsTools/main/CsharpGalexy.LibraryExtention.Data/Iran/Provinces/provinces_cities.json";
 
         /// <summary>
         /// بارگذاری اولیه و کش کردن داده‌ها
