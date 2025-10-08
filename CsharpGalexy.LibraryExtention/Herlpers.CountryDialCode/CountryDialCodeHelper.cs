@@ -1,49 +1,9 @@
-﻿
-
-//public static class CountryDialCodeHelper
-//{
-//    public class CountryDialCode
-//    {
-//        public string DialCode { get; set; }
-//        public string PersianCountryName { get; set; }
-//        public string EnglishCountryName { get; set; }
-//    }
-
-
-//    public static string GetPersianCountryByDialCode(string dialCode)
-//    {
-//        var entry = CountryDialCodes.FirstOrDefault(x => x.DialCode == dialCode);
-//        return entry?.PersianCountryName;
-//    }
-
-//    public static string GetEnglishCountryByDialCode(string dialCode)
-//    {
-//        var entry = CountryDialCodes.FirstOrDefault(x => x.DialCode == dialCode);
-//        return entry?.EnglishCountryName;
-//    }
-
-//    public static string GetDialCodeByPersianCountry(string persianCountryName)
-//    {
-//        var entry = CountryDialCodes.FirstOrDefault(x => x.PersianCountryName == persianCountryName);
-//        return entry?.DialCode;
-//    }
-
-//    public static string GetDialCodeByEnglishCountry(string englishCountryName)
-//    {
-//        var entry = CountryDialCodes.FirstOrDefault(x => x.EnglishCountryName == englishCountryName);
-//        return entry?.DialCode;
-//    }
-
-//    public static List<CountryDialCode> GetAllCountriesSortedByDialCode()
-//    {
-//        return CountryDialCodes.OrderBy(x => int.Parse(x.DialCode.Trim('+'))).ToList();
-//    }
-//}
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace YourNamespace.Helpers
 {
@@ -58,113 +18,93 @@ namespace YourNamespace.Helpers
     }
 
     /// <summary>
-    /// کلاس کمکی برای مدیریت کدهای تلفن کشورها با بارگذاری از فایل JSON
+    /// کلاس کمکی برای مدیریت کدهای تلفن کشورها با بارگذاری از فایل JSON آنلاین
     /// </summary>
     public static class CountryDialCodeHelper
     {
-        // Lazy loading برای بارگذاری تنها یک‌بار و ایمن برای چندنخی
-        private static readonly Lazy<List<CountryDialCode>> _lazyCountries =
-            new Lazy<List<CountryDialCode>>(LoadFromJson);
+        private static Task<List<CountryDialCode>>? _countriesTask;
 
-        // مسیر فایل JSON (در پوشه‌ی خروجی برنامه)
-        private static string JsonFilePath => 
-            Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Iran/Provinces/country-dial-codes.json");
+        private static string JsonFileUrl =>
+            "https://raw.githubusercontent.com/CsharpGalexy/ExtentionsTools/main/CsharpGalexy.Data/Iran/Provinces/country-dial-codes.json";
 
         /// <summary>
-        /// بارگذاری داده‌ها از فایل JSON
+        /// بارگذاری اولیه و کش کردن داده‌ها
         /// </summary>
-        private static List<CountryDialCode> LoadFromJson()
+        public static Task InitializeAsync()
         {
-            if (!File.Exists(JsonFilePath))
-                throw new FileNotFoundException(
-                    $"فایل country-dial-codes.json یافت نشد. مسیر: {JsonFilePath}");
+            if (_countriesTask == null)
+            {
+                _countriesTask = LoadFromJsonAsync();
+            }
+
+            return _countriesTask;
+        }
+
+        public static async Task<List<CountryDialCode>> LoadFromJsonAsync()
+        {
+            using var httpClient = new HttpClient();
 
             try
             {
-                var json = File.ReadAllText(JsonFilePath);
-                var options = new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true
-                };
-
+                var json = await httpClient.GetStringAsync(JsonFileUrl);
+                var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
                 var countries = JsonSerializer.Deserialize<List<CountryDialCode>>(json, options);
-
-                if (countries == null)
-                    throw new InvalidOperationException("دی‌سریالایز کردن فایل JSON با شکست مواجه شد.");
-
-                return countries;
+                return countries ?? new List<CountryDialCode>();
             }
-            catch (JsonException ex)
+            catch (Exception ex)
             {
-                throw new InvalidOperationException(
-                    "خطا در پردازش فایل country-dial-codes.json. لطفاً ساختار JSON را بررسی کنید.", ex);
+                throw new InvalidOperationException($"خطا در بارگذاری JSON از {JsonFileUrl}: {ex.Message}");
             }
         }
 
-        /// <summary>
-        /// بازگرداندن تمام کشورها
-        /// </summary>
-        public static IReadOnlyList<CountryDialCode> GetAllCountries() =>
-            _lazyCountries.Value.AsReadOnly();
+        public static async Task<IReadOnlyList<CountryDialCode>> GetAllCountriesAsync()
+        {
+            if (_countriesTask == null)
+                await InitializeAsync();
 
-        /// <summary>
-        /// دریافت نام فارسی کشور بر اساس کد تلفن
-        /// </summary>
-        public static string? GetPersianCountryByDialCode(string dialCode) =>
-            GetAllCountries()
-                .FirstOrDefault(c => c.DialCode == dialCode)?
-                .PersianCountryName;
+            return (await _countriesTask!).AsReadOnly();
+        }
 
-        /// <summary>
-        /// دریافت نام انگلیسی کشور بر اساس کد تلفن
-        /// </summary>
-        public static string? GetEnglishCountryByDialCode(string dialCode) =>
-            GetAllCountries()
-                .FirstOrDefault(c => c.DialCode == dialCode)?
-                .EnglishCountryName;
+        public static async Task<string?> GetPersianCountryByDialCodeAsync(string dialCode)
+        {
+            var countries = await GetAllCountriesAsync();
+            return countries.FirstOrDefault(c => c.DialCode == dialCode)?.PersianCountryName;
+        }
 
-        /// <summary>
-        /// دریافت کد تلفن بر اساس نام فارسی کشور (بدون حساسیت به بزرگ/کوچکی)
-        /// </summary>
-        public static string? GetDialCodeByPersianCountry(string persianCountryName)
+        public static async Task<string?> GetEnglishCountryByDialCodeAsync(string dialCode)
+        {
+            var countries = await GetAllCountriesAsync();
+            return countries.FirstOrDefault(c => c.DialCode == dialCode)?.EnglishCountryName;
+        }
+
+        public static async Task<string?> GetDialCodeByPersianCountryAsync(string persianCountryName)
         {
             if (string.IsNullOrWhiteSpace(persianCountryName))
                 return null;
 
-            return GetAllCountries()
-                .FirstOrDefault(c => string.Equals(
-                    c.PersianCountryName,
-                    persianCountryName,
-                    StringComparison.OrdinalIgnoreCase))?
-                .DialCode;
+            var countries = await GetAllCountriesAsync();
+            return countries.FirstOrDefault(c =>
+                string.Equals(c.PersianCountryName, persianCountryName, StringComparison.OrdinalIgnoreCase))?.DialCode;
         }
 
-        /// <summary>
-        /// دریافت کد تلفن بر اساس نام انگلیسی کشور (بدون حساسیت به بزرگ/کوچکی)
-        /// </summary>
-        public static string? GetDialCodeByEnglishCountry(string englishCountryName)
+        public static async Task<string?> GetDialCodeByEnglishCountryAsync(string englishCountryName)
         {
             if (string.IsNullOrWhiteSpace(englishCountryName))
                 return null;
 
-            return GetAllCountries()
-                .FirstOrDefault(c => string.Equals(
-                    c.EnglishCountryName,
-                    englishCountryName,
-                    StringComparison.OrdinalIgnoreCase))?
-                .DialCode;
+            var countries = await GetAllCountriesAsync();
+            return countries.FirstOrDefault(c =>
+                string.Equals(c.EnglishCountryName, englishCountryName, StringComparison.OrdinalIgnoreCase))?.DialCode;
         }
 
-        /// <summary>
-        /// دریافت تمام کشورها مرتب‌شده بر اساس کد تلفن (عددی)
-        /// </summary>
-        public static IReadOnlyList<CountryDialCode> GetAllCountriesSortedByDialCode()
+        public static async Task<IReadOnlyList<CountryDialCode>> GetAllCountriesSortedByDialCodeAsync()
         {
-            return GetAllCountries()
+            var countries = await GetAllCountriesAsync();
+
+            return countries
                 .Where(c => !string.IsNullOrEmpty(c.DialCode) && c.DialCode.StartsWith("+"))
                 .OrderBy(c =>
                 {
-                    // حذف '+' و تبدیل به عدد برای مرتب‌سازی صحیح
                     var numericPart = c.DialCode.Substring(1);
                     return long.TryParse(numericPart, out var num) ? num : long.MaxValue;
                 })
