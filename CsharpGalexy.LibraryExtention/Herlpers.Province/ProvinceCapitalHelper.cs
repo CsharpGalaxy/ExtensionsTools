@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
 using System.Text.Json;
-
-
-
+using System.Threading.Tasks;
 
 public class ProvinceCapital
 {
@@ -12,86 +12,90 @@ public class ProvinceCapital
     public string Capital { get; set; } = string.Empty;
 }
 
-
 public static class ProvinceCapitalHelper
 {
-    private static readonly Lazy<List<ProvinceCapital>> _lazyProvinces =
-        new Lazy<List<ProvinceCapital>>(LoadFromJson);
+    private static Task<List<ProvinceCapital>>? _provincesTask;
 
-    private static string JsonFilePath =>
-        Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Iran/Provinces/province-capitals.json");
+    private static string JsonFileUrl =>
+        "https://raw.githubusercontent.com/CsharpGalexy/ExtentionsTools/main/CsharpGalexy.Data/Iran/Provinces/province-capitals.json";
 
-    private static List<ProvinceCapital> LoadFromJson()
+    /// <summary>
+    /// بارگذاری اولیه و کش کردن داده‌ها
+    /// </summary>
+    public static Task InitializeAsync()
     {
-        if (!File.Exists(JsonFilePath))
-            throw new FileNotFoundException($"فایل province-capitals.json یافت نشد: {JsonFilePath}");
+        if (_provincesTask == null)
+        {
+            _provincesTask = LoadFromJsonAsync();
+        }
 
-        var json = File.ReadAllText(JsonFilePath);
-        var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-        var provinces = JsonSerializer.Deserialize<List<ProvinceCapital>>(json, options);
-
-        if (provinces == null)
-            throw new InvalidOperationException("خطا در دی‌سریالایز کردن فایل province-capitals.json");
-
-        return provinces;
+        return _provincesTask;
     }
 
-    /// <summary>
-    /// بازگرداندن تمام استان‌ها و پایتخت‌ها
-    /// </summary>
-    public static IReadOnlyList<ProvinceCapital> GetAllProvinces() =>
-        _lazyProvinces.Value.AsReadOnly();
+    public static async Task<List<ProvinceCapital>> LoadFromJsonAsync()
+    {
+        using var httpClient = new HttpClient();
 
-    /// <summary>
-    /// دریافت پایتخت بر اساس شناسه استان (ProvinceId)
-    /// </summary>
-    public static string? GetCapitalByProvinceId(string provinceId) =>
-        GetAllProvinces()
-            .FirstOrDefault(p => p.ProvinceId == provinceId)?
-            .Capital;
+        try
+        {
+            var json = await httpClient.GetStringAsync(JsonFileUrl);
+            var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+            var provinces = JsonSerializer.Deserialize<List<ProvinceCapital>>(json, options);
+            return provinces ?? new List<ProvinceCapital>();
+        }
+        catch (Exception ex)
+        {
+            throw new InvalidOperationException($"خطا در بارگذاری JSON از {JsonFileUrl}: {ex.Message}");
+        }
+    }
 
-    /// <summary>
-    /// دریافت پایتخت بر اساس نام استان (بدون حساسیت به بزرگ/کوچکی)
-    /// </summary>
-    public static string? GetCapitalByProvinceName(string provinceName)
+    public static async Task<IReadOnlyList<ProvinceCapital>> GetAllProvincesAsync()
+    {
+        if (_provincesTask == null)
+            await InitializeAsync();
+
+        return (await _provincesTask!).AsReadOnly();
+    }
+
+    public static async Task<string?> GetCapitalByProvinceIdAsync(string provinceId)
+    {
+        var provinces = await GetAllProvincesAsync();
+        return provinces.FirstOrDefault(p => p.ProvinceId == provinceId)?.Capital;
+    }
+
+    public static async Task<string?> GetCapitalByProvinceNameAsync(string provinceName)
     {
         if (string.IsNullOrWhiteSpace(provinceName))
             return null;
 
-        return GetAllProvinces()
-            .FirstOrDefault(p => string.Equals(
-                p.ProvinceName,
-                provinceName,
-                StringComparison.OrdinalIgnoreCase))?
-            .Capital;
+        var provinces = await GetAllProvincesAsync();
+        return provinces.FirstOrDefault(p =>
+            string.Equals(p.ProvinceName, provinceName, StringComparison.OrdinalIgnoreCase))?.Capital;
     }
 
-    /// <summary>
-    /// دریافت نام استان بر اساس پایتخت (بدون حساسیت)
-    /// </summary>
-    public static string? GetProvinceNameByCapital(string capitalName)
+    public static async Task<string?> GetProvinceNameByCapitalAsync(string capitalName)
     {
         if (string.IsNullOrWhiteSpace(capitalName))
             return null;
 
-        return GetAllProvinces()
-            .FirstOrDefault(p => string.Equals(
-                p.Capital,
-                capitalName,
-                StringComparison.OrdinalIgnoreCase))?
-            .ProvinceName;
+        var provinces = await GetAllProvincesAsync();
+        return provinces.FirstOrDefault(p =>
+            string.Equals(p.Capital, capitalName, StringComparison.OrdinalIgnoreCase))?.ProvinceName;
     }
 
-    /// <summary>
-    /// بررسی وجود استان بر اساس شناسه
-    /// </summary>
-    public static bool ExistsByProvinceId(string provinceId) =>
-        GetAllProvinces().Any(p => p.ProvinceId == provinceId);
+    public static async Task<bool> ExistsByProvinceIdAsync(string provinceId)
+    {
+        var provinces = await GetAllProvincesAsync();
+        return provinces.Any(p => p.ProvinceId == provinceId);
+    }
 
-    /// <summary>
-    /// بررسی وجود استان بر اساس نام
-    /// </summary>
-    public static bool ExistsByProvinceName(string provinceName) =>
-        !string.IsNullOrWhiteSpace(provinceName) &&
-        GetAllProvinces().Any(p => string.Equals(p.ProvinceName, provinceName, StringComparison.OrdinalIgnoreCase));
+    public static async Task<bool> ExistsByProvinceNameAsync(string provinceName)
+    {
+        if (string.IsNullOrWhiteSpace(provinceName))
+            return false;
+
+        var provinces = await GetAllProvincesAsync();
+        return provinces.Any(p =>
+            string.Equals(p.ProvinceName, provinceName, StringComparison.OrdinalIgnoreCase));
+    }
 }
