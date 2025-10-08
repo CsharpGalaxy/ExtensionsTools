@@ -4,7 +4,34 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+
+
+
+	  <!--<PackAsTool>true</PackAsTool>-->
+	  <Version>1.0.0</Version>
+	  <ImplicitUsings>enable</ImplicitUsings>
+	  <Nullable>enable</Nullable>
+	  <PackageProjectUrl>https://github.com/CsharpGalexy/ExtentionsTools</PackageProjectUrl>
+	  <PackageReadmeFile>README.md</PackageReadmeFile>
+	  <RepositoryUrl>https://github.com/CsharpGalexy/ExtentionsTools</RepositoryUrl>
+	  <!--<PackAsTool>True</PackAsTool>-->
+	  <IncludeSymbols>True</IncludeSymbols>
+	  <PackageLicenseFile>LICENSE</PackageLicenseFile>
+	  <Authors>CsharpGalexy</Authors>
+	  <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+	  <PackAsTool>False</PackAsTool>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE" Link="LICENSE">
+      <PackagePath>\</PackagePath>
+      <Pack>True</Pack>
+    </None>
+    <None Include="..\README.md" Link="README.md">
+      <PackagePath>\</PackagePath>
+      <Pack>True</Pack>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <None Update="Iran\Provinces\country-dial-codes.json">
