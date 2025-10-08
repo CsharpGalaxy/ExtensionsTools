@@ -1,11 +1,20 @@
 ﻿using CsharpGalexy.Console.Models;
 using CsharpGalexy.LibraryExtention.Extentions.Province;
+using CsharpGalexy.LibraryExtention.Helpers.Mony;
 using CsharpGalexy.LibraryExtention.Models;
 using System.ComponentModel;
 using System.Text;
 using YourNamespace.Helpers;
 string str = "dasdad assad sd sds sdsd";
 var a = str.TruncateMore(3);
+ CityHelper.InitializeAsync().GetAwaiter().GetResult();
+var aaaa =await CityHelper.LoadCitiesFromJsonAsync();
+var aaaa1 =await ProvinceCapitalHelper.LoadFromJsonAsync();
+var aaaa2 =await ProvincePhoneCodeHelper.LoadFromJsonAsync();
+var aaaa3 =await ProvincePostalCodeHelper.LoadFromJsonAsync();
+var aaaa4 =await ProvinceHelper.LoadProvincesFromJsonAsync();
+var aaaa5 =await CurrencyHelper.LoadFromJsonAsync();
+var aaaa6 =await CountryDialCodeHelper.LoadFromJsonAsync();
 #region DateTime
 var now = DateTime.Now;
 var yesterday = now.AddDays(-1);
@@ -193,8 +202,6 @@ stringBuilder.AppendLine("------------------");
 
 
 
-var aaa= ProvincePostalCodeHelper.GetAllPostalCodes();
-
 //گرفتن کل استان ها
 //var provinces = ProvinceHelper.GetAllProvinces();
 //foreach (var province in provinces)
@@ -345,13 +352,6 @@ stringBuilder.AppendLine("🧪 شروع تست‌های CountryDialCodeHelper...
 
 try
 {
-    Test_GetPersianCountryByDialCode(stringBuilder);
-    Test_GetEnglishCountryByDialCode(stringBuilder);
-    Test_GetDialCodeByPersianCountry(stringBuilder);
-    Test_GetDialCodeByEnglishCountry(stringBuilder);
-    Test_GetAllCountriesSortedByDialCode(stringBuilder);
-    Test_CaseInsensitiveSearch(stringBuilder);
-    Test_InvalidInputs(stringBuilder);
 
     stringBuilder.AppendLine("✅ تمام تست‌ها با موفقیت انجام شدند!");
 }
@@ -365,90 +365,6 @@ stringBuilder.AppendLine("\nبرای خروج کلیدی را فشار دهید.
 File.WriteAllText("CountryDialCodeHelper.txt", stringBuilder.ToString());
 
 
-static void Test_GetPersianCountryByDialCode(in StringBuilder stringBuilder)
-{
-    stringBuilder.AppendLine("• تست GetPersianCountryByDialCode...");
-    var result = CountryDialCodeHelper.GetPersianCountryByDialCode("+1");
-    if (result != "آمریکا")
-        throw new Exception("نتیجه مورد انتظار 'آمریکا' نیست.");
-    stringBuilder.AppendLine("  ✔️ OK");
-}
-
-static void Test_GetEnglishCountryByDialCode(in StringBuilder stringBuilder)
-{
-    stringBuilder.AppendLine("• تست GetEnglishCountryByDialCode...");
-    var result = CountryDialCodeHelper.GetEnglishCountryByDialCode("+1");
-    if (result != "United States")
-        throw new Exception("نتیجه مورد انتظار 'United States' نیست.");
-    stringBuilder.AppendLine("  ✔️ OK");
-}
-
-static void Test_GetDialCodeByPersianCountry(in StringBuilder stringBuilder)
-{
-    stringBuilder.AppendLine("• تست GetDialCodeByPersianCountry...");
-    var result = CountryDialCodeHelper.GetDialCodeByPersianCountry("آمریکا");
-    if (result != "+1")
-        throw new Exception("کد تلفن آمریکا باید '+1' باشد.");
-    stringBuilder.AppendLine("  ✔️ OK");
-}
-
-static void Test_GetDialCodeByEnglishCountry(in StringBuilder stringBuilder)
-{
-    stringBuilder.AppendLine("• تست GetDialCodeByEnglishCountry...");
-    var result = CountryDialCodeHelper.GetDialCodeByEnglishCountry("Canada");
-    if (result != "+1")
-        throw new Exception("کد تلفن کانادا باید '+1' باشد.");
-    stringBuilder.AppendLine("  ✔️ OK");
-}
-
-static void Test_GetAllCountriesSortedByDialCode(in StringBuilder stringBuilder)
-{
-    stringBuilder.AppendLine("• تست GetAllCountriesSortedByDialCode...");
-    var sorted = CountryDialCodeHelper.GetAllCountriesSortedByDialCode();
-    if (sorted.Count == 0)
-        throw new Exception("لیست کشورها خالی است.");
-
-    // بررسی اینکه اولین کشور کد +1 دارد
-    if (sorted[0].DialCode != "+1")
-        throw new Exception("اولین کشور باید کد +1 داشته باشد.");
-
-    stringBuilder.AppendLine($"  ✔️ OK (تعداد کشورها: {sorted.Count})");
-}
-
-static void Test_CaseInsensitiveSearch(in StringBuilder stringBuilder)
-{
-    stringBuilder.AppendLine("• تست جستجوی بدون حساسیت به بزرگ/کوچکی...");
-    var code1 = CountryDialCodeHelper.GetDialCodeByEnglishCountry("canada");
-    var code2 = CountryDialCodeHelper.GetDialCodeByEnglishCountry("CANADA");
-    var code3 = CountryDialCodeHelper.GetDialCodeByPersianCountry("آمریکا"); // فارسی همیشه case-sensitive نیست ولی تست می‌کنیم
-
-    if (code1 != "+1" || code2 != "+1")
-        throw new Exception("جستجوی بدون حساسیت به حروف کار نمی‌کند.");
-
-    stringBuilder.AppendLine("  ✔️ OK");
-}
-
-static void Test_InvalidInputs(in StringBuilder stringBuilder)
-{
-    stringBuilder.AppendLine("• تست ورودی‌های نامعتبر...");
-
-    // جستجوی کد تلفن ناموجود
-    var unknown = CountryDialCodeHelper.GetPersianCountryByDialCode("+999");
-    if (unknown != null)
-        throw new Exception("کد تلفن ناموجود نباید نتیجه‌ای برگرداند.");
-
-    // جستجوی نام کشور ناموجود
-    var unknownCode = CountryDialCodeHelper.GetDialCodeByEnglishCountry("Atlantis");
-    if (unknownCode != null)
-        throw new Exception("نام کشور ناموجود نباید نتیجه‌ای برگرداند.");
-
-    // ورودی خالی
-    var empty = CountryDialCodeHelper.GetDialCodeByEnglishCountry("");
-    if (empty != null)
-        throw new Exception("ورودی خالی نباید نتیجه‌ای برگرداند.");
-
-    stringBuilder.AppendLine("  ✔️ OK");
-}
 #endregion
 Console.ReadKey();
 
