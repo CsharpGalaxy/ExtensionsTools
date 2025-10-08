@@ -1,98 +1,107 @@
-﻿
-
-namespace CsharpGalexy.LibraryExtention.Extentions.Province;
-
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Text.Json;
+using System.Threading.Tasks;
 
-
+namespace CsharpGalexy.LibraryExtention.Extentions.Province
+{
     public static class CityHelper
     {
-        private static readonly Lazy<List<CityModel>> _lazyCities =
-            new Lazy<List<CityModel>>(LoadCitiesFromJson);
+        private static Task<List<CityModel>>? _citiesTask;
 
-        private static string JsonFilePath =>
-            Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Iran/Provinces/provinces_cities.json");
+        private static string JsonFileUrl =>
+           "https://raw.githubusercontent.com/CsharpGalexy/ExtentionsTools/main/CsharpGalexy.Data/Iran/Provinces/provinces_cities.json";
 
-        private static List<CityModel> LoadCitiesFromJson()
+        /// <summary>
+        /// بارگذاری اولیه و کش کردن داده‌ها
+        /// </summary>
+        public static Task InitializeAsync()
         {
-            if (!File.Exists(JsonFilePath))
-                throw new FileNotFoundException($"فایل cities.json یافت نشد: {JsonFilePath}");
-
-            var json = File.ReadAllText(JsonFilePath);
-            var options = new JsonSerializerOptions
+            if (_citiesTask == null)
             {
-                PropertyNameCaseInsensitive = true
-            };
+                _citiesTask = LoadCitiesFromJsonAsync();
+            }
 
-            var cities = JsonSerializer.Deserialize<List<CityModel>>(json, options);
-            if (cities == null)
-                throw new InvalidOperationException("خطا در دی‌سریالایز کردن فایل cities.json");
-
-            return cities;
+            return _citiesTask;
         }
 
-        /// <summary>
-        /// بازگرداندن تمام شهرها
-        /// </summary>
-        public static IReadOnlyList<CityModel> GetAllCities() =>
-            _lazyCities.Value.AsReadOnly();
+        public static async Task<List<CityModel>> LoadCitiesFromJsonAsync()
+        {
+            using var httpClient = new HttpClient();
 
-        /// <summary>
-        /// جستجوی شهر بر اساس شناسه شهر (cityId)
-        /// </summary>
-        public static CityModel? GetByCityId(string cityId) =>
-            GetAllCities().FirstOrDefault(c => c.CityId == cityId);
+            try
+            {
+                var json = await httpClient.GetStringAsync(JsonFileUrl);
+                var cities = JsonSerializer.Deserialize<List<CityModel>>(json);
+                return cities ?? new List<CityModel>();
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException($"خطا در بارگذاری JSON از {JsonFileUrl}: {ex.Message}");
+            }
+        }
 
-        /// <summary>
-        /// جستجوی شهر بر اساس نام شهر (بدون حساسیت به بزرگ/کوچکی)
-        /// </summary>
-        public static CityModel? GetByCityName(string cityName)
+        private static async Task<IReadOnlyList<CityModel>> GetAllCitiesAsync()
+        {
+            if (_citiesTask == null)
+                await InitializeAsync();
+
+            return (await _citiesTask!).AsReadOnly();
+        }
+
+        public static async Task<CityModel?> GetByCityIdAsync(string cityId)
+        {
+            var cities = await GetAllCitiesAsync();
+            return cities.FirstOrDefault(c => c.CityId == cityId);
+        }
+
+        public static async Task<CityModel?> GetByCityNameAsync(string cityName)
         {
             if (string.IsNullOrWhiteSpace(cityName))
                 return null;
 
-            return GetAllCities().FirstOrDefault(c =>
+            var cities = await GetAllCitiesAsync();
+            return cities.FirstOrDefault(c =>
                 string.Equals(c.CityName, cityName, StringComparison.OrdinalIgnoreCase));
         }
 
-        /// <summary>
-        /// دریافت تمام شهرهای یک استان بر اساس شناسه استان (provinceId)
-        /// </summary>
-        public static IReadOnlyList<CityModel> GetCitiesByProvinceId(string provinceId) =>
-            GetAllCities()
+        public static async Task<IReadOnlyList<CityModel>> GetCitiesByProvinceIdAsync(string provinceId)
+        {
+            var cities = await GetAllCitiesAsync();
+            return cities
                 .Where(c => c.ProvinceId == provinceId)
                 .ToList()
                 .AsReadOnly();
+        }
 
-        /// <summary>
-        /// دریافت تمام شهرهای یک استان بر اساس نام استان (بدون حساسیت به بزرگ/کوچکی)
-        /// </summary>
-        public static IReadOnlyList<CityModel> GetCitiesByProvinceName(string provinceName)
+        public static async Task<IReadOnlyList<CityModel>> GetCitiesByProvinceNameAsync(string provinceName)
         {
             if (string.IsNullOrWhiteSpace(provinceName))
                 return Array.Empty<CityModel>();
 
-            return GetAllCities()
+            var cities = await GetAllCitiesAsync();
+            return cities
                 .Where(c => string.Equals(c.ProvinceName, provinceName, StringComparison.OrdinalIgnoreCase))
                 .ToList()
                 .AsReadOnly();
         }
 
-        /// <summary>
-        /// بررسی وجود شهر بر اساس شناسه
-        /// </summary>
-        public static bool ExistsByCityId(string cityId) =>
-            GetAllCities().Any(c => c.CityId == cityId);
+        public static async Task<bool> ExistsByCityIdAsync(string cityId)
+        {
+            var cities = await GetAllCitiesAsync();
+            return cities.Any(c => c.CityId == cityId);
+        }
 
-        /// <summary>
-        /// بررسی وجود شهر بر اساس نام
-        /// </summary>
-        public static bool ExistsByCityName(string cityName) =>
-            !string.IsNullOrWhiteSpace(cityName) &&
-            GetAllCities().Any(c =>
+        public static async Task<bool> ExistsByCityNameAsync(string cityName)
+        {
+            if (string.IsNullOrWhiteSpace(cityName))
+                return false;
+
+            var cities = await GetAllCitiesAsync();
+            return cities.Any(c =>
                 string.Equals(c.CityName, cityName, StringComparison.OrdinalIgnoreCase));
+        }
     }
+}
