@@ -30,10 +30,11 @@
 		</None>
 	</ItemGroup>
 
-	<ItemGroup>
-	  <!--<PackageReference Include="AutoMapper" Version="15.0.1" />
+	<ItemGroup><!--<PackageReference Include="AutoMapper" Version="15.0.1" />
 	  <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />-->
 	  <!--<PackageReference Include="Newtonsoft.Json" Version="13.0.4" />-->
+	
+	  <Folder Include="Helpers.Xml\" />
 	</ItemGroup>
 
 	<ItemGroup>
