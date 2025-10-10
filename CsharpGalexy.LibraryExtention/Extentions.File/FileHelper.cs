@@ -1,4 +1,5 @@
 ﻿using CsharpGalexy.LibraryExtention.Models.Files;
+using static CsharpGalexy.LibraryExtention.File.ValidateFiles;
 
 namespace CsharpGalexy.LibraryExtention.File;
 
@@ -452,6 +453,17 @@ public static partial class ValidateFiles
     /// <param name="generateNewFileName"></param>
     /// <returns>UploadFileResult(bool IsSuccess, string NewFileName, List<string> Errors)</returns>
 
+
+
+
+
+
+
+
+}
+public static class FileHelper
+{
+
     public static async Task<UploadFileResult> UploadFileAsync(Stream stream, string fileName, FileType type, string path, bool generateNewFileName = false)
     {
         var errors = new List<string>();
@@ -499,8 +511,22 @@ public static partial class ValidateFiles
             return new UploadFileResult(false, errors);
         }
     }
+    public static bool DeleteFile(string relativePath, string relativeRoot = "wwwroot")
+    {
+        if (string.IsNullOrEmpty(relativePath))
+            return false;
 
+        // ساخت مسیر کامل روی دیسک
+        string fullPath = Path.Combine(Directory.GetCurrentDirectory(), relativeRoot, relativePath.TrimStart('/').Replace("/", Path.DirectorySeparatorChar.ToString()));
 
+        if (System.IO.File.Exists(fullPath))
+        {
+            System.IO.File.Delete(fullPath);
+            return true;
+        }
+
+        return false;
+    }
 
 
     /// <summary>
@@ -509,8 +535,7 @@ public static partial class ValidateFiles
     /// <param name="path"></param>
     public static void DeleteFile(string path)
     {
-        if (System.IO.File.Exists(path))
-            System.IO.File.Delete(path);
+      
     }
     public static ValidateFiles.FileType GetFileTypeFromExtension(this string extension)
     {
@@ -536,5 +561,68 @@ public static partial class ValidateFiles
     {
         byte[] bytes = Convert.FromBase64String(base64);
         System.IO.File.WriteAllBytes(path, bytes);
+    }
+
+
+    public static string SaveBase64File(string base64WithPrefix, string outputDir, string relativeRoot = "wwwroot")
+    {
+        // جدا کردن prefix از داده base64
+        var parts = base64WithPrefix.Split(',');
+        if (parts.Length != 2)
+            throw new ArgumentException("Invalid base64 string format");
+
+        string metaData = parts[0]; // مثل: data:image/png;base64
+        string base64Data = parts[1];
+
+        // استخراج پسوند از mime-type
+        string extension = "bin"; // پیش‌فرض
+        int slashIndex = metaData.IndexOf('/');
+        int semicolonIndex = metaData.IndexOf(';');
+
+        if (slashIndex > 0 && semicolonIndex > slashIndex)
+        {
+            extension = metaData.Substring(slashIndex + 1, semicolonIndex - slashIndex - 1);
+        }
+
+        // ایجاد پوشه اگر وجود نداشت
+        if (!Directory.Exists(outputDir))
+            Directory.CreateDirectory(outputDir);
+
+        // اسم یکتا برای فایل
+        string fileName = $"{Guid.NewGuid()}.{extension}";
+        string filePath = Path.Combine(outputDir, fileName);
+
+        // ذخیره فایل
+        byte[] fileBytes = Convert.FromBase64String(base64Data);
+        System.IO.File.WriteAllBytes(filePath, fileBytes);
+
+        // ساخت مسیر نسبی (برای ذخیره در DB)
+        string relativePath = filePath.Replace(Path.Combine(Directory.GetCurrentDirectory(), relativeRoot), "")
+                                      .Replace("\\", "/")
+                                      .TrimStart('/');
+
+        return "/" + relativePath;
+    }
+
+    public static string GetFileExtensionFromBase64(string base64WithPrefix)
+    {
+        var parts = base64WithPrefix.Split(',');
+        if (parts.Length != 2)
+            throw new ArgumentException("Invalid base64 string format");
+        string metaData = parts[0]; // مثل: data:image/png;base64
+        // استخراج پسوند از mime-type
+        string extension = "bin"; // پیش‌فرض
+        int slashIndex = metaData.IndexOf('/');
+        int semicolonIndex = metaData.IndexOf(';');
+        if (slashIndex > 0 && semicolonIndex > slashIndex)
+        {
+            extension = metaData.Substring(slashIndex + 1, semicolonIndex - slashIndex - 1);
+        }
+        return extension;
+    }
+
+    public static string GetFilePathUploadFile(string type)
+    {
+        return Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Uploads", type);
     }
 }
