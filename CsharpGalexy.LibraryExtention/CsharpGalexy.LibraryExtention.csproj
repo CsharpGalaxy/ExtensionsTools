@@ -33,7 +33,7 @@
 	<ItemGroup>
 	  <!--<PackageReference Include="AutoMapper" Version="15.0.1" />
 	  <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />-->
-	  <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+	  <!--<PackageReference Include="Newtonsoft.Json" Version="13.0.4" />-->
 	</ItemGroup>
 
 	<ItemGroup>
@@ -61,29 +61,6 @@
 	  </None>-->
 		
 		
-	</ItemGroup>
-	<ItemGroup>
-		<Content  Include="Iran\Provinces\country-dial-codes.json">
-		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</Content >
-		<Content  Include="Iran\Provinces\currency-codes.json">
-		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</Content >
-		<Content  Include="Iran\Provinces\province-capitals.json">
-		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</Content >
-		<Content  Include="Iran\Provinces\province-phone-codes.json">
-		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</Content >
-		<Content  Include="Iran\Provinces\province-postal-codes.json">
-		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</Content >
-		<Content  Include="Iran\Provinces\provinces.json">
-		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</Content >
-		<Content  Include="Iran\Provinces\provinces_cities.json">
-		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</Content >
 	</ItemGroup>
 
 </Project>
