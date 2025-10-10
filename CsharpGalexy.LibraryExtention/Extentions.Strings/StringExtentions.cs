@@ -1,6 +1,6 @@
 ﻿
 using CsharpGalexy.LibraryExtention.Models;
-using Newtonsoft.Json.Linq;
+
 using System;
 using System.Collections;
 using System.Globalization;
@@ -8,10 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
-using NewtonsoftSerializer = Newtonsoft.Json;
+
 using JsonSerializer = System.Text.Json.JsonSerializer;
-using Newtonsoft.Json.Serialization;
-using Newtonsoft.Json.Linq;
+
 
 /// <summary>
 /// Powerful extension methods for string
@@ -430,18 +429,18 @@ public static class StringExtensions
 
     #region 🧠 JSON Serialization Settings (Newtonsoft)
 
-    /// <summary>
-    /// تنظیمات پیش‌فرض برای سریالایز کردن JSON با Newtonsoft.Json
-    /// - نادیده گرفتن حلقه‌های مرجع (ReferenceLoopHandling.Ignore)
-    /// - Escape کردن کاراکترهای HTML در رشته‌ها
-    /// - تبدیل نام پراپرتی‌ها به camelCase (مثلاً FirstName → firstName)
-    /// </summary>
-    private static readonly NewtonsoftSerializer.JsonSerializerSettings JsonSerializerSettings = new NewtonsoftSerializer.JsonSerializerSettings
-    {
-        ReferenceLoopHandling = NewtonsoftSerializer.ReferenceLoopHandling.Ignore,
-        StringEscapeHandling = NewtonsoftSerializer.StringEscapeHandling.EscapeHtml,
-        ContractResolver = new CamelCasePropertyNamesContractResolver()
-    };
+    ///// <summary>
+    ///// تنظیمات پیش‌فرض برای سریالایز کردن JSON با Newtonsoft.Json
+    ///// - نادیده گرفتن حلقه‌های مرجع (ReferenceLoopHandling.Ignore)
+    ///// - Escape کردن کاراکترهای HTML در رشته‌ها
+    ///// - تبدیل نام پراپرتی‌ها به camelCase (مثلاً FirstName → firstName)
+    ///// </summary>
+    //private static readonly NewtonsoftSerializer.JsonSerializerSettings JsonSerializerSettings = new NewtonsoftSerializer.JsonSerializerSettings
+    //{
+    //    ReferenceLoopHandling = NewtonsoftSerializer.ReferenceLoopHandling.Ignore,
+    //    StringEscapeHandling = NewtonsoftSerializer.StringEscapeHandling.EscapeHtml,
+    //    ContractResolver = new CamelCasePropertyNamesContractResolver()
+    //};
 
     #endregion
 
@@ -681,90 +680,61 @@ public static class StringExtensions
 
     #region 📦 JSON Serialization/Deserialization (Newtonsoft.Json)
 
-    /// <summary>
-    /// تبدیل شیء به رشته JSON با استفاده از Newtonsoft.Json و تنظیمات پیش‌فرض.
-    /// در صورت خطا، null برمی‌گرداند.
-    /// </summary>
-    public static string ToJson(this object value)
+
+
+
+
+/// <summary>
+/// تبدیل رشته JSON به شیء از نوع T با استفاده از System.Text.Json.
+/// در صورت خطا، مقدار پیش‌فرض T برگردانده می‌شود و خطا در کنسول چاپ می‌شود.
+/// </summary>
+public static T ParseTo<T>(this string str)
+{
+    if (string.IsNullOrEmpty(str)) return default(T);
+    try
     {
-        if (value == null) return null;
+        return JsonSerializer.Deserialize<T>(str);
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"ParseTo Error: {ex.Message}");
+        return default(T);
+    }
+}
+
+/// <summary>
+/// اعتبارسنجی ساختار JSON (آیا رشته یک JSON معتبر است؟)
+/// با استفاده از System.Text.Json.JsonDocument
+/// </summary>
+public static bool IsValidJson(this string text)
+{
+    if (string.IsNullOrWhiteSpace(text)) return false;
+    text = text.Trim();
+    if ((text.StartsWith("{") && text.EndsWith("}")) ||
+        (text.StartsWith("[") && text.EndsWith("]")))
+    {
         try
         {
-            return NewtonsoftSerializer.JsonConvert.SerializeObject(value);
+            using var doc = JsonDocument.Parse(text);
+            return true;
         }
         catch
         {
-            return null;
+            return false;
         }
     }
+    return false;
+}
 
-    /// <summary>
-    /// تبدیل شیء به رشته JSON با استفاده از Newtonsoft.Json و تنظیمات دلخواه.
-    /// اگر تنظیمات داده نشود، از تنظیمات پیش‌فرض کلاس استفاده می‌کند.
-    /// </summary>
-    public static string ToJson(this object value, NewtonsoftSerializer.JsonSerializerSettings settings)
-    {
-        if (value == null) return null;
-        var opSettings = settings ?? JsonSerializerSettings;
-        try
-        {
-            return NewtonsoftSerializer.JsonConvert.SerializeObject(value, opSettings);
-        }
-        catch
-        {
-            return null;
-        }
-    }
+#endregion
 
-    /// <summary>
-    /// تبدیل رشته JSON به شیء از نوع T با استفاده از Newtonsoft.Json.
-    /// در صورت خطا، مقدار پیش‌فرض T برگردانده می‌شود و خطا در کنسول چاپ می‌شود.
-    /// </summary>
-    public static T ParseTo<T>(this string str)
-    {
-        if (string.IsNullOrEmpty(str)) return default(T);
-        try
-        {
-            return NewtonsoftSerializer.JsonConvert.DeserializeObject<T>(str);
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"ParseTo Error: {ex.Message}");
-            return default(T);
-        }
-    }
+#region String && Array
 
-    /// <summary>
-    /// اعتبارسنجی ساختار JSON (آیا رشته یک JSON معتبر است؟)
-    /// با استفاده از Newtonsoft.Json.JToken.Parse
-    /// </summary>
-    public static bool IsValidJson(this string text)
-    {
-        if (string.IsNullOrWhiteSpace(text)) return false;
-        text = text.Trim();
-        if ((text.StartsWith("{") && text.EndsWith("}")) || // For object
-            (text.StartsWith("[") && text.EndsWith("]")))   // For array
-        {
-            try
-            {
-                var obj = NewtonsoftSerializer.Linq.JToken.Parse(text);
-                return true;
-            }
-            catch (NewtonsoftSerializer.JsonReaderException) { return false; }
-            catch { return false; }
-        }
-        return false;
-    }
-
-    #endregion
-
-    #region String && Array
-
-    /// <summary>
-    /// جستجوی باینری در ArrayList (فقط برای لیست‌های مرتب شده!)
-    /// ⚠️ اگر لیست null باشد یا المان پیدا نشود، false برمی‌گرداند.
-    /// </summary>
-    public static bool ArraySearch(this ArrayList lista, string value)
+/// <summary>
+/// جستجوی باینری در ArrayList (فقط برای لیست‌های مرتب شده!)
+/// ⚠️ اگر لیست null باشد یا المان پیدا نشود، false برمی‌گرداند.
+/// </summary>
+public static bool ArraySearch(this ArrayList lista, string value)
     {
         if (lista == null) return false;
         var index = lista.BinarySearch(value);
