@@ -251,7 +251,10 @@ public static class IntExtensions
 
         return (int)reversed * sign;
     }
-
+    public static int RealValue(this int? number)
+    {
+       return number.HasValue ? number.Value : 0;
+    }
     /// <summary>
     /// 45. رشته باینری با طول ثابت 32 کاراکتر. (toBinaryStringPadded)
     /// </summary>
