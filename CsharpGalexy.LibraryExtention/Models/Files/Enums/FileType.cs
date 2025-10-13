@@ -14,4 +14,30 @@ public static partial class ValidateFiles
         ZIP = 8,
         RAR = 9
     }
+
+
+}
+
+public enum FileExtension
+{
+    Unknown,    // برای فایل‌های ناشناخته
+    Jpg,        // .jpg / .jpeg
+    Png,        // .png
+    Gif,        // .gif
+    Bmp,        // .bmp
+    Pdf,        // .pdf
+    Txt,        // .txt
+    Doc,        // .doc
+    Docx,       // .docx
+    Xls,        // .xls
+    Xlsx,       // .xlsx
+    Ppt,        // .ppt
+    Pptx,       // .pptx
+    Mp3,        // .mp3
+    Mp4,        // .mp4
+    Avi,        // .avi
+    Mov,        // .mov
+    Zip,        // .zip
+    Rar,        // .rar
+    Bin         // .bin / فایل ناشناخته
 }
