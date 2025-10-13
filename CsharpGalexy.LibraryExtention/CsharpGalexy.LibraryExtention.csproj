@@ -5,7 +5,7 @@
 		<LangVersion>latest</LangVersion>
 		<OutputType>Library</OutputType>
 		<!--<PackAsTool>true</PackAsTool>-->
-		<Version>2.6.1</Version>
+		<Version>2.6.2</Version>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<PackageProjectUrl>https://github.com/CsharpGalexy/ExtentionsTools</PackageProjectUrl>
@@ -28,40 +28,6 @@
 			<Pack>True</Pack>
 			<PackagePath>\</PackagePath>
 		</None>
-	</ItemGroup>
-
-	<ItemGroup><!--<PackageReference Include="AutoMapper" Version="15.0.1" />
-	  <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />-->
-	  <!--<PackageReference Include="Newtonsoft.Json" Version="13.0.4" />-->
-	
-	  <Folder Include="Helpers.Xml\" />
-	</ItemGroup>
-
-	<ItemGroup>
-	
-	  <!--<None Update="Iran\Provinces\country-dial-codes.json">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </None>
-	  <None Update="Iran\Provinces\currency-codes.json">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </None>
-	  <None Update="Iran\Provinces\province-capitals.json">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </None>
-	  <None Update="Iran\Provinces\province-phone-codes.json">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </None>
-	  <None Update="Iran\Provinces\province-postal-codes.json">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </None>
-	  <None Update="Iran\Provinces\provinces.json">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </None>
-	  <None Update="Iran\Provinces\provinces_cities.json">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </None>-->
-		
-		
 	</ItemGroup>
 
 </Project>
