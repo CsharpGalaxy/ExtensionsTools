@@ -562,6 +562,31 @@ public static class FileHelper
         byte[] bytes = Convert.FromBase64String(base64);
         System.IO.File.WriteAllBytes(path, bytes);
     }
+    public static byte[] SafeBase64Decode(string base64String)
+    {
+        if (string.IsNullOrWhiteSpace(base64String))
+            throw new ArgumentException("Base64 string is empty");
+
+        // اگر رشته با "data:..." شروع میشه بخش قبل از "," رو حذف کن
+        if (base64String.Contains(","))
+            base64String = base64String.Substring(base64String.IndexOf(",") + 1);
+
+        // پاکسازی کاراکترهای اضافی
+        base64String = base64String.Trim()
+                                   .Replace("\n", "")
+                                   .Replace("\r", "")
+                                   .Replace(" ", "")
+                                   .Replace("\"", "");
+
+        // طول Base64 باید مضربی از 4 باشه → در صورت نیاز padding اضافه کن
+        int mod4 = base64String.Length % 4;
+        if (mod4 > 0)
+        {
+            base64String += new string('=', 4 - mod4);
+        }
+
+        return Convert.FromBase64String(base64String);
+    }
 
 
     public static string SaveBase64File(string base64WithPrefix, string outputDir, string relativeRoot = "wwwroot")
@@ -603,7 +628,28 @@ public static class FileHelper
 
         return "/" + relativePath;
     }
+    public static string SaveBase64FileNotMIMEtype(string base64WithPrefix, FileExtension extension, string outputDir, string relativeRoot = "wwwroot")
+    {
 
+        // ایجاد پوشه اگر وجود نداشت
+        if (!Directory.Exists(outputDir))
+            Directory.CreateDirectory(outputDir);
+
+        // اسم یکتا برای فایل
+        string fileName = $"{Guid.NewGuid()}.{(extension).ToString().ToLower()}";
+        string filePath = Path.Combine(outputDir, fileName);
+
+        // ذخیره فایل
+        byte[] fileBytes = SafeBase64Decode(base64WithPrefix);
+        System.IO.File.WriteAllBytes(filePath, fileBytes);
+
+        // ساخت مسیر نسبی (برای ذخیره در DB)
+        string relativePath = filePath.Replace(Path.Combine(Directory.GetCurrentDirectory(), relativeRoot), "")
+                                      .Replace("\\", "/")
+                                      .TrimStart('/');
+
+        return "/" + relativePath;
+    }
     public static string GetFileExtensionFromBase64(string base64WithPrefix)
     {
         var parts = base64WithPrefix.Split(',');
