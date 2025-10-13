@@ -499,4 +499,14 @@ public static class DateTimeExtensions
         => date.ToString(System.Globalization.DateTimeFormatInfo.CurrentInfo?.ShortDatePattern);
 
     #endregion
+
+    /// <summary>
+    /// بررسی اینکه آیا سال شمسی (هجری خورشیدی) کبیسه است یا نه.
+    /// </summary>
+    public static bool IsPersianLeapYear(this int persianYear)
+    {
+        int[] leapYearsInCycle = { 1, 5, 9, 13, 17, 22, 26, 30 };
+        int cycleYear = persianYear % 33;
+        return Array.Exists(leapYearsInCycle, y => y == cycleYear);
+    }
 }
