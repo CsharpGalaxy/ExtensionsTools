@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsharpGalexy.Console", "Csh
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsharpGalexy.LibraryExtention.Data", "CsharpGalexy.LibraryExtention.Data\CsharpGalexy.LibraryExtention.Data.csproj", "{C4A5C3F5-3025-47F3-9B2E-A108AD2B5867}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsharpGalexy.LibraryExtention.EFCore", "CsharpGalexy.LibraryExtention.EFCore\CsharpGalexy.LibraryExtention.EFCore.csproj", "{A098F7F8-36E5-4001-81A8-C8B9C0952CCD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{C4A5C3F5-3025-47F3-9B2E-A108AD2B5867}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4A5C3F5-3025-47F3-9B2E-A108AD2B5867}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C4A5C3F5-3025-47F3-9B2E-A108AD2B5867}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A098F7F8-36E5-4001-81A8-C8B9C0952CCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A098F7F8-36E5-4001-81A8-C8B9C0952CCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A098F7F8-36E5-4001-81A8-C8B9C0952CCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A098F7F8-36E5-4001-81A8-C8B9C0952CCD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
