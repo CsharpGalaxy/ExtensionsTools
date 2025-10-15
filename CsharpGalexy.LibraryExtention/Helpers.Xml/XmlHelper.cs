@@ -27,6 +27,7 @@ public static class XmlHelper
     // 2. Convert XmlDocument to string
     public static string ToXml(XmlDocument doc)
     {
+        
         return doc.OuterXml;
     }
 
