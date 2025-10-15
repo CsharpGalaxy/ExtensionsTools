@@ -384,12 +384,6 @@ public static class CurrencyExtensions
 
     // Overload برای decimal
     public static string ToPersianDigits(this decimal value)
-        => value.ToString("N0").ToPersianDigits(); public static string ToMoneyWithSuffix(this decimal rialValue)
-    {
-        var toman = rialValue / 10;
-        if (toman >= 1_000_000_000) return $"{toman / 1_000_000_000:0.##} میلیارد تومان";
-        if (toman >= 1_000_000) return $"{toman / 1_000_000:0.##} میلیون تومان";
-        if (toman >= 1_000) return $"{toman / 1_000:0.##} هزار تومان";
-        return $"{toman:0} تومان";
-    }
+        => value.ToString("N0").ToPersianDigits(); 
+
 }
