@@ -57,7 +57,7 @@ var allCodes = await ProvincePostalCodeHelper.GetAllPostalCodesAsync();
 
 The postal code data is loaded from:
 ```
-https://raw.githubusercontent.com/CsharpGalexy/ExtensionsTools/main/CsharpGalexy.LibraryExtention.Data/Iran/Provinces/province-postal-codes.json
+https://raw.githubusercontent.com/CsharpGalaxy/ExtensionsTools/refs/heads/main/CsharpGalaxy.LibraryExtension.Data/Iran/Provinces/province-postal-codes.json
 ```
 
 ### Thread Safety
