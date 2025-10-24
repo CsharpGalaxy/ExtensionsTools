@@ -1,0 +1,156 @@
+[
+  {
+    "id": 1,
+    "name": "بانک ملی ایران",
+    "code": "001",
+    "type": "دولتی",
+    "isActive": true
+  },
+  {
+    "id": 2,
+    "name": "بانک سپه",
+    "code": "002",
+    "type": "دولتی",
+    "isActive": true
+  },
+  {
+    "id": 3,
+    "name": "بانک مسکن",
+    "code": "003",
+    "type": "دولتی",
+    "isActive": true
+  },
+  {
+    "id": 4,
+    "name": "بانک کشاورزی",
+    "code": "004",
+    "type": "دولتی",
+    "isActive": true
+  },
+  {
+    "id": 5,
+    "name": "بانک توسعه صادرات ایران",
+    "code": "005",
+    "type": "دولتی",
+    "isActive": true
+  },
+  {
+    "id": 6,
+    "name": "بانک صنعت و معدن",
+    "code": "006",
+    "type": "دولتی",
+    "isActive": true
+  },
+  {
+    "id": 7,
+    "name": "بانک توسعه تعاون",
+    "code": "007",
+    "type": "دولتی",
+    "isActive": true
+  },
+  {
+    "id": 8,
+    "name": "پست بانک ایران",
+    "code": "008",
+    "type": "دولتی",
+    "isActive": true
+  },
+  {
+    "id": 9,
+    "name": "بانک ملت",
+    "code": "009",
+    "type": "خصوصی",
+    "isActive": true
+  },
+  {
+    "id": 10,
+    "name": "بانک تجارت",
+    "code": "010",
+    "type": "خصوصی",
+    "isActive": true
+  },
+  {
+    "id": 11,
+    "name": "بانک رفاه کارگران",
+    "code": "011",
+    "type": "خصوصی",
+    "isActive": true
+  },
+  {
+    "id": 12,
+    "name": "بانک پارسیان",
+    "code": "012",
+    "type": "خصوصی",
+    "isActive": true
+  },
+  {
+    "id": 13,
+    "name": "بانک پاسارگاد",
+    "code": "013",
+    "type": "خصوصی",
+    "isActive": true
+  },
+  {
+    "id": 14,
+    "name": "بانک اقتصاد نوین",
+    "code": "014",
+    "type": "خصوصی",
+    "isActive": true
+  },
+  {
+    "id": 15,
+    "name": "بانک سامان",
+    "code": "015",
+    "type": "خصوصی",
+    "isActive": true
+  },
+  {
+    "id": 16,
+    "name": "بانک سینا",
+    "code": "016",
+    "type": "خصوصی",
+    "isActive": true
+  },
+  {
+    "id": 17,
+    "name": "بانک سرمایه",
+    "code": "017",
+    "type": "خصوصی",
+    "isActive": true
+  },
+  {
+    "id": 18,
+    "name": "بانک شهر",
+    "code": "018",
+    "type": "خصوصی",
+    "isActive": true
+  },
+  {
+    "id": 19,
+    "name": "بانک ایران زمین",
+    "code": "019",
+    "type": "خصوصی",
+    "isActive": true
+  },
+  {
+    "id": 20,
+    "name": "بانک آینده",
+    "code": "020",
+    "type": "خصوصی",
+    "isActive": true
+  },
+  {
+    "id": 21,
+    "name": "بانک قرض‌الحسنه مهر ایران",
+    "code": "021",
+    "type": "خصوصی",
+    "isActive": true
+  },
+  {
+    "id": 22,
+    "name": "بانک قرض‌الحسنه رسالت",
+    "code": "022",
+    "type": "خصوصی",
+    "isActive": true
+  }
+]
