@@ -27,6 +27,6 @@ Features
 
 ### install package
 
-```Install-Package CsharpGalexy.LibraryExtention ```
+```Install-Package CsharpGalaxy.LibraryExtension ```
 
 
