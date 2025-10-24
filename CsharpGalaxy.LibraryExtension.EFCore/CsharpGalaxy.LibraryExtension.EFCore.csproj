@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+	<ItemGroup>
+	  <PackageReference Include="Mapster" Version="7.4.0" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.10" />
+	</ItemGroup>
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<LangVersion>latest</LangVersion>
+		<OutputType>Library</OutputType>
+		<!--<PackAsTool>true</PackAsTool>-->
+		<Version>1.0.0</Version>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<PackageProjectUrl>https://github.com/CsharpGalaxy/ExtensionsTools</PackageProjectUrl>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<RepositoryUrl>https://github.com/CsharpGalaxy/ExtensionsTools</RepositoryUrl>
+		<!--<PackAsTool>True</PackAsTool>-->
+		<IncludeSymbols>True</IncludeSymbols>
+		<PackageLicenseFile>LICENSE</PackageLicenseFile>
+		<Authors>CsharpGalexy</Authors>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\LICENSE">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+		<None Include="..\README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+</Project>
