@@ -824,6 +824,19 @@ public static bool ArraySearch(this ArrayList lista, string value)
     /// <param name="value">The input string.</param>
     /// <returns>True if the string is null, empty, or whitespace; otherwise, false.</returns>
     public static bool IsNullOrWhiteSpaceEx(this string value) => string.IsNullOrWhiteSpace(value);
+    public static List<int> ToIntList(this string input)
+    {
+        return input
+            .Split(',', StringSplitOptions.RemoveEmptyEntries)
+            .Select(s => int.TryParse(s.Trim(), out var n) ? n : throw new FormatException($"Invalid number: {s}"))
+            .ToList();
+    }
+    public static string RemoveSlashes(this string input)
+    {
+        if (string.IsNullOrEmpty(input))
+            return string.Empty;
 
+        return input.Replace("/", "").Replace("\\", "");
+    }
 }
 
