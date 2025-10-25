@@ -461,8 +461,64 @@ public static partial class ValidateFiles
 
 
 }
+
+public class ResultFileMessage
+{
+    public Guid Id { get; set; } = Guid.NewGuid();
+
+    /// <summary>
+    /// مسیر نسبی فایل آپلود شده
+    /// </summary>
+    public string FilePath { get; set; } = string.Empty;
+
+    /// <summary>
+    /// نام اصلی فایل هنگام آپلود
+    /// </summary>
+    public string OriginalFileName { get; set; } = string.Empty;
+
+    /// <summary>
+    /// زمان آپلود فایل
+    /// </summary>
+    public DateTime UploadedAt { get; set; }
+
+    /// <summary>
+    /// نوع فایل (مثلاً Image, Pdf, Docx)
+    /// </summary>
+    public string FileType { get; set; } = string.Empty;
+
+    /// <summary>
+    /// شناسه پیام مشاوره‌ای که این فایل به آن تعلق دارد
+    /// </summary>
+    public Guid MessageId { get; set; }
+}
+
 public static class FileHelper
 {
+
+    public static async Task<ResultFileMessage?> UploadStreamAsync(Stream stream, string originalFileName, string folderPath, string folderType)
+    {
+        if (stream == null || stream.Length == 0 || string.IsNullOrWhiteSpace(originalFileName))
+            return null;
+
+        if (!Directory.Exists(folderPath))
+            Directory.CreateDirectory(folderPath);
+
+        string fileName = $"{Guid.NewGuid()}{Path.GetExtension(originalFileName)}";
+        string fullPath = Path.Combine(folderPath, fileName);
+
+        using var fileStream = new FileStream(fullPath, FileMode.Create);
+        await stream.CopyToAsync(fileStream);
+
+        string relativePath = $"/Uploads/{folderType}/{fileName}";
+
+        return new ResultFileMessage
+        {
+            FilePath = relativePath,
+            OriginalFileName = originalFileName,
+            UploadedAt = DateTime.Now,
+            FileType = originalFileName.GetFileType().ToString()
+        };
+    }
 
     public static async Task<UploadFileResult> UploadFileAsync(Stream stream, string fileName, FileType type, string path, bool generateNewFileName = false)
     {
@@ -535,20 +591,37 @@ public static class FileHelper
     /// <param name="path"></param>
     public static void DeleteFile(string path)
     {
-      
+
     }
-    public static ValidateFiles.FileType GetFileTypeFromExtension(this string extension)
+    public static FileType GetFileType(this string fileName)
+    {
+        var extension = Path.GetExtension(fileName)?.ToLowerInvariant();
+
+        return extension switch
+        {
+            ".jpg" or ".jpeg" or ".png" or ".gif" or ".bmp" => FileType.Image,
+            ".zip" or ".rar" => FileType.ZIP,
+            ".pdf" => FileType.PDF,
+            ".doc" or ".docx" => FileType.Word,
+            ".xls" or ".xlsx" => FileType.Excel,
+            ".txt" => FileType.Text,
+            ".mp3" or ".wav" => FileType.AUDIO,
+            ".mp4" or ".avi" or ".mov" => FileType.Video,
+            _ => FileType.Unknown
+        };
+    }
+    public static FileType GetFileTypeFromExtension(this string extension)
     {
         return extension switch
         {
-            ".jpg" or ".jpeg" or ".png" or ".gif" or ".bmp" => ValidateFiles.FileType.Image,
-            ".wmv" or ".mpg" or ".mpeg" or ".mp4" or ".avi" or ".flv" => ValidateFiles.FileType.Video,
-            ".pdf" => ValidateFiles.FileType.PDF,
-            ".doc" => ValidateFiles.FileType.DOC,
-            ".docx" => ValidateFiles.FileType.DOCX,
-            ".zip" => ValidateFiles.FileType.ZIP,
-            ".rar" => ValidateFiles.FileType.RAR,
-            _ => ValidateFiles.FileType.Text // نامعتبر یا پشتیبانی نشده
+            ".jpg" or ".jpeg" or ".png" or ".gif" or ".bmp" => FileType.Image,
+            ".wmv" or ".mpg" or ".mpeg" or ".mp4" or ".avi" or ".flv" => FileType.Video,
+            ".pdf" => FileType.PDF,
+            ".doc" => FileType.DOC,
+            ".docx" => FileType.DOCX,
+            ".zip" => FileType.ZIP,
+            ".rar" => FileType.RAR,
+            _ => FileType.Text // نامعتبر یا پشتیبانی نشده
         };
     }
 
