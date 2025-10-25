@@ -1,4 +1,4 @@
-﻿namespace CsharpGalexy.LibraryExtention.Helpers.Collections;
+﻿
 
 
 
@@ -436,4 +436,27 @@ public static class ListHelper
 
     // ⚠️ نکته: برای thread-safety بهتر است از ConcurrentBag یا lock استفاده کنید.
     // ولی برای سازگاری با IList<T>، این روش ساده‌تر است.
+
+    public static string ToCommaSeparated(this List<int> list)
+    {
+        return string.Join(",", list);
+    }
+    public static List<string> ToStringList(this List<int> list)
+    {
+        return list.Select(i => i.ToString()).ToList();
+    }
+    public static List<int> ToIntListSafe(this List<string> list)
+    {
+        return list
+            .Where(s => int.TryParse(s, out _))
+            .Select(s => int.Parse(s))
+            .ToList();
+    }
+
+    public static List<string> ToFormattedStringList(this List<int> list, Func<int, string> formatter)
+    {
+        return list.Select(formatter).ToList();
+    }
+
+
 }
