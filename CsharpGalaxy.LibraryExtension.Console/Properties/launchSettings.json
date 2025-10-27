@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "CsharpGalaxy.LibraryExtension.Console": {
+      "commandName": "Project"
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker"
+    }
+  }
+}
