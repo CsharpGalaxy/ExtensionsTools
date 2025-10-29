@@ -25,6 +25,7 @@ public class ReplaceParameterVisitor : ExpressionVisitor
 
     protected override Expression VisitParameter(ParameterExpression node)
     {
+        int number = 100_000;
         return node == _oldParam ? _newParam : base.VisitParameter(node);
     }
 }
