@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsharpGalaxy.LibraryExtensi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsharpGalaxy.LibraryExtension.Export", "CsharpGalaxy.LibraryExtension.Export\CsharpGalaxy.LibraryExtension.Export.csproj", "{F02E49B0-90D3-4140-A5B3-F959EB566F94}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsharpGalaxy.LibraryExtension.FakeDataPersian", "CsharpGalaxy.LibraryExtension.FakeDataPersian\CsharpGalaxy.LibraryExtension.FakeDataPersian.csproj", "{2153E360-939F-577B-E552-49A929B04D01}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{F02E49B0-90D3-4140-A5B3-F959EB566F94}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F02E49B0-90D3-4140-A5B3-F959EB566F94}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F02E49B0-90D3-4140-A5B3-F959EB566F94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2153E360-939F-577B-E552-49A929B04D01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2153E360-939F-577B-E552-49A929B04D01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2153E360-939F-577B-E552-49A929B04D01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2153E360-939F-577B-E552-49A929B04D01}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,6 +68,7 @@ Global
 		{62D3CD60-850F-4573-8B7B-4D85C09EE8EF} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{9B7712C3-EA52-413C-A9DC-D6DFD9593D8C} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{F02E49B0-90D3-4140-A5B3-F959EB566F94} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{2153E360-939F-577B-E552-49A929B04D01} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2E119EB1-879C-4CE5-91FE-C49F6B5FB194}

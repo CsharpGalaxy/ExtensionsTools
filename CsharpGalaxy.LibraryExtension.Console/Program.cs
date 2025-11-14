@@ -1,19 +1,60 @@
 ﻿// See https://aka.ms/new-console-template for more information
+using CsharpGalaxy.LibraryExtension.FakeDataPersian.Generators;
+using CsharpGalaxy.LibraryExtension.FakeDataPersian.Helpers;
 using CsharpGalexy.LibraryExtention.Helpers.Collections;
 
 Console.WriteLine("Hello, World!");
- List<TestEntity> GetSampleData() => new()
-    {
-        new TestEntity { Id = 1, Name = "سیب", Created = DateTime.Today.AddDays(-1) },
-        new TestEntity { Id = 2, Name = "موز", Created = DateTime.Today },
-        new TestEntity { Id = 3, Name = "انگور", Created = DateTime.Today.AddDays(-2) },
-    };
 
- IQueryable<TestEntity> GetQueryable() => GetSampleData().AsQueryable();
-var result = await GetQueryable().ToPagedList();
-public class TestEntity
-{
-    public int Id { get; set; }
-    public string Name { get; set; } = "";
-    public DateTime Created { get; set; }
-}
+
+// نام‌های تصادفی
+var firstName = PersianNameGenerator.FirstName();
+var fullName = PersianNameGenerator.FullName();
+
+// موبایل معتبر
+var mobile = IranianMobileGenerator.Mobile();
+var isValid = IranianMobileGenerator.IsValidMobile(mobile);
+
+// کد ملی
+var melliCode = IranianNationalCodeGenerator.MelliCode();
+
+// آدرس
+var address = PersianAddressGenerator.FullAddress();
+
+// تاریخ شمسی
+var shamsiDate = PersianDateGenerator.ShamsiDate();
+var age = PersianDateGenerator.Age(18, 60);
+
+// متن
+var email = PersianTextGenerator.Email();
+var username = PersianTextGenerator.Username();
+
+// بانکی
+var sheba = BankingMoneyGenerator.Sheba();
+var cardNumber = BankingMoneyGenerator.CardNumberFormatted();
+
+// شبکه
+var ipv4 = InternetCryptoGenerator.IPv4Private();
+var guid = InternetCryptoGenerator.GuidString();
+
+// تصاویر (Base64)
+var avatarMale = ImageGenerator.MaleAvatarBase64();
+var qrCode = ImageGenerator.SimpleQRCodeBase64("https://example.com");
+var chart = ImageGenerator.SimpleChartBase64(
+    new[] { 10, 20, 15, 25 },
+    new[] { "فروردین", "اردیبهشت", "خرداد", "تیر" }
+);
+
+// داده‌های تجاری
+var company = BusinessDataGenerator.CompanyName();
+var jobTitle = BusinessDataGenerator.JobTitle();
+var invoice = BusinessDataGenerator.InvoiceNumber();
+// مجموعه‌ای
+var names = CollectionHelper.RandomList(
+    () => PersianNameGenerator.FullName(),
+    count: 10
+);
+// داده‌های پزشکی
+var bloodType = HealthMedicalGenerator.BloodType();
+var bmi = HealthMedicalGenerator.CalculateBMI(170, 70);
+var patient = HealthMedicalGenerator.DoctorSpecialty();
+
