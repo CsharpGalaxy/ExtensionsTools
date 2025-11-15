@@ -23,7 +23,7 @@ namespace CsharpGalexy.LibraryExtention.Helpers.Mony
         private static Task<List<CurrencyInfo>>? _currencyTask;
 
         private static string JsonFileUrl =>
-            "https://raw.githubusercontent.com/CsharpGalaxy/ExtensionsTools/refs/heads/main/CsharpGalaxy.LibraryExtension.Data/Iran/Provinces/country-dial-codes.json\r\ncurrency-codes.json";
+            "https://raw.githubusercontent.com/CsharpGalaxy/ExtensionsTools/refs/heads/main/CsharpGalaxy.LibraryExtension.Data/Iran/Provinces/currency-codes.json";
 
         /// <summary>
         /// بارگذاری اولیه و کش کردن داده‌ها
