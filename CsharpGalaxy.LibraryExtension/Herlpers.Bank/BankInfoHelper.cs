@@ -15,7 +15,7 @@ public static class BankInfoHelper
     private static Task<List<BankInfo>>? _banksTask;
     private static string JsonFileUrl =>
         "https://raw.githubusercontent.com/CsharpGalaxy/ExtensionsTools/refs/heads/main/CsharpGalaxy.LibraryExtension.Data/Iran/Provinces/banks.json";
-
+ 
     public static Task InitializeAsync()
     {
         if (_banksTask == null)
