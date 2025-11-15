@@ -1,3 +1,5 @@
+using CsharpGalaxy.LibraryExtension.FakeDataPersian.Attributes;
+
 namespace CsharpGalaxy.LibraryExtension.FakeDataPersian.Models;
 
 /// <summary>
@@ -6,6 +8,7 @@ namespace CsharpGalaxy.LibraryExtension.FakeDataPersian.Models;
 public class FakeUser
 {
     public string Id { get; set; } = Guid.NewGuid().ToString();
+    [FirstName]
     public string FirstName { get; set; } = "";
     public string LastName { get; set; } = "";
     public string Email { get; set; } = "";
