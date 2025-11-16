@@ -1,5 +1,7 @@
 ﻿using System.Linq.Expressions;
 using System.Reflection;
+using CsharpGalaxy.LibraryExtension.FakeDataPersian.Attributes;
+using CsharpGalaxy.LibraryExtension.FakeDataPersian.Generators;
 
 namespace CsharpGalaxy.LibraryExtension.FakeDataPersian.Abstracts;
 
@@ -9,6 +11,8 @@ namespace CsharpGalaxy.LibraryExtension.FakeDataPersian.Abstracts;
 public class FakeBuilder<T> where T : new()
 {
     private readonly Dictionary<string, Func<object>> _rules = new();
+    private readonly Dictionary<string, (Type, Delegate)> _foreignKeyRules = new();
+    private readonly Random _random = new();
 
     /// <summary>
     /// قانون تولید برای یک Property را تعریف می‌کند
@@ -17,6 +21,19 @@ public class FakeBuilder<T> where T : new()
     {
         var propName = GetPropertyName(property);
         _rules[propName] = generator;
+        _foreignKeyRules.Remove(propName);
+        return this;
+    }
+
+    /// <summary>
+    /// قانون تولید برای یک کلید خارجی را تعریف می‌کند
+    /// </summary>
+    public FakeBuilder<T> RuleForForeignKey<TRelated>(Expression<Func<T, TRelated>> property, Func<TRelated> generator) 
+        where TRelated : class, new()
+    {
+        var propName = GetPropertyName(property);
+        _rules.Remove(propName);
+        _foreignKeyRules[propName] = (typeof(TRelated), new Func<object>(() => generator()));
         return this;
     }
 
@@ -94,19 +111,103 @@ public class FakeBuilder<T> where T : new()
     }
 
     /// <summary>
+    /// قانون تولید برای تمام Enum properties را تعریف می‌کند
+    /// </summary>
+    public FakeBuilder<T> RuleForAllEnums(Func<object> generator)
+    {
+        var props = typeof(T).GetProperties().Where(p => p.PropertyType.IsEnum);
+        foreach (var prop in props)
+        {
+            _rules[prop.Name] = generator;
+        }
+        return this;
+    }
+
+    /// <summary>
+    /// قانون تولید برای یک Enum property را تعریف می‌کند (نوع-آگاه)
+    /// </summary>
+    public FakeBuilder<T> RuleForEnum<TEnum>(Expression<Func<T, TEnum>> property, Func<TEnum> generator) 
+        where TEnum : Enum
+    {
+        var propName = GetPropertyName(property);
+        _rules[propName] = () => generator();
+        return this;
+    }
+
+    /// <summary>
     /// یک نمونه تکی را ایجاد می‌کند
     /// </summary>
     public T Build()
     {
         var entity = new T();
-        foreach (var rule in _rules)
+        var properties = typeof(T).GetProperties();
+
+        foreach (var prop in properties)
         {
-            var prop = typeof(T).GetProperty(rule.Key);
-            if (prop != null && prop.CanWrite)
+            if (!prop.CanWrite)
+                continue;
+
+            // بررسی Ignore Attribute
+            if (prop.GetCustomAttribute<IgnoreAttribute>() != null)
+                continue;
+
+            // بررسی Constant Attribute
+            var constantAttr = prop.GetCustomAttribute<ConstantAttribute>();
+            if (constantAttr != null)
             {
-                prop.SetValue(entity, rule.Value());
+                prop.SetValue(entity, constantAttr.Value);
+                continue;
+            }
+
+            // بررسی Enum Attribute
+            var enumAttr = prop.GetCustomAttribute<EnumAttribute>();
+            if (enumAttr != null && !_rules.ContainsKey(prop.Name))
+            {
+                if (enumAttr.AllowedValues != null && enumAttr.AllowedValues.Length > 0)
+                {
+                    var randomIndex = _random.Next(enumAttr.AllowedValues.Length);
+                    prop.SetValue(entity, enumAttr.AllowedValues[randomIndex]);
+                }
+                else
+                {
+                    prop.SetValue(entity, EnumGenerator.GetRandomEnumValue(enumAttr.EnumType));
+                }
+                continue;
+            }
+
+            // اگر property نوع Enum است
+            if (prop.PropertyType.IsEnum && !_rules.ContainsKey(prop.Name))
+            {
+                prop.SetValue(entity, EnumGenerator.GetRandomEnumValue(prop.PropertyType));
+                continue;
+            }
+
+            // بررسی ForeignKey Attribute
+            var foreignKeyAttr = prop.GetCustomAttribute<ForeignKeyAttribute>();
+            
+            // اگر قانون کلید خارجی وجود دارد
+            if (_foreignKeyRules.TryGetValue(prop.Name, out var fkRule))
+            {
+                // اگر کلید خارجی اختیاری است، احتمال null
+                if (foreignKeyAttr?.IsOptional == true)
+                {
+                    int probability = foreignKeyAttr.NullProbability;
+                    if (_random.Next(0, 100) < probability)
+                    {
+                        prop.SetValue(entity, null);
+                        continue;
+                    }
+                }
+                var value = fkRule.Item2.DynamicInvoke();
+                prop.SetValue(entity, value);
+            }
+            // اگر قانون شخصی وجود دارد
+            else if (_rules.TryGetValue(prop.Name, out var rule))
+            {
+                prop.SetValue(entity, rule());
             }
         }
+
         return entity;
     }
 

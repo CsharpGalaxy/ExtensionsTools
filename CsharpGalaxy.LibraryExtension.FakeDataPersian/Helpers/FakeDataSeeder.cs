@@ -51,6 +51,14 @@ public static class FakeDataSeeder
             if (prop.GetCustomAttribute<IgnoreAttribute>() != null)
                 continue;
 
+            // اگر Constant قرار داشت، از آن استفاده کن
+            var constantAttr = prop.GetCustomAttribute<ConstantAttribute>();
+            if (constantAttr != null)
+            {
+                prop.SetValue(entity, constantAttr.Value);
+                continue;
+            }
+
             // بررسی Attribute‌های مختلف
             if (prop.GetCustomAttribute<FirstNameAttribute>() != null)
                 prop.SetValue(entity, PersianNameGenerator.FirstName());
@@ -112,7 +120,26 @@ public static class FakeDataSeeder
             else if (prop.GetCustomAttribute<StatusAttribute>() != null)
                 prop.SetValue(entity, BusinessDataGenerator.ProjectStatus());
 
+            else if (prop.GetCustomAttribute<EnumAttribute>() != null)
+            {
+                var enumAttr = prop.GetCustomAttribute<EnumAttribute>();
+                if (enumAttr.AllowedValues != null && enumAttr.AllowedValues.Length > 0)
+                {
+                    // اگر مقادیر محدود داشت، از میان آن‌ها انتخاب کن
+                    var randomIndex = random.Next(enumAttr.AllowedValues.Length);
+                    prop.SetValue(entity, enumAttr.AllowedValues[randomIndex]);
+                }
+                else
+                {
+                    // تمام مقادیر enum را استفاده کن
+                    prop.SetValue(entity, EnumGenerator.GetRandomEnumValue(enumAttr.EnumType));
+                }
+            }
+
             // بررسی Type‌های مختلف
+            else if (prop.PropertyType.IsEnum)
+                prop.SetValue(entity, EnumGenerator.GetRandomEnumValue(prop.PropertyType));
+
             else if (prop.PropertyType == typeof(Guid))
                 prop.SetValue(entity, System.Guid.NewGuid());
 
