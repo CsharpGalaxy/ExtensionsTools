@@ -189,6 +189,13 @@
   - `bool` / `bool?` - مقدار بولی تصادفی
   - `DateTime` / `DateTime?` - تاریخ تصادفی
   - `string` - کلمهٔ فارسی تصادفی
+- **Attributes جدید تاریخ شمسی:**
+  - `[PersianDate]` - تاریخ شمسی کامل
+  - `[PersianDayName]` - نام روز فارسی
+  - `[PersianMonthName]` - نام ماه فارسی
+  - `[PersianYear]` - سال شمسی (بازهٔ پیش‌فرض: ۱۳۸۰-۱۴۱۰)
+  - `[PersianYear(minYear, maxYear)]` - سال شمسی با بازهٔ سفارشی
+  - `[PersianDateRange(startDate, endDate)]` - تاریخ در بازهٔ مشخص
 
 ### 🏗️ FakeBuilder
 پترن Builder برای تولید داده‌های سفارشی:
@@ -196,6 +203,12 @@
 - `RuleForForeignKey<T>(property, generator)` - قانون برای کلید خارجی
 - `RuleForEnum<T>(property, generator)` - قانون برای enum
 - `RuleForListSelection<T>(property, items)` - انتخاب رندوم از لیست
+- `RuleForPersianDayName<T>(property)` - نام روز فارسی
+- `RuleForPersianMonthName<T>(property)` - نام ماه فارسی
+- `RuleForPersianYear<T>(property, minYear, maxYear)` - سال شمسی
+- `RuleForRandomPersianDate<T>(property)` - تاریخ شمسی کامل
+- `RuleForPersianDateRange<T>(property, startDate, endDate)` - تاریخ در بازهٔ مشخص
+- `RuleForPersianBirthDate<T>(property, age)` - تاریخ تولد شمسی
 - `RuleForAllStrings(generator)` - قانون برای تمام string‌ها
 - `RuleForAllInts(generator)` - قانون برای تمام int‌ها
 - `RuleForAllBools(generator)` - قانون برای تمام bool‌ها

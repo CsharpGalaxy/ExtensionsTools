@@ -1,3 +1,5 @@
+using System.Globalization;
+
 namespace CsharpGalaxy.LibraryExtension.FakeDataPersian.Generators;
 
 public static class PersianDateGenerator
@@ -158,56 +160,41 @@ public static class PersianDateGenerator
 
         public PersianDateTime(string shamsiDateString)
         {
-            // فرمت: ۱۴۰۰/۰۱/۰۱
+            // فرمت: ۱۴۰۰/۰۱/۰۱ یا ۱۴۰۰/۰۱/۰۱ ۱۶:۴۵:۲۲
             var parts = shamsiDateString.Split('/');
             if (parts.Length >= 3)
             {
                 Year = int.Parse(parts[0]);
                 Month = int.Parse(parts[1]);
-                Day = int.Parse(parts[2]);
+                var dayAndTime = parts[2].Split(' ');
+                Day = int.Parse(dayAndTime[0]);
+                
+                if (dayAndTime.Length > 1)
+                {
+                    var timeParts = dayAndTime[1].Split(':');
+                    Hour = int.Parse(timeParts[0]);
+                    Minute = int.Parse(timeParts[1]);
+                    Second = int.Parse(timeParts[2]);
+                }
+                else
+                {
+                    Hour = 0;
+                    Minute = 0;
+                    Second = 0;
+                }
             }
         }
 
         private void ConvertFromGregorian(DateTime gregorianDate)
         {
+            // Simplified and more reliable Gregorian to Jalali conversion
             int gy = gregorianDate.Year;
             int gm = gregorianDate.Month;
-            int gd = gregorianDate.Day;
-
-            int g_d_n = 365 * gy + ((gy + 3) / 4) - ((gy + 99) / 100) + ((gy + 399) / 400);
-            for (int i = 0; i < gm; ++i)
-                g_d_n += DateTime.DaysInMonth(gy, i + 1);
-
-            int j_d_n = g_d_n - 79;
-            int j_np = j_d_n / 12053;
-            j_d_n %= 12053;
-
-            int jy = 979 + 2820 * j_np + 33 * (j_d_n / 1029983);
-            j_d_n %= 1029983;
-
-            if (j_d_n >= 366)
-            {
-                jy += (j_d_n - 1) / 365;
-                j_d_n = (j_d_n - 1) % 365;
-            }
-
-            int jm = 1;
-            int jd = 1;
-
-            if (j_d_n < 186)
-            {
-                jm = 1 + j_d_n / 31;
-                jd = 1 + (j_d_n % 31);
-            }
-            else
-            {
-                jm = 7 + (j_d_n - 186) / 30;
-                jd = 1 + ((j_d_n - 186) % 30);
-            }
-
-            Year = jy;
-            Month = jm;
-            Day = jd;
+            int dayOfMonth = gregorianDate.Day;
+            var pc = new PersianCalendar();
+            Year = pc.GetYear(gregorianDate);
+            Month = pc.GetMonth(gregorianDate);
+            Day = pc.GetDayOfMonth(gregorianDate);
             Hour = gregorianDate.Hour;
             Minute = gregorianDate.Minute;
             Second = gregorianDate.Second;
@@ -434,13 +421,47 @@ public static class PersianDateGenerator
     /// </summary>
     public static PersianDateTime GetRandomDateBetween(string startShamsiDate, string endShamsiDate)
     {
-        var start = new PersianDateTime(startShamsiDate).ToDateTime();
-        var end = new PersianDateTime(endShamsiDate).ToDateTime();
+        // Parse input dates
+        var startParts = startShamsiDate.Split('/');
+        var endParts = endShamsiDate.Split('/');
         
-        TimeSpan timeSpan = end - start;
-        int randomDays = Random.Next((int)timeSpan.TotalDays);
+        int startYear = int.Parse(startParts[0]);
+        int startMonth = int.Parse(startParts[1]);
+        int startDay = int.Parse(startParts[2]);
         
-        return new PersianDateTime(start.AddDays(randomDays));
+        int endYear = int.Parse(endParts[0]);
+        int endMonth = int.Parse(endParts[1]);
+        int endDay = int.Parse(endParts[2]);
+        
+        // Generate random year within range
+        int randomYear = Random.Next(startYear, endYear + 1);
+        
+        // Generate random month
+        int randomMonth;
+        if (randomYear == startYear && randomYear == endYear)
+            randomMonth = Random.Next(startMonth, endMonth + 1);
+        else if (randomYear == startYear)
+            randomMonth = Random.Next(startMonth, 13);
+        else if (randomYear == endYear)
+            randomMonth = Random.Next(1, endMonth + 1);
+        else
+            randomMonth = Random.Next(1, 13);
+        
+        // Generate random day
+        int daysInMonth = GetDaysInMonth(randomYear, randomMonth);
+        int randomDay;
+        
+        if (randomYear == startYear && randomMonth == startMonth && randomYear == endYear && randomMonth == endMonth)
+            randomDay = Random.Next(startDay, endDay + 1);
+        else if (randomYear == startYear && randomMonth == startMonth)
+            randomDay = Random.Next(startDay, daysInMonth + 1);
+        else if (randomYear == endYear && randomMonth == endMonth)
+            randomDay = Random.Next(1, endDay + 1);
+        else
+            randomDay = Random.Next(1, daysInMonth + 1);
+        
+        return new PersianDateTime(randomYear, randomMonth, randomDay, 
+            Random.Next(0, 24), Random.Next(0, 60), Random.Next(0, 60));
     }
 
     /// <summary>

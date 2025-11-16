@@ -120,6 +120,28 @@ public static class FakeDataSeeder
             else if (prop.GetCustomAttribute<StatusAttribute>() != null)
                 prop.SetValue(entity, BusinessDataGenerator.ProjectStatus());
 
+            // Persian Date Attributes
+            else if (prop.GetCustomAttribute<PersianDateAttribute>() != null)
+                prop.SetValue(entity, PersianDateGenerator.GetRandomPersianDateTime());
+
+            else if (prop.GetCustomAttribute<PersianDayNameAttribute>() != null)
+                prop.SetValue(entity, PersianDateGenerator.GetDayNameFarsi());
+
+            else if (prop.GetCustomAttribute<PersianMonthNameAttribute>() != null)
+                prop.SetValue(entity, PersianDateGenerator.GetRandomMonthNameFarsi());
+
+            else if (prop.GetCustomAttribute<PersianYearAttribute>() != null)
+            {
+                var yearAttr = prop.GetCustomAttribute<PersianYearAttribute>();
+                prop.SetValue(entity, PersianDateGenerator.GetRandomShamsiYear(yearAttr.MinYear, yearAttr.MaxYear));
+            }
+
+            else if (prop.GetCustomAttribute<PersianDateRangeAttribute>() != null)
+            {
+                var rangeAttr = prop.GetCustomAttribute<PersianDateRangeAttribute>();
+                prop.SetValue(entity, PersianDateGenerator.GetRandomDateBetween(rangeAttr.StartDate, rangeAttr.EndDate));
+            }
+
             else if (prop.GetCustomAttribute<EnumAttribute>() != null)
             {
                 var enumAttr = prop.GetCustomAttribute<EnumAttribute>();
