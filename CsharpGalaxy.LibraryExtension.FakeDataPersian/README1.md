@@ -46,6 +46,23 @@
 - `Age(from, to)` - سن: ۱۸..۶۰
 - `BirthDate(age)` - تاریخ تولد
 
+#### ویژگی های جدید تاریخ شمسی:
+- `GetDayNameFarsi()` - نام روز: شنبه، یکشنبه، ...
+- `GetMonthNameFarsi(month)` - نام ماه: فروردین، اردیبهشت، ...
+- `GetRandomMonthNameFarsi()` - نام ماه تصادفی
+- `GetRandomShamsiYear(min, max)` - سال شمسی تصادفی
+- `GetRandomShamsiMonth()` - ماه شمسی تصادفی (۱-۱۲)
+- `GetRandomShamsiDay()` - روز شمسی تصادفی (۱-۳۰)
+- `GetDaysInMonth(year, month)` - تعداد روزهای ماه
+- `GetDaysInYear(year)` - تعداد روزهای سال (۳۶۵ یا ۳۶۶)
+- `IsLeapYear(year)` - بررسی سال کبیسه
+- `GetDayOfYear(year, month, day)` - روز سال (۱-۳۶۶)
+- `GetWeekOfYear(year, month, day)` - هفتهٔ سال (۱-۵۳)
+- `GetRandomPersianDateTime()` - تاریخ شمسی کامل
+- `GetTodayPersian()` - امروز به شمسی
+- `GetYesterdayPersian()` - دیروز به شمسی
+- `GetTomorrowPersian()` - فردا به شمسی
+
 ### 📝 PersianTextGenerator
 متن‌های فارسی:
 - `Sentence()` - جملهٔ تصادفی
@@ -1004,6 +1021,8 @@ Console.WriteLine($"Random GUID: {InternetCryptoGenerator.GuidString()}");
 - Nested objects
 - Large lists
 - RuleForEnum و RuleForForeignKey
+- **روز و ماه به فارسی** ⭐
+- **تاریخ شمسی پیشرفته** ⭐
 
 ✅ **Features:**
 - مقادیر ثابت (Currency, TaxRate)
@@ -1012,6 +1031,125 @@ Console.WriteLine($"Random GUID: {InternetCryptoGenerator.GuidString()}");
 - کلیدهای خارجی (Category, Product)
 - کلیدهای اختیاری با NullProbability
 - نادیده گرفتن (Ignore)
+- **نام روزهای هفته فارسی**
+- **نام ماه‌های شمسی فارسی**
+- **محاسبات تاریخ شمسی (کبیسه، روز سال، هفتهٔ سال)**
+
+## بخش جدید: Persian Date Features
+
+### نمونه استفاده از روز و ماه فارسی:
+
+```csharp
+using CsharpGalaxy.LibraryExtension.FakeDataPersian.Generators;
+using CsharpGalaxy.LibraryExtension.FakeDataPersian.Abstracts;
+
+// ۱. نام روز فارسی
+var dayName = PersianDateGenerator.GetDayNameFarsi();
+Console.WriteLine($"روز: {dayName}");  // شنبه، یکشنبه، دوشنبه، ...
+
+// ۲. نام ماه فارسی
+var monthName = PersianDateGenerator.GetMonthNameFarsi(1);  // فروردین
+Console.WriteLine($"ماه: {monthName}");
+
+var randomMonth = PersianDateGenerator.GetRandomMonthNameFarsi();
+Console.WriteLine($"ماه تصادفی: {randomMonth}");
+
+// ۳. سال شمسی تصادفی
+var year = PersianDateGenerator.GetRandomShamsiYear();
+Console.WriteLine($"سال: {year}");  // ۱۳۸۰ - ۱۴۱۰
+
+var customYear = PersianDateGenerator.GetRandomShamsiYear(1400, 1405);
+Console.WriteLine($"سال سفارشی: {customYear}");
+
+// ۴. محاسبات تاریخ شمسی
+var daysInMonth = PersianDateGenerator.GetDaysInMonth(1400, 1);
+Console.WriteLine($"روزهای فروردین: {daysInMonth}");  // ۳۱
+
+var daysInYear = PersianDateGenerator.GetDaysInYear(1400);
+Console.WriteLine($"روزهای ۱۴۰۰: {daysInYear}");  // ۳۶۵ یا ۳۶۶
+
+bool isLeap = PersianDateGenerator.IsLeapYear(1403);
+Console.WriteLine($"۱۴۰۳ کبیسه است؟ {isLeap}");
+
+// ۵. روز سال و هفتهٔ سال
+var dayOfYear = PersianDateGenerator.GetDayOfYear(1400, 1, 1);
+Console.WriteLine($"روز ۱۴۰۰/۱/۱: {dayOfYear}");  // ۱
+
+var weekOfYear = PersianDateGenerator.GetWeekOfYear(1400, 1, 1);
+Console.WriteLine($"هفتهٔ ۱۴۰۰/۱/۱: {weekOfYear}");  // ۱
+
+// ۶. تاریخ شمسی به صورت کامل
+var persianDate = PersianDateGenerator.GetRandomPersianDateTime();
+Console.WriteLine($"تاریخ شمسی: {persianDate}");
+Console.WriteLine($"  سال: {persianDate.Year}");
+Console.WriteLine($"  ماه: {persianDate.Month}");
+Console.WriteLine($"  روز: {persianDate.Day}");
+
+// ۷. تاریخ‌های خاص
+var today = PersianDateGenerator.GetTodayPersian();
+var yesterday = PersianDateGenerator.GetYesterdayPersian();
+var tomorrow = PersianDateGenerator.GetTomorrowPersian();
+
+Console.WriteLine($"امروز: {today}");
+Console.WriteLine($"دیروز: {yesterday}");
+Console.WriteLine($"فردا: {tomorrow}");
+```
+
+### استفاده با FakeBuilder:
+
+```csharp
+class Article
+{
+    public int Id { get; set; }
+    public string Title { get; set; }
+    public string PublishedDay { get; set; }
+    public string PublishedMonth { get; set; }
+    public int PublishedYear { get; set; }
+}
+
+// استفاده PersianDate در FakeBuilder
+var article = new FakeBuilder<Article>()
+    .RuleFor(x => x.Id, () => Random.Shared.Next(1, 1000))
+    .RuleFor(x => x.Title, () => $"مقاله {Random.Shared.Next(100)}")
+    .RuleForPersianDayName(x => x.PublishedDay)
+    .RuleForPersianMonthName(x => x.PublishedMonth)
+    .RuleForPersianYear(x => x.PublishedYear, 1400, 1410)
+    .Build();
+
+Console.WriteLine($"عنوان: {article.Title}");
+Console.WriteLine($"تاریخ: {article.PublishedDay} {article.PublishedMonth} {article.PublishedYear}");
+```
+
+### Attributes برای تاریخ شمسی:
+
+```csharp
+class BlogPost
+{
+    public int Id { get; set; }
+    
+    [PersianDayName]
+    public string DayName { get; set; }
+    
+    [PersianMonthName]
+    public string MonthName { get; set; }
+    
+    [PersianYear]
+    public int Year { get; set; }
+    
+    [PersianYear(1400, 1405)]
+    public int YearInRange { get; set; }
+    
+    [PersianDateRange("1400/01/01", "1410/12/29")]
+    public PersianDateGenerator.PersianDateTime PublishedDate { get; set; }
+}
+
+// استفاده Seeder
+var post = FakeDataSeeder.Seed<BlogPost>();
+Console.WriteLine($"روز: {post.DayName}");
+Console.WriteLine($"ماه: {post.MonthName}");
+Console.WriteLine($"سال: {post.Year}");
+Console.WriteLine($"تاریخ انتشار: {post.PublishedDate}");
+```
 
 ## نیازمندی‌ها
 
