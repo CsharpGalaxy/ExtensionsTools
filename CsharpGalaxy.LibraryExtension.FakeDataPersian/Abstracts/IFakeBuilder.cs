@@ -135,6 +135,33 @@ public class FakeBuilder<T> where T : new()
     }
 
     /// <summary>
+    /// قانون تولید برای انتخاب رندوم از یک لیست
+    /// </summary>
+    public FakeBuilder<T> RuleForListSelection<TProperty>(Expression<Func<T, TProperty>> property, params TProperty[] items)
+    {
+        var propName = GetPropertyName(property);
+        if (items == null || items.Length == 0)
+            throw new ArgumentException("Items list cannot be empty");
+        
+        _rules[propName] = () => items[_random.Next(items.Length)];
+        return this;
+    }
+
+    /// <summary>
+    /// قانون تولید برای انتخاب رندوم از یک لیست (IEnumerable)
+    /// </summary>
+    public FakeBuilder<T> RuleForListSelection<TProperty>(Expression<Func<T, TProperty>> property, IEnumerable<TProperty> items)
+    {
+        var propName = GetPropertyName(property);
+        var itemArray = items?.ToArray() ?? throw new ArgumentException("Items list cannot be null or empty");
+        if (itemArray.Length == 0)
+            throw new ArgumentException("Items list cannot be empty");
+        
+        _rules[propName] = () => itemArray[_random.Next(itemArray.Length)];
+        return this;
+    }
+
+    /// <summary>
     /// یک نمونه تکی را ایجاد می‌کند
     /// </summary>
     public T Build()

@@ -178,6 +178,7 @@
 - `RuleFor<T>(property, generator)` - قانون برای یک property
 - `RuleForForeignKey<T>(property, generator)` - قانون برای کلید خارجی
 - `RuleForEnum<T>(property, generator)` - قانون برای enum
+- `RuleForListSelection<T>(property, items)` - انتخاب رندوم از لیست
 - `RuleForAllStrings(generator)` - قانون برای تمام string‌ها
 - `RuleForAllInts(generator)` - قانون برای تمام int‌ها
 - `RuleForAllBools(generator)` - قانون برای تمام bool‌ها
@@ -711,6 +712,64 @@ var items = new FakeBuilder<Product>()
     .RuleFor(x => x.Name, () => PersianTextGenerator.Word())
     .RuleForAllEnums(() => EnumGenerator.GetRandomEnumValue(typeof(OrderStatus)))
     .BuildList(10);
+```
+
+### استفاده از RuleForListSelection برای انتخاب رندوم از لیست
+```csharp
+// تعریف مدل
+public class Product
+{
+    public string Id { get; set; }
+    public string Name { get; set; }
+    public string Color { get; set; }
+    public string Size { get; set; }
+    public int Stock { get; set; }
+}
+
+// استفاده: انتخاب رندوم از لیست اپشن‌ها
+var colors = new[] { "قرمز", "آبی", "سبز", "زرد" };
+var sizes = new[] { "S", "M", "L", "XL" };
+var stocks = new[] { 10, 20, 50, 100 };
+
+var product = new FakeBuilder<Product>()
+    .RuleFor(x => x.Id, () => Guid.NewGuid().ToString())
+    .RuleFor(x => x.Name, () => "محصول")
+    .RuleForListSelection(x => x.Color, colors)  // انتخاب رندوم از رنگ‌ها
+    .RuleForListSelection(x => x.Size, sizes)    // انتخاب رندوم از سایز‌ها
+    .RuleForListSelection(x => x.Stock, stocks)  // انتخاب رندوم از موجودی‌ها
+    .Build();
+
+Console.WriteLine($"{product.Name} - {product.Color} ({product.Size})");
+
+// ایجاد لیست - هر محصول یک انتخاب رندوم از لیست دریافت می‌کند
+var products = new FakeBuilder<Product>()
+    .RuleFor(x => x.Id, () => Guid.NewGuid().ToString())
+    .RuleFor(x => x.Name, () => "محصول")
+    .RuleForListSelection(x => x.Color, colors)
+    .RuleForListSelection(x => x.Size, sizes)
+    .BuildList(50);
+
+// هر کدام یک رنگ و سایز تصادفی دارند
+Console.WriteLine($"Created {products.Count} products with random colors and sizes");
+
+// استفاده با IEnumerable
+var statusList = new List<string> { "فعال", "غیرفعال", "معلق" };
+var product2 = new FakeBuilder<Product>()
+    .RuleFor(x => x.Id, () => Guid.NewGuid().ToString())
+    .RuleFor(x => x.Name, () => "محصول")
+    .RuleForListSelection(x => x.Color, statusList)
+    .Build();
+
+// استفاده با متد زنجیری (Chaining)
+var product3 = new FakeBuilder<Product>()
+    .RuleFor(x => x.Id, () => Guid.NewGuid().ToString())
+    .RuleFor(x => x.Name, () => "محصول خاص")
+    .RuleForListSelection(x => x.Color, colors)
+    .RuleFor(x => x.Stock, () => 500)
+    .RuleForListSelection(x => x.Size, sizes)
+    .Build();
+
+Console.WriteLine($"{product3.Name} - Stock: {product3.Stock}");
 ```
 
 ## مثال جامع - استفاده تمام Attributes و Features
