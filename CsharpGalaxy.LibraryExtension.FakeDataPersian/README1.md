@@ -713,6 +713,247 @@ var items = new FakeBuilder<Product>()
     .BuildList(10);
 ```
 
+## مثال جامع - استفاده تمام Attributes و Features
+
+```csharp
+using CsharpGalaxy.LibraryExtension.FakeDataPersian.Abstracts;
+using CsharpGalaxy.LibraryExtension.FakeDataPersian.Attributes;
+using CsharpGalaxy.LibraryExtension.FakeDataPersian.Generators;
+using CsharpGalaxy.LibraryExtension.FakeDataPersian.Helpers;
+
+// ===== تعریف Enums =====
+public enum OrderStatus
+{
+    Pending,
+    Processing,
+    Shipped,
+    Delivered,
+    Cancelled
+}
+
+public enum PaymentMethod
+{
+    CreditCard,
+    BankTransfer,
+    Cash
+}
+
+// ===== تعریف مدل‌های مرتبط =====
+public class Category
+{
+    public string Id { get; set; }
+    public string Name { get; set; }
+}
+
+public class Product
+{
+    [Guid]
+    public string Id { get; set; }
+    
+    [Word]
+    public string Name { get; set; }
+    
+    // مقدار ثابت
+    [Constant("IRR")]
+    public string Currency { get; set; }
+    
+    // مقدار ثابت درصد
+    [Constant(0.09)]
+    public decimal TaxRate { get; set; }
+    
+    // Enum تصادفی
+    [Enum(typeof(OrderStatus))]
+    public OrderStatus Status { get; set; }
+    
+    // نادیده گرفتن
+    [Ignore]
+    public string Notes { get; set; }
+    
+    // کلید خارجی الزامی
+    [ForeignKey(nameof(Category))]
+    public Category Category { get; set; }
+}
+
+public class Order
+{
+    // مقدار ثابت
+    [Constant("ORDER-2024")]
+    public string OrderPrefix { get; set; }
+    
+    [Guid]
+    public string Id { get; set; }
+    
+    [FullName]
+    public string CustomerName { get; set; }
+    
+    [Email]
+    public string CustomerEmail { get; set; }
+    
+    [Mobile]
+    public string CustomerPhone { get; set; }
+    
+    // Enum تصادفی
+    [Enum(typeof(OrderStatus))]
+    public OrderStatus Status { get; set; }
+    
+    // Enum محدود
+    [Enum(typeof(PaymentMethod), PaymentMethod.CreditCard, PaymentMethod.BankTransfer)]
+    public PaymentMethod PaymentMethod { get; set; }
+    
+    [DateTime]
+    public DateTime CreatedDate { get; set; }
+    
+    // کلید خارجی اختیاری با احتمال null ۲۰٪
+    [ForeignKey(nameof(Product), IsOptional = true, NullProbability = 20)]
+    public Product Product { get; set; }
+    
+    // نادیده گرفتن
+    [Ignore]
+    public decimal ManualDiscount { get; set; }
+}
+
+// ===== استفاده کامل =====
+
+// ۱. استفاده با FakeDataSeeder (Attribute-based)
+Console.WriteLine("=== FakeDataSeeder Example ===");
+var order1 = FakeDataSeeder.Seed<Order>();
+Console.WriteLine($"Order: {order1.OrderPrefix}");  // ORDER-2024
+Console.WriteLine($"Customer: {order1.CustomerName}");
+Console.WriteLine($"Email: {order1.CustomerEmail}");
+Console.WriteLine($"Status: {order1.Status}");  // تصادفی
+Console.WriteLine($"Payment: {order1.PaymentMethod}");  // فقط CreditCard یا BankTransfer
+Console.WriteLine($"Product: {order1.Product?.Name ?? "No Product"}");  // ۸۰٪ احتمال
+Console.WriteLine($"Discount: {order1.ManualDiscount}");  // 0 (ignored)
+Console.WriteLine();
+
+// ۲. ایجاد لیست با FakeDataSeeder
+Console.WriteLine("=== FakeDataSeeder List ===");
+var orders = FakeDataSeeder.SeedList<Order>(5);
+Console.WriteLine($"Created {orders.Count} orders");
+foreach (var o in orders)
+{
+    Console.WriteLine($"  - {o.OrderPrefix}: {o.CustomerName} ({o.Status})");
+}
+Console.WriteLine();
+
+// ۳. استفاده با FakeBuilder (Fluent API)
+Console.WriteLine("=== FakeBuilder Example ===");
+var order2 = new FakeBuilder<Order>()
+    .RuleFor(x => x.OrderPrefix, () => "ORDER-2024")
+    .RuleFor(x => x.Id, () => Guid.NewGuid().ToString())
+    .RuleFor(x => x.CustomerName, () => PersianNameGenerator.FullName())
+    .RuleFor(x => x.CustomerEmail, () => PersianTextGenerator.Email())
+    .RuleFor(x => x.CustomerPhone, () => IranianMobileGenerator.Mobile())
+    .RuleForEnum(x => x.Status, () => OrderStatus.Completed)
+    .RuleForEnum(x => x.PaymentMethod, () => PaymentMethod.BankTransfer)
+    .RuleFor(x => x.CreatedDate, () => DateTime.Now.AddDays(-Random.Shared.Next(30)))
+    .RuleForForeignKey(x => x.Product, () => new FakeBuilder<Product>()
+        .RuleFor(p => p.Id, () => Guid.NewGuid().ToString())
+        .RuleFor(p => p.Name, () => $"محصول {Random.Shared.Next(1000, 9999)}")
+        .RuleForForeignKey(p => p.Category, () => new FakeBuilder<Category>()
+            .RuleFor(c => c.Id, () => Guid.NewGuid().ToString())
+            .RuleFor(c => c.Name, () => "الکترونیکس")
+            .Build())
+        .Build())
+    .Build();
+
+Console.WriteLine($"Order: {order2.OrderPrefix}");
+Console.WriteLine($"Customer: {order2.CustomerName}");
+Console.WriteLine($"Product: {order2.Product?.Name}");
+Console.WriteLine($"Category: {order2.Product?.Category?.Name}");
+Console.WriteLine();
+
+// ۴. ایجاد لیست بزرگ با FakeBuilder
+Console.WriteLine("=== FakeBuilder List (1000 items) ===");
+var largeOrders = new FakeBuilder<Order>()
+    .RuleFor(x => x.OrderPrefix, () => "ORDER-2024")
+    .RuleFor(x => x.Id, () => Guid.NewGuid().ToString())
+    .RuleFor(x => x.CustomerName, () => PersianNameGenerator.FullName())
+    .RuleFor(x => x.CustomerEmail, () => PersianTextGenerator.Email())
+    .RuleFor(x => x.CustomerPhone, () => IranianMobileGenerator.Mobile())
+    .RuleForEnum(x => x.Status, () => EnumGenerator.GetRandomValue<OrderStatus>())
+    .RuleForEnum(x => x.PaymentMethod, () => EnumGenerator.GetRandomValue<PaymentMethod>())
+    .RuleFor(x => x.CreatedDate, () => DateTime.Now.AddDays(-Random.Shared.Next(365)))
+    .RuleForForeignKey(x => x.Product, () => new FakeBuilder<Product>()
+        .RuleFor(p => p.Id, () => Guid.NewGuid().ToString())
+        .RuleFor(p => p.Name, () => $"محصول {Random.Shared.Next(1000, 9999)}")
+        .RuleForForeignKey(p => p.Category, () => new FakeBuilder<Category>()
+            .RuleFor(c => c.Id, () => Guid.NewGuid().ToString())
+            .RuleFor(c => c.Name, () => "دسته‌بندی")
+            .Build())
+        .Build())
+    .BuildList(1000);
+
+Console.WriteLine($"Created {largeOrders.Count} orders");
+var withProducts = largeOrders.Count(o => o.Product != null);
+Console.WriteLine($"Orders with products: {withProducts} (expected ~800)");
+Console.WriteLine($"Orders without products: {largeOrders.Count - withProducts} (expected ~200)");
+Console.WriteLine();
+
+// ۵. مقایسه Constant مقادیر در لیست
+Console.WriteLine("=== Constant Values Consistency ===");
+var products = FakeDataSeeder.SeedList<Product>(10);
+var currencies = products.Select(p => p.Currency).Distinct();
+var taxes = products.Select(p => p.TaxRate).Distinct();
+Console.WriteLine($"Unique currencies in 10 products: {currencies.Count()} (expected 1)");
+Console.WriteLine($"Unique tax rates in 10 products: {taxes.Count()} (expected 1)");
+foreach (var p in products.Take(3))
+{
+    Console.WriteLine($"  - Product: {p.Name}, Currency: {p.Currency}, Tax: {p.TaxRate}");
+}
+Console.WriteLine();
+
+// ۶. بررسی Enum محدود
+Console.WriteLine("=== Limited Enum Values ===");
+var limitedOrders = FakeDataSeeder.SeedList<Order>(20);
+var payments = limitedOrders.Select(o => o.PaymentMethod).Distinct();
+Console.WriteLine($"Unique payment methods in 20 orders: {payments.Count()} (expected 2)");
+foreach (var payment in payments)
+{
+    Console.WriteLine($"  - {payment}");
+}
+Console.WriteLine();
+
+// ۷. استفاده Factory برای اشیاء کامل
+Console.WriteLine("=== Factory Pattern ===");
+var factoryUser = FakeDataFactory.CreateFakeUser();
+Console.WriteLine($"User: {factoryUser.FullName}");
+Console.WriteLine($"Email: {factoryUser.Email}");
+Console.WriteLine($"Mobile: {factoryUser.Mobile}");
+Console.WriteLine();
+
+// ۸. Generator مستقیم
+Console.WriteLine("=== Direct Generator Usage ===");
+Console.WriteLine($"Random enum: {EnumGenerator.GetRandomValue<OrderStatus>()}");
+Console.WriteLine($"Random mobile: {IranianMobileGenerator.Mobile()}");
+Console.WriteLine($"Random email: {PersianTextGenerator.Email()}");
+Console.WriteLine($"Random GUID: {InternetCryptoGenerator.GuidString()}");
+```
+
+**خلاصهٔ مثال:**
+
+✅ **FakeDataSeeder:**
+- Attribute-based generation
+- Constant values
+- Enum attributes (محدود و عادی)
+- Ignore properties
+- Foreign keys
+
+✅ **FakeBuilder:**
+- Fluent API
+- Custom rules
+- Nested objects
+- Large lists
+- RuleForEnum و RuleForForeignKey
+
+✅ **Features:**
+- مقادیر ثابت (Currency, TaxRate)
+- Enum تصادفی (OrderStatus)
+- Enum محدود (PaymentMethod)
+- کلیدهای خارجی (Category, Product)
+- کلیدهای اختیاری با NullProbability
+- نادیده گرفتن (Ignore)
+
 ## نیازمندی‌ها
 
 - .NET 8.0+
