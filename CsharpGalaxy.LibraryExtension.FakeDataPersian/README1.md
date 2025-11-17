@@ -1,6 +1,12 @@
 # CsharpGalaxy.LibraryExtension.FakeDataPersian
 
+
 کتابخانهٔ تولید داده‌های تصادفی فارسی برای تست و توسعه
+
+
+### install package
+
+```Install-Package CsharpGalaxy.LibraryExtension.FakeDataPersian ```
 
 ## ویژگی‌ها
 
