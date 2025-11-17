@@ -310,5 +310,20 @@ public static class EnumExtensions
                    .ToDictionary(enumValue => enumValue, enumValue => enumValue.ToString());
     }
 
+    // تبدیل به int
+    public static int ToInt<TEnum>(this TEnum value) where TEnum : Enum
+    {
+        return Convert.ToInt32(value);
+    }
+
+    // تبدیل به string (نام enum)
+    public static string ToStringValue<TEnum>(this TEnum value) where TEnum : Enum
+    {
+        return value.ToString();
+    }
+
+
+
+
     #endregion
 }
