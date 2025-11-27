@@ -137,7 +137,8 @@ public static class BoolExtensions
     /// </summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static string ToStringOnOff(this bool value) => value ? "ON" : "OFF";
-
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static string ToStringOnOffPersian(this bool value) => value ? "فعال" : "غیرفعال";
     /// <summary>
     /// 22. خروجی "Yes"/"No". (toStringYesNo)
     /// </summary>
