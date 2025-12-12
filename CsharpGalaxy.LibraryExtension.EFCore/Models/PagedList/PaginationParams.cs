@@ -4,7 +4,7 @@
     public class PagedListInfo
     {
         private int _pageSize = 100;
-        private int _pageNumber=1;
+        private int _pageNumber = 1;
 
         public int TotalCount { get; set; }
 
@@ -42,6 +42,31 @@
                 }
 
             }
+        }
+
+
+
+        /// <summary>
+        /// پارامترهای جستجو و فیلتر (کلید-مقدار)
+        /// </summary>
+        public Dictionary<string, object> Filters { get; set; } = new();
+
+        /// <summary>
+        /// اضافه کردن یا تغییر یک فیلتر
+        /// </summary>
+        public void AddFilter(string key, object value)
+        {
+            if (string.IsNullOrWhiteSpace(key)) return;
+            Filters[key] = value;
+        }
+
+        /// <summary>
+        /// گرفتن مقدار فیلتر
+        /// </summary>
+        public object GetFilter(string key)
+        {
+            return Filters.TryGetValue(key, out var value) ? value : null;
+
         }
     }
 }

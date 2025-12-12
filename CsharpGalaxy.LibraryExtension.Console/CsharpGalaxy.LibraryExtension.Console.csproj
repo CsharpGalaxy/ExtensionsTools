@@ -15,6 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="..\CsharpGalaxy.LibraryExtension.EFCore\CsharpGalaxy.LibraryExtension.EFCore.csproj" />
     <ProjectReference Include="..\CsharpGalaxy.LibraryExtension.FakeDataPersian\CsharpGalaxy.LibraryExtension.FakeDataPersian.csproj" />
+    <ProjectReference Include="..\CsharpGalaxy.LibraryExtension\CsharpGalaxy.LibraryExtension.csproj" />
   </ItemGroup>
 
 </Project>

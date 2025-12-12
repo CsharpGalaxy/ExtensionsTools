@@ -1,9 +1,25 @@
 ﻿// See https://aka.ms/new-console-template for more information
+using CsharpGalaxy.LibraryExtension.EFCore.Models.PagedList;
+using CsharpGalaxy.LibraryExtension.Extensions.Object;
+using CsharpGalaxy.LibraryExtension.Extensions.Strings;
 using CsharpGalaxy.LibraryExtension.FakeDataPersian.Generators;
 using CsharpGalaxy.LibraryExtension.FakeDataPersian.Helpers;
 using CsharpGalexy.LibraryExtention.Helpers.Collections;
-
-Console.WriteLine("Hello, World!");
+using System.IO;
+var pageInfo = new PagedListInfo
+{
+    PageNumber = 2,
+    PageSize = 20,
+    TotalCount = 150,
+    Filters = new Dictionary<string, object>()
+    {
+        {"Search","abolfazl" },
+        {"locationId","12" },
+    }
+};
+var pageInfo1=pageInfo.GetFilter("Search");
+Console.WriteLine($"Page {pageInfo.PageNumber} of {pageInfo.TotalPages}");
+//Console.WriteLine($"Search: {pageInfo.Filters.Search}, LocationId: {pageInfo.Filters.LocationId}");
 
 
 // نام‌های تصادفی
@@ -58,3 +74,17 @@ var bloodType = HealthMedicalGenerator.BloodType();
 var bmi = HealthMedicalGenerator.CalculateBMI(170, 70);
 var patient = HealthMedicalGenerator.DoctorSpecialty();
 
+public class Person
+{
+    public Address Address { get; set; }
+}
+
+public class Address
+{
+    public City City { get; set; }
+}
+
+public class City
+{
+    public string Street { get; set; }
+}

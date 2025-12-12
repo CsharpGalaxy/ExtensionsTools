@@ -6,5 +6,7 @@ namespace TeamLibrary.API.Shared.PagedList
     {
         public List<T> List { get; set; } = [];
         public PagedListInfo Pagination { get; set; } = new();
+
+        public object TempData { get; set; } = new object();
     }
 }

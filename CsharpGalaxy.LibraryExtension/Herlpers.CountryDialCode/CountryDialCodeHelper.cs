@@ -5,7 +5,7 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace YourNamespace.Helpers
+namespace CsharpGalaxy.LibraryExtension.Herlpers.CountryDialCode
 {
     /// <summary>
     /// مدل نماینده‌ی یک کشور با کد تلفن

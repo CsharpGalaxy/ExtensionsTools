@@ -123,6 +123,21 @@ public static class QueryableExtensions
         };
     }
 
+    //public async Task<bool> IsExistsAsync<TEntity,TProperty>(Expression<Func<TEntity, TProperty>> propertySelector, TProperty value)
+    //{
+    //    // ساختن expression برای مقایسه
+    //    var parameter = Expression.Parameter(typeof(TEntity), "u");
+    //    var body = Expression.Equal(
+    //        Expression.Invoke(propertySelector, parameter),
+    //        Expression.Constant(value, typeof(TProperty))
+    //    );
+
+    //    var lambda = Expression.Lambda<Func<TEntity, bool>>(body, parameter);
+
+    //    return await _dbContext.Users
+    //        .AsNoTracking()
+    //        .AnyAsync(lambda);
+    //}
 
     public static async Task<PagedList<TDest>> ToPagedList<TSource, TDest>
     (this IQueryable<TSource> source, Expression<Func<TSource, TDest>> selector,
@@ -348,7 +363,20 @@ public static class QueryableExtensions
 
 
 
+    /// <summary>
+    /// بر اساس یک فیلد انتخابی، فقط رکوردهای یونیک رو برمی‌گردونه.
+    /// </summary>
+    public static IQueryable<T> DistinctBy<T, TKey>(
+        this IQueryable<T> source,
+        Expression<Func<T, TKey>> keySelector)
+    {
+        if (source == null) throw new ArgumentNullException(nameof(source));
+        if (keySelector == null) throw new ArgumentNullException(nameof(keySelector));
 
+        return source
+            .GroupBy(keySelector)
+            .Select(g => g.First());
+    }
 
 }
 // 📦 مدل تنظیمات برای مرتب‌سازی و صفحه‌بندی

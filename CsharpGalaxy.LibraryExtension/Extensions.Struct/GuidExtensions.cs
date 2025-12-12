@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 using System;
 using System.Text;
+namespace CsharpGalaxy.LibraryExtension.Extensions.Struct;
 
-
-    /// <summary>
-    /// Provides extension methods for the <see cref="Guid"/> structure to enhance functionality and usability.
-    /// </summary>
-    public static class GuidExtensions
+/// <summary>
+/// Provides extension methods for the <see cref="Guid"/> structure to enhance functionality and usability.
+/// </summary>
+public static class GuidExtensions
     {
         /// <summary>
         /// Converts the <see cref="Guid"/> to a shorter, URL-friendly string using Base64 encoding (with URL-safe characters).

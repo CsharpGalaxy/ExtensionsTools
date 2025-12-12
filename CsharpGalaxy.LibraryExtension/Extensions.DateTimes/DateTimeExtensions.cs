@@ -1,5 +1,5 @@
 ﻿
-
+namespace CsharpGalaxy.LibraryExtension.Extensions.DateTimes;
 using System;
 using System.Globalization;
 public enum WeekDay
@@ -39,7 +39,7 @@ public static class DateTimeExtensions
         // یعنی Sunday=1 در System باید بشه Sunday=1 در WeekDay و Saturday=6 باید بشه Saturday=0
 
         // تبدیل از System.DayOfWeek به WeekDay
-        WeekDay today = (WeekDay)(((dayIndex + 1) % 7));
+        WeekDay today = (WeekDay)((dayIndex + 1) % 7);
 
         return today;
     }
@@ -446,7 +446,7 @@ public static class DateTimeExtensions
     /// </summary>
     public static bool IsWeekday(this DateTime dateTime)
     {
-        return !IsWeekend(dateTime);
+        return !dateTime.IsWeekend();
     }
 
     #endregion
@@ -496,7 +496,7 @@ public static class DateTimeExtensions
     /// <param name="date">The date to format</param>
     /// <returns>Formatted date string</returns>
     public static string ToSystemDatePattern(this DateTime date)
-        => date.ToString(System.Globalization.DateTimeFormatInfo.CurrentInfo?.ShortDatePattern);
+        => date.ToString(DateTimeFormatInfo.CurrentInfo?.ShortDatePattern);
 
     #endregion
 

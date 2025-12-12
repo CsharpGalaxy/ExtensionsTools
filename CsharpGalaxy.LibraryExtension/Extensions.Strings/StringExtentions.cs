@@ -1,5 +1,4 @@
-﻿
-using CsharpGalexy.LibraryExtention.Models;
+﻿using CsharpGalexy.LibraryExtention.Models;
 
 using System;
 using System.Collections;
@@ -11,7 +10,7 @@ using System.Text.RegularExpressions;
 
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
-
+namespace CsharpGalaxy.LibraryExtension.Extensions.Strings;
 /// <summary>
 /// Powerful extension methods for string
 /// </summary>
@@ -255,7 +254,7 @@ public static class StringExtensions
             sum += int.Parse(value[i].ToString()) * (10 - i);
 
         var remainder = sum % 11;
-        return (remainder < 2 && check == remainder) || (remainder >= 2 && check == 11 - remainder);
+        return remainder < 2 && check == remainder || remainder >= 2 && check == 11 - remainder;
     }
 
     ///// <summary>
@@ -837,6 +836,26 @@ public static bool ArraySearch(this ArrayList lista, string value)
             return string.Empty;
 
         return input.Replace("/", "").Replace("\\", "");
+    }
+
+    /// <summary>
+    /// Joins a sequence of strings with the specified separator.
+    /// کارایی بالا چون از string.Join داخلی استفاده می‌کنه.
+    /// </summary>
+    public static string JoinWith(this IEnumerable<string> source, string separator)
+    {
+        if (source == null) throw new ArgumentNullException(nameof(source));
+        return string.Join(separator, source);
+    }
+
+    /// <summary>
+    /// Joins a sequence of objects by projecting them to string.
+    /// مناسب برای لیست‌هایی که نوعشان غیر از string است.
+    /// </summary>
+    public static string JoinWith<T>(this IEnumerable<T> source, string separator)
+    {
+        if (source == null) throw new ArgumentNullException(nameof(source));
+        return string.Join(separator, source);
     }
 }
 

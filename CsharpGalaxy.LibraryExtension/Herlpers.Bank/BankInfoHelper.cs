@@ -1,5 +1,5 @@
 ﻿using System.Text.Json;
-
+namespace CsharpGalexy.LibraryExtention.Helpers.Bank;
 
 public class BankInfo
 {
@@ -9,6 +9,7 @@ public class BankInfo
     public string Type { get; set; } = string.Empty; // دولتی یا خصوصی
     public bool IsActive { get; set; }
 }
+
 
 public static class BankInfoHelper
 {

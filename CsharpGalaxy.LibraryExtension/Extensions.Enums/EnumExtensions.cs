@@ -1,12 +1,11 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
 
-
+namespace CsharpGalaxy.LibraryExtension.Extensions.Enums;
 
 /// <summary>
 /// Extension methods for enums
@@ -98,9 +97,9 @@ public static class EnumExtensions
     public static T ToEnum<T>(this string value, bool ignoreCase = true) where T : struct, IConvertible
     {
         if (string.IsNullOrWhiteSpace(value))
-            return default(T);
+            return default;
 
-        return Enum.TryParse(value, ignoreCase, out T result) ? result : default(T);
+        return Enum.TryParse(value, ignoreCase, out T result) ? result : default;
     }
 
     /// <summary>

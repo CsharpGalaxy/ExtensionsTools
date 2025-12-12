@@ -501,7 +501,17 @@ public static class IntHelper
     {
         return int.TryParse(s, out int result) ? result : defaultValue;
     }
+    /// <summary>
+    /// اگر مقدار نال بود، مقدار پیش‌فرض برمی‌گرداند.
+    /// </summary>
+    public static int GetValueOrZero(this int? value)
+        => value ?? 0;
 
+    /// <summary>
+    /// نسخه جنریک برای هر نوع Nullable
+    /// </summary>
+    public static T GetValueOrDefault<T>(this T? value, T defaultValue = default) where T : struct
+        => value ?? defaultValue;
     /// <summary>
     /// 31. پارس رشته به Integer یا null در صورت خطا. (parseIntOrNull)
     /// </summary>

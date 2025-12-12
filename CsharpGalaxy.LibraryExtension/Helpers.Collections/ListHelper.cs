@@ -1,26 +1,28 @@
 ﻿
 
 
+using CsharpGalaxy.LibraryExtension.Helpers.Collections;
 
+namespace CsharpGalaxy.LibraryExtension.Helpers.Collections;
 public static class ListHelper
 {
     // 1. isNullOrEmpty
     public static bool IsNullOrEmpty<T>(this IList<T> list) => list == null || list.Count == 0;
 
     // 2. isNotEmpty
-    public static bool IsNotEmpty<T>(this IList<T> list) => !IsNullOrEmpty(list);
+    public static bool IsNotEmpty<T>(this IList<T> list) => !list.IsNullOrEmpty();
 
     // 3. sizeOf
     public static int SizeOf<T>(this IList<T> list) => list?.Count ?? 0;
 
     // 4. getFirst
-    public static T GetFirst<T>(this IList<T> list) => list.IsNullOrEmpty() ? default(T) : list[0];
+    public static T GetFirst<T>(this IList<T> list) => list.IsNullOrEmpty() ? default : list[0];
 
     // 5. getLast
-    public static T GetLast<T>(this IList<T> list) => list.IsNullOrEmpty() ? default(T) : list[list.Count - 1];
+    public static T GetLast<T>(this IList<T> list) => list.IsNullOrEmpty() ? default : list[list.Count - 1];
 
     // 6. getOrElse
-    public static T GetOrElse<T>(this IList<T> list, int index, T defaultValue = default(T))
+    public static T GetOrElse<T>(this IList<T> list, int index, T defaultValue = default)
     {
         if (list != null && index >= 0 && index < list.Count)
             return list[index];
@@ -31,7 +33,7 @@ public static class ListHelper
     private static readonly Random _random = new Random();
     public static T GetRandom<T>(this IList<T> list)
     {
-        if (list.IsNullOrEmpty()) return default(T);
+        if (list.IsNullOrEmpty()) return default;
         lock (_random) // برای thread-safety
             return list[_random.Next(list.Count)];
     }
@@ -41,7 +43,7 @@ public static class ListHelper
     {
         if (list == null) throw new ArgumentNullException(nameof(list));
         while (list.Count <= index)
-            list.Add(default(T));
+            list.Add(default);
         list[index] = value;
     }
 
@@ -68,7 +70,7 @@ public static class ListHelper
     // 11. removeFirst
     public static T RemoveFirst<T>(this List<T> list)
     {
-        if (list.IsNullOrEmpty()) return default(T);
+        if (list.IsNullOrEmpty()) return default;
         var first = list[0];
         list.RemoveAt(0);
         return first;
@@ -77,7 +79,7 @@ public static class ListHelper
     // 12. removeLast
     public static T RemoveLast<T>(this List<T> list)
     {
-        if (list.IsNullOrEmpty()) return default(T);
+        if (list.IsNullOrEmpty()) return default;
         var last = list[list.Count - 1];
         list.RemoveAt(list.Count - 1);
         return last;
@@ -149,7 +151,7 @@ public static class ListHelper
     public static void RotateLeft<T>(this IList<T> list, int n)
     {
         if (list.IsNullOrEmpty()) return;
-        n = ((n % list.Count) + list.Count) % list.Count;
+        n = (n % list.Count + list.Count) % list.Count;
         if (n == 0) return;
         var temp = new T[n];
         for (int i = 0; i < n; i++)
@@ -164,7 +166,7 @@ public static class ListHelper
     public static void RotateRight<T>(this IList<T> list, int n)
     {
         if (list.IsNullOrEmpty()) return;
-        n = ((n % list.Count) + list.Count) % list.Count;
+        n = (n % list.Count + list.Count) % list.Count;
         if (n == 0) return;
         list.RotateLeft(list.Count - n);
     }
@@ -198,11 +200,11 @@ public static class ListHelper
 
     // 25. min
     public static T Min<T>(this IEnumerable<T> source) where T : IComparable<T>
-        => source?.Any() == true ? source.Min() : default(T);
+        => source?.Any() == true ? source.Min() : default;
 
     // 26. max
     public static T Max<T>(this IEnumerable<T> source) where T : IComparable<T>
-        => source?.Any() == true ? source.Max() : default(T);
+        => source?.Any() == true ? source.Max() : default;
 
     // 27-29. sum
     public static int SumInt(this IEnumerable<int> source) => source?.Sum() ?? 0;
@@ -373,7 +375,7 @@ public static class ListHelper
     // 60-62. match
     public static bool AnyMatch<T>(this IEnumerable<T> source, Func<T, bool> predicate) => source?.Any(predicate) == true;
     public static bool AllMatch<T>(this IEnumerable<T> source, Func<T, bool> predicate) => source?.All(predicate) == true;
-    public static bool NoneMatch<T>(this IEnumerable<T> source, Func<T, bool> predicate) => !AnyMatch(source, predicate);
+    public static bool NoneMatch<T>(this IEnumerable<T> source, Func<T, bool> predicate) => !source.AnyMatch(predicate);
 
     // 63-65. contains
     public static bool Contains<T>(this IEnumerable<T> source, T item) => source?.Contains(item) == true;
