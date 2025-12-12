@@ -77,16 +77,16 @@ public static class QueryableExtensions
         => !query.Any();
 
     // ✅ تبدیل به HashSet بدون لیست واسط
-    public static async Task<HashSet<T>> ToHashSetAsync<T>(this IQueryable<T> query)
+    public static async Task<HashSet<T>> ToHashSetAsyncEx<T>(this IQueryable<T> query)
         => new HashSet<T>(await query.ToListAsync());
 
     // ✅ CountAsync سفارشی
-    public static async Task<int> CountAsync<T>(this IQueryable<T> query, Expression<Func<T, bool>> predicate = null)
+    public static async Task<int> CountAsyncEx<T>(this IQueryable<T> query, Expression<Func<T, bool>> predicate = null)
         => predicate == null ? await EntityFrameworkQueryableExtensions.CountAsync(query)
                              : await EntityFrameworkQueryableExtensions.CountAsync(query.Where(predicate));
 
     // ✅ AnyAsync اورلود ساده‌شده
-    public static Task<bool> AnyAsync<T>(this IQueryable<T> query, Expression<Func<T, bool>> predicate)
+    public static Task<bool> AnyAsyncEx<T>(this IQueryable<T> query, Expression<Func<T, bool>> predicate)
         => EntityFrameworkQueryableExtensions.AnyAsync(query, predicate);
 
     // ✅ انتخاب مقادیر یکتا
@@ -213,17 +213,17 @@ public static class QueryableExtensions
     }
 
     // ✅ اورلود کوتاه‌تر برای AsNoTracking
-    public static IQueryable<T> AsNoTracking<T>(this IQueryable<T> query)
+    public static IQueryable<T> AsNoTrackingEx<T>(this IQueryable<T> query)
         where T : class
         => EntityFrameworkQueryableExtensions.AsNoTracking(query);
 
     // ✅ حذف موقتی فیلترهای سراسری EF
-    public static IQueryable<T> IgnoreQueryFilters<T>(this IQueryable<T> query)
+    public static IQueryable<T> IgnoreQueryFiltersEx<T>(this IQueryable<T> query)
         where T : class
         => EntityFrameworkQueryableExtensions.IgnoreQueryFilters(query);
 
     // ✅ حذف گروهی بدون لود موجودیت‌ها
-    public static async Task<int> BatchDeleteAsync<T>(this IQueryable<T> query, Expression<Func<T, bool>> predicate)
+    public static async Task<int> BatchDeleteWithLoadAsync<T>(this IQueryable<T> query, Expression<Func<T, bool>> predicate)
         where T : class
     {
         var items = await query.Where(predicate).ToListAsync();
@@ -291,7 +291,7 @@ public static class QueryableExtensions
     }
 
     // ✅ نسخه ایمن ToListAsync (در صورت خطا لیست خالی)
-    public static async Task<List<T>> ToListSafeAsync<T>(this IQueryable<T> query)
+    public static async Task<List<T>> ToListSafeAsyncEx<T>(this IQueryable<T> query)
     {
         try
         {
@@ -337,16 +337,16 @@ public static class QueryableExtensions
 
 
     // 7. ToHashSetAsync
-    public static async Task<HashSet<T>> ToHashSetAsync<T>(this IQueryable<T> source, IEqualityComparer<T>? comparer = null)
+    public static async Task<HashSet<T>> ToHashSetAsyncEx<T>(this IQueryable<T> source, IEqualityComparer<T>? comparer = null)
     {
         var list = await source.ToListAsync();
         return new HashSet<T>(list, comparer ?? EqualityComparer<T>.Default);
     }
 
     // 8. CountAsync (برای وضوح بیشتر – در واقع فقط wrapper است)
-    public static Task<int> CountAsync<T>(this IQueryable<T> source)
+    public static Task<int> CountAsyncEx<T>(this IQueryable<T> source)
     {
-        return source.CountAsync();
+        return EntityFrameworkQueryableExtensions.CountAsync(source);
     }
 
 
@@ -355,7 +355,7 @@ public static class QueryableExtensions
     // 16. BatchDeleteAsync – نیاز به EF Core 7+ یا Z.EntityFramework.Extensions
     // ⚠️ EF Core خالص از حذف گروهی پشتیبانی نمی‌کند (تا نسخه 8 هم ندارد)
     // راه‌حل: استفاده از ExecuteDeleteAsync (EF Core 7+)
-    public static async Task<int> BatchDeleteAsync<T>(this IQueryable<T> source) where T : class
+    public static async Task<int> BatchDeleteAsyncEx<T>(this IQueryable<T> source) where T : class
     {
         // EF Core 7+ فقط
         return await source.ExecuteDeleteAsync();
