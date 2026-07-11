@@ -1,5 +1,6 @@
 ﻿
 namespace CsharpGalaxy.LibraryExtension.Extensions.DateTimes;
+
 using System;
 using System.Globalization;
 public enum WeekDay
@@ -18,7 +19,7 @@ public enum WeekDay
 /// </summary>
 public static class DateTimeExtensions
 {
-   
+
     private static readonly string[] PersianMonths =
     {
         "فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور",
@@ -77,10 +78,32 @@ public static class DateTimeExtensions
     /// </summary>
     /// <param name="dateTime">Gregorian DateTime</param>
     /// <returns>Persian date as string (e.g. 1403/02/15)</returns>
-    public static string ToShamsiDate(this DateTime dateTime)
+    public static string? ToShamsiDate(this DateTime? dateTime)
     {
+        if (!dateTime.HasValue)
+            return null;
         var pc = new PersianCalendar();
-        return $"{pc.GetYear(dateTime):0000}/{pc.GetMonth(dateTime):00}/{pc.GetDayOfMonth(dateTime):00}";
+        return $"{pc.GetYear(dateTime.Value):0000}/{pc.GetMonth(dateTime.Value):00}/{pc.GetDayOfMonth(dateTime.Value):00}";
+    }
+    public static string? ToShamsiDate(this DateTime dateTime)
+    {
+        try
+        {
+            if (dateTime == DateTime.MinValue)
+                return null;
+
+            var pc = new PersianCalendar();
+
+            if (dateTime < pc.MinSupportedDateTime || dateTime > pc.MaxSupportedDateTime)
+                return null;
+
+            return $"{pc.GetYear(dateTime):0000}/{pc.GetMonth(dateTime):00}/{pc.GetDayOfMonth(dateTime):00}";
+        }
+        catch (Exception)
+        {
+            return null;
+        }
+
     }
 
     /// <summary>

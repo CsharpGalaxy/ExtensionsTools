@@ -176,7 +176,29 @@ public static class StringExtensions
                     .Replace("6", "۶").Replace("7", "۷").Replace("8", "۸")
                     .Replace("9", "۹");
     }
+    public static string PersianToEnglishV2(this string persianStr)
+    {
+        if (string.IsNullOrWhiteSpace(persianStr))
+        {
+            return string.Empty;
+        }
 
+        Dictionary<string, string> LettersDictionary = new Dictionary<string, string>
+        {
+            ["۰"] = "0",
+            ["۱"] = "1",
+            ["۲"] = "2",
+            ["۳"] = "3",
+            ["۴"] = "4",
+            ["۵"] = "5",
+            ["۶"] = "6",
+            ["۷"] = "7",
+            ["۸"] = "8",
+            ["۹"] = "9"
+        };
+        return LettersDictionary.Aggregate(persianStr, (current, item) =>
+            current.Replace(item.Key, item.Value));
+    }
     public static string ConvertLayout(this string value, KeyboardLayoutDirection direction)
     {
         if (string.IsNullOrEmpty(value)) return value;
@@ -732,7 +754,31 @@ public static bool ArraySearch(this ArrayList lista, string value)
         var persianCalendar = new PersianCalendar();
         return persianCalendar.ToDateTime(year, month, day, 0, 0, 0, 0);
     }
+    public static DateTime? ToGregorianDateNullValue(this string shamsiDate)
+    {
+        try
+        {
+            if (string.IsNullOrWhiteSpace(shamsiDate))
+                throw new ArgumentNullException(nameof(shamsiDate));
 
+            // قبول هر دو جداکننده / و -
+            var parts = shamsiDate.Split(new[] { '/', '-' }, StringSplitOptions.RemoveEmptyEntries);
+            if (parts.Length != 3)
+                throw new FormatException("فرمت تاریخ شمسی باید yyyy/MM/dd یا yyyy-MM-dd باشد.");
+
+            // parse سال، ماه، روز
+            int year = int.Parse(parts[0]);
+            int month = int.Parse(parts[1]);
+            int day = int.Parse(parts[2]);
+
+            var persianCalendar = new PersianCalendar();
+            return persianCalendar.ToDateTime(year, month, day, 0, 0, 0, 0);
+        }
+        catch (Exception)
+        {
+            return null;
+        }
+    }
     /// <summary>
     /// تبدیل تاریخ شمسی به میلادی با ساعت و دقیقه
     /// </summary>

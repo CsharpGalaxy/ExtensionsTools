@@ -1,5 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using CsharpGalaxy.LibraryExtension.EFCore.Models.PagedList;
+using CsharpGalaxy.LibraryExtension.Extensions.DateTimes;
 using CsharpGalaxy.LibraryExtension.Extensions.Object;
 using CsharpGalaxy.LibraryExtension.Extensions.Strings;
 using CsharpGalaxy.LibraryExtension.FakeDataPersian.Generators;
@@ -74,6 +75,12 @@ var bloodType = HealthMedicalGenerator.BloodType();
 var bmi = HealthMedicalGenerator.CalculateBMI(170, 70);
 var patient = HealthMedicalGenerator.DoctorSpecialty();
 
+
+DateTime? testDate=null;
+var s=testDate.ToShamsiDate();
+var testDate1= DateTime.MinValue.ToShamsiDate();
+
+Console.ReadKey();
 public class Person
 {
     public Address Address { get; set; }
